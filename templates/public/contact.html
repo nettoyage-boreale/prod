@@ -1,0 +1,669 @@
+{% extends 'public/base_public.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Contact" %}{% endblock %}
+{% block nav_contact %}active{% endblock %}
+{% block mob_contact %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ─────────────────────────────────────────
+   All CSS vars here match base_public.html
+   --navy, --blue, --blue-hover, --blue-light,
+   --blue-glow, --white, --off-white,
+   --text, --text-body, --text-muted, --border
+───────────────────────────────────────── */
+
+/* ── PAGE HERO ── */
+.ch {
+  position: relative;
+  background: var(--navy);
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+/* Real photo background — no orbs, no grid */
+.ch-photo {
+  position: absolute;
+  inset: 0;
+}
+.ch-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+  filter: saturate(0.6);
+}
+.ch-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,22,40,.96) 40%, rgba(10,22,40,.6) 100%);
+}
+.ch-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Breadcrumb */
+.ch-crumb {
+  display: flex; align-items: center; gap: .5rem;
+  margin-bottom: 1.5rem;
+  font-size: .8rem; color: rgba(255,255,255,.38);
+}
+.ch-crumb a { color: var(--blue); text-decoration: none; transition: color .18s }
+.ch-crumb a:hover { color: #fff }
+.ch-crumb svg { width: 12px; height: 12px; stroke: rgba(255,255,255,.3); fill: none }
+
+/* Pill badge */
+.ch-pill {
+  display: inline-flex; align-items: center; gap: .55rem;
+  background: rgba(27,170,214,.15);
+  border: 1px solid rgba(27,170,214,.3);
+  padding: .38rem 1rem; border-radius: 100px;
+  margin-bottom: 1.25rem;
+  opacity: 0; animation: chUp .5s .1s ease forwards;
+}
+.ch-pill-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--blue);
+  animation: chPulse 2s ease-in-out infinite;
+}
+@keyframes chPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(27,170,214,.5) }
+  50%      { box-shadow: 0 0 0 6px rgba(27,170,214,0) }
+}
+.ch-pill span { font-size: .71rem; color: var(--blue); letter-spacing: .12em; text-transform: uppercase; font-weight: 600 }
+
+/* Hero heading */
+.ch-h1 {
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 800; line-height: 1.06;
+  color: #fff; margin: 0 0 1rem;
+  opacity: 0; animation: chUp .7s .25s ease forwards;
+}
+.ch-h1 .hl { color: var(--blue) }
+
+.ch-sub {
+  font-size: .97rem; line-height: 1.8;
+  color: rgba(255,255,255,.55);
+  max-width: 500px; margin-bottom: 2rem;
+  opacity: 0; animation: chUp .6s .4s ease forwards;
+}
+
+.ch-actions {
+  display: flex; gap: .85rem; flex-wrap: wrap;
+  opacity: 0; animation: chUp .6s .55s ease forwards;
+}
+.ch-btn-call {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--blue); color: #fff;
+  padding: .85rem 1.75rem; border-radius: 8px;
+  font-size: .9rem; font-weight: 600; text-decoration: none;
+  transition: background .18s, transform .16s, box-shadow .18s;
+}
+.ch-btn-call:hover { background: var(--blue-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(27,170,214,.3) }
+.ch-btn-call svg { width: 15px; height: 15px; stroke: currentColor; fill: none; flex-shrink: 0 }
+.ch-btn-mail {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.8);
+  padding: .85rem 1.6rem; border-radius: 8px;
+  font-size: .9rem; text-decoration: none;
+  transition: border-color .18s, color .18s, background .18s;
+}
+.ch-btn-mail:hover { border-color: rgba(255,255,255,.6); color: #fff; background: rgba(255,255,255,.05) }
+.ch-btn-mail svg { width: 15px; height: 15px; stroke: currentColor; fill: none; flex-shrink: 0 }
+
+@keyframes chUp { from { opacity:0; transform: translateY(18px) } to { opacity:1; transform: none } }
+
+/* Quick contact card (right side of hero) */
+.ch-card {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(12px);
+  border-radius: 18px; padding: 1.75rem;
+  opacity: 0; animation: chUp .7s .5s ease forwards;
+}
+.ch-card-label {
+  font-size: .67rem; letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(255,255,255,.38); font-weight: 600; margin-bottom: 1.1rem;
+}
+.ch-card-rows { display: flex; flex-direction: column; gap: .85rem }
+.ch-card-row {
+  display: flex; align-items: center; gap: .85rem;
+}
+.ch-card-ico {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(27,170,214,.16);
+  border: 1px solid rgba(27,170,214,.28);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ch-card-ico svg {
+  width: 16px; height: 16px;
+  stroke: var(--blue); fill: none; stroke-width: 1.9;
+}
+.ch-card-row-label {
+  font-size: .67rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-bottom: .12rem;
+}
+.ch-card-row a,
+.ch-card-row span {
+  color: rgba(255,255,255,.8); font-size: .88rem; text-decoration: none; line-height: 1.5;
+  transition: color .18s;
+}
+.ch-card-row a:hover { color: var(--blue) }
+.ch-divider { height: 1px; background: rgba(255,255,255,.09); margin: 1rem 0 }
+.ch-avail {
+  display: flex; justify-content: space-between; align-items: center; font-size: .82rem;
+}
+.ch-avail-label { color: rgba(255,255,255,.38) }
+.ch-avail-val {
+  display: flex; align-items: center; gap: .4rem;
+  color: var(--blue); font-weight: 600;
+}
+.ch-avail-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+  animation: chPulse 2s infinite;
+}
+
+/* ── FORM + INFO SECTION ── */
+.cm { background: var(--off-white); padding: 5rem 0 }
+.cm-wrap { max-width: 1280px; margin: 0 auto; padding: 0 4rem }
+.cm-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 2rem; align-items: start }
+
+/* Info card */
+.ci {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 2.25rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10,22,40,.07);
+}
+.ci::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue), #6dd8f5);
+}
+.ci-copy { margin-bottom: 2rem }
+.ci-copy .pill { margin-bottom: .9rem }
+.ci-copy h2 { font-size: clamp(1.6rem,2.5vw,2.1rem); font-weight: 700; color: var(--navy); margin-bottom: .75rem; line-height: 1.18 }
+.ci-copy h2 .hl { color: var(--blue) }
+.ci-copy p { font-size: .95rem; line-height: 1.82; color: var(--text-body) }
+
+.ci-blocks { display: flex; flex-direction: column; gap: .75rem }
+.ci-block {
+  display: flex; gap: .9rem; align-items: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border); border-radius: 12px;
+  background: var(--off-white);
+  transition: transform .22s, border-color .22s, box-shadow .22s;
+  cursor: default;
+}
+.ci-block:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27,170,214,.3);
+  box-shadow: 0 8px 24px rgba(27,170,214,.08);
+}
+.ci-block-ico {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background .22s;
+}
+.ci-block:hover .ci-block-ico { background: rgba(27,170,214,.18) }
+.ci-block-ico svg { width: 19px; height: 19px; stroke: var(--blue); fill: none; stroke-width: 1.9 }
+.ci-block-title { font-size: .88rem; font-weight: 600; color: var(--navy); margin-bottom: .15rem }
+.ci-block-val { font-size: .875rem; color: var(--text-body); text-decoration: none; transition: color .18s }
+.ci-block-val:hover { color: var(--blue) }
+
+.ci-note {
+  margin-top: 1.25rem; display: flex; gap: .75rem;
+  padding: 1rem 1.1rem; border-radius: 12px;
+  background: var(--blue-light); align-items: flex-start;
+}
+.ci-note-ico {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(27,170,214,.18);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ci-note-ico svg { width: 15px; height: 15px; stroke: var(--blue); fill: none; stroke-width: 2 }
+.ci-note p { font-size: .86rem; line-height: 1.75; color: var(--blue); margin: 0 }
+
+/* Form card */
+.cf {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 2.25rem;
+  box-shadow: 0 4px 20px rgba(10,22,40,.07);
+}
+.cf-head { margin-bottom: 1.75rem }
+.cf-head .pill { margin-bottom: .9rem }
+.cf-head h2 { font-size: clamp(1.6rem,2.5vw,2.1rem); font-weight: 700; color: var(--navy); margin-bottom: .6rem; line-height: 1.18 }
+.cf-head h2 .hl { color: var(--blue) }
+.cf-head p { font-size: .93rem; color: var(--text-body); line-height: 1.75 }
+
+.cf-success {
+  display: flex; gap: .7rem; align-items: flex-start;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(27,170,214,.28);
+  background: var(--blue-light);
+  border-radius: 12px; margin-bottom: 1.5rem;
+}
+.cf-success svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; flex-shrink: 0; margin-top: .1rem }
+.cf-success p { margin: 0; color: var(--blue); font-size: .9rem; line-height: 1.7 }
+
+.cf-form { display: flex; flex-direction: column; gap: 1rem }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
+
+.fg { display: flex; flex-direction: column; gap: .45rem }
+.fg label {
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--navy);
+}
+.fg label .req { color: var(--blue); margin-left: 2px }
+.fg input,
+.fg textarea,
+.fg select {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--text);
+  border-radius: 10px; padding: .85rem 1rem;
+  font-family: inherit; font-size: .9rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  -webkit-appearance: none;
+}
+.fg textarea { min-height: 140px; resize: vertical }
+.fg select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231BAAD6' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .9rem center;
+  background-size: 15px;
+  padding-right: 2.5rem;
+  appearance: none;
+}
+.fg input:focus,
+.fg textarea:focus,
+.fg select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(27,170,214,.12);
+}
+.fg input::placeholder,
+.fg textarea::placeholder { color: var(--text-muted); font-size: .87rem }
+
+.cf-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  background: var(--blue); color: #fff;
+  border: none; border-radius: 10px;
+  padding: 1rem 2rem; width: 100%;
+  font-family: inherit; font-size: .92rem; font-weight: 700;
+  cursor: pointer;
+  transition: background .18s, transform .16s, box-shadow .18s;
+}
+.cf-submit:hover { background: var(--blue-hover); transform: translateY(-2px); box-shadow: 0 8px 26px rgba(27,170,214,.3) }
+.cf-submit svg { width: 15px; height: 15px; stroke: currentColor; fill: none; transition: transform .18s }
+.cf-submit:hover svg { transform: translateX(4px) }
+.cf-privacy { text-align: center; font-size: .77rem; color: var(--text-muted); margin-top: .5rem; line-height: 1.6 }
+
+/* ── TRUST CARDS ── */
+.ct { background: var(--white); padding: 4rem 0 }
+.ct-wrap { max-width: 1280px; margin: 0 auto; padding: 0 4rem }
+.ct-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem }
+.ct-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.75rem 1.5rem;
+  text-align: center;
+  transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.ct-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,170,214,.1); border-color: rgba(27,170,214,.3) }
+.ct-ico {
+  width: 50px; height: 50px; border-radius: 13px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+}
+.ct-ico svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.8 }
+.ct-card h3 { font-size: .95rem; font-weight: 700; color: var(--navy); margin: 0 0 .4rem }
+.ct-card p { font-size: .83rem; line-height: 1.72; color: var(--text-muted); margin: 0 }
+
+/* ── BOTTOM CTA BAND ── */
+.cta-wrap { background: var(--off-white); padding: 0 0 5rem }
+.cta-shell { max-width: 1280px; margin: 0 auto; padding: 0 4rem }
+.cta-band {
+  position: relative; overflow: hidden;
+  border-radius: 20px;
+  background: var(--navy);
+  padding: 3rem 2.75rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: center;
+}
+/* subtle accent — a real photo stripe on the right */
+.cta-band::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(27,170,214,.1));
+  pointer-events: none;
+}
+.cta-copy { position: relative; z-index: 1 }
+.cta-copy h2 {
+  font-size: clamp(1.5rem,2.5vw,2.1rem);
+  font-weight: 800; color: #fff; margin: 0 0 .6rem; line-height: 1.18;
+}
+.cta-copy h2 span { color: var(--blue) }
+.cta-copy p { margin: 0; color: rgba(255,255,255,.55); line-height: 1.8; max-width: 480px }
+.cta-btns {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: .7rem;
+  align-items: stretch; flex-shrink: 0; min-width: 200px;
+}
+.cta-btn-w {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  background: #fff; color: var(--navy);
+  padding: .9rem 1.6rem; border-radius: 8px;
+  font-size: .9rem; font-weight: 700; text-decoration: none;
+  transition: transform .16s, box-shadow .18s; white-space: nowrap;
+}
+.cta-btn-w:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,22,40,.2) }
+.cta-btn-w svg { width: 14px; height: 14px; stroke: var(--blue); fill: none }
+.cta-btn-g {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.78);
+  padding: .88rem 1.5rem; border-radius: 8px;
+  font-size: .88rem; text-decoration: none;
+  transition: border-color .18s, background .18s, color .18s; white-space: nowrap;
+}
+.cta-btn-g:hover { border-color: rgba(255,255,255,.55); color: #fff; background: rgba(255,255,255,.06) }
+.cta-btn-g svg { width: 14px; height: 14px; stroke: currentColor; fill: none }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .ch-inner,.cm-wrap,.ct-wrap,.cta-shell{ padding-left:2rem;padding-right:2rem }
+  .ct-grid{ grid-template-columns:1fr 1fr }
+}
+@media(max-width:900px){
+  .ch-inner,.cm-grid,.cta-band{ grid-template-columns:1fr }
+  .ch-inner{ padding:4rem 1.5rem }
+  .cta-band{ padding:2.25rem 1.75rem }
+}
+@media(max-width:640px){
+  .cm-wrap,.ct-wrap,.cta-shell{ padding-left:1.25rem;padding-right:1.25rem }
+  .cf-row{ grid-template-columns:1fr }
+  .ci,.cf{ padding:1.5rem;border-radius:16px }
+  .ct{ padding:3rem 0 }
+  .cta-wrap{ padding-bottom:3.5rem }
+}
+@media(max-width:420px){
+  .ct-grid{ grid-template-columns:1fr }
+  .cta-btns{ min-width:unset }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="ch">
+  <div class="ch-photo">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=75" alt="">
+  </div>
+
+  <div class="ch-inner">
+    <div>
+      <div class="ch-crumb">
+        <a href="{% url 'home' %}">{% trans "Home" %}</a>
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        <span>{% trans "Contact" %}</span>
+      </div>
+
+      <div class="ch-pill">
+        <span class="ch-pill-dot"></span>
+        <span>{% trans "Get in touch" %}</span>
+      </div>
+
+      <h1 class="ch-h1">
+        {% trans "Let's talk about" %}<br>
+        <span class="hl">{% trans "your space" %}</span>
+      </h1>
+      <p class="ch-sub">{% trans "Tell us what you need and we will get back to you quickly. No pressure, no fluff — just practical help for your cleaning needs." %}</p>
+
+      <div class="ch-actions">
+        <a href="tel:514-699-9218" class="ch-btn-call">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          514-699-9218
+        </a>
+        <a href="mailto:info@nettoyageboreal.ca" class="ch-btn-mail">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          {% trans "Send Email" %}
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick contact card -->
+    <div class="ch-card">
+      <div class="ch-card-label">{% trans "Quick Contact" %}</div>
+      <div class="ch-card-rows">
+        <div class="ch-card-row">
+          <div class="ch-card-ico">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div>
+            <div class="ch-card-row-label">{% trans "Phone" %}</div>
+            <a href="tel:514-699-9218" class="ch-card-row">514-699-9218</a>
+          </div>
+        </div>
+        <div class="ch-card-row">
+          <div class="ch-card-ico">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ch-card-row-label">{% trans "Email" %}</div>
+            <a href="mailto:info@nettoyageboreal.ca" class="ch-card-row">info@nettoyageboreal.ca</a>
+          </div>
+        </div>
+        <div class="ch-card-row">
+          <div class="ch-card-ico">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <div class="ch-card-row-label">{% trans "Service Area" %}</div>
+            <span>{% trans "Montréal & Greater Region" %}</span>
+          </div>
+        </div>
+      </div>
+      <div class="ch-divider"></div>
+      <div class="ch-avail">
+        <span class="ch-avail-label">{% trans "Availability" %}</span>
+        <span class="ch-avail-val">
+          <span class="ch-avail-dot"></span>
+          {% trans "7 days a week" %}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORM + INFO ══ -->
+<section class="cm">
+  <div class="cm-wrap">
+    <div class="cm-grid">
+
+      <!-- Left: contact info -->
+      <div class="ci sr">
+        <div class="ci-copy">
+          <span class="pill">{% trans "Contact Information" %}</span>
+          <h2>{% trans "Simple," %} <span class="hl">{% trans "fast" %}</span><br>{% trans "and direct" %}</h2>
+          <p>{% trans "Use the form to send us your request. Whether it's a quote, extra information, or a specific cleaning need — we respond quickly and clearly." %}</p>
+        </div>
+        <div class="ci-blocks">
+          <div class="ci-block sr d1">
+            <div class="ci-block-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            </div>
+            <div>
+              <div class="ci-block-title">{% trans "Call Us" %}</div>
+              <a href="tel:514-699-9218" class="ci-block-val">514-699-9218</a>
+            </div>
+          </div>
+          <div class="ci-block sr d2">
+            <div class="ci-block-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="ci-block-title">{% trans "Email Us" %}</div>
+              <a href="mailto:info@nettoyageboreal.ca" class="ci-block-val">info@nettoyageboreal.ca</a>
+            </div>
+          </div>
+          <div class="ci-block sr d3">
+            <div class="ci-block-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <div class="ci-block-title">{% trans "Coverage" %}</div>
+              <span class="ci-block-val">{% trans "Montréal & Greater Region" %}</span>
+            </div>
+          </div>
+          <div class="ci-block sr d4">
+            <div class="ci-block-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="ci-block-title">{% trans "Hours" %}</div>
+              <span class="ci-block-val">{% trans "7 days a week" %}</span>
+            </div>
+          </div>
+        </div>
+        <div class="ci-note sr d4">
+          <div class="ci-note-ico">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <p>{% trans "We typically respond the same day — whether that's answering your question, planning a visit, or preparing a quote." %}</p>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="cf sr d1">
+        <div class="cf-head">
+          <span class="pill">{% trans "Send a Message" %}</span>
+          <h2>{% trans "Tell us what" %} <span class="hl">{% trans "you need" %}</span></h2>
+          <p>{% trans "Fill out the form and we will be in touch shortly." %}</p>
+        </div>
+
+        {% if success %}
+        <div class="cf-success">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <p>{% trans "Thank you! Your message has been received. We will be in touch with you shortly." %}</p>
+        </div>
+        {% endif %}
+
+        <form method="POST" class="cf-form">
+          {% csrf_token %}
+          <div class="cf-row">
+            <div class="fg">
+              <label for="fn">{% trans "Full Name" %}<span class="req">*</span></label>
+              <input id="fn" type="text" name="name" placeholder="Jean Tremblay" required>
+            </div>
+            <div class="fg">
+              <label for="fc">{% trans "Company" %}</label>
+              <input id="fc" type="text" name="company" placeholder="{% trans 'Acme Inc. (optional)' %}">
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="fg">
+              <label for="fe">{% trans "Email" %}<span class="req">*</span></label>
+              <input id="fe" type="email" name="email" placeholder="vous@exemple.com" required>
+            </div>
+            <div class="fg">
+              <label for="fp">{% trans "Phone" %}</label>
+              <input id="fp" type="tel" name="phone" placeholder="514-000-0000">
+            </div>
+          </div>
+          <div class="fg">
+            <label for="fs">{% trans "Service Needed" %}</label>
+            <select id="fs" name="service">
+              <option value="">{% trans "Select a service…" %}</option>
+              <option value="office">{% trans "Office Cleaning" %}</option>
+              <option value="clinic">{% trans "Clinic / Medical" %}</option>
+              <option value="warehouse">{% trans "Warehouse / Industrial" %}</option>
+              <option value="retail">{% trans "Retail / Commercial" %}</option>
+              <option value="other">{% trans "Other" %}</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="fm">{% trans "Message" %}<span class="req">*</span></label>
+            <textarea id="fm" name="message" placeholder="{% trans 'Describe your space, frequency, and any specific requirements…' %}" required></textarea>
+          </div>
+          <button type="submit" class="cf-submit">
+            {% trans "Send Message" %}
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="cf-privacy">{% trans "Your information is confidential and never shared with third parties." %}</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST CARDS ══ -->
+<section class="ct">
+  <div class="ct-wrap">
+    <div class="ct-grid">
+      <div class="ct-card sr">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>{% trans "Insured & Local" %}</h3>
+        <p>{% trans "Fully insured company based in Montréal, serving the greater region." %}</p>
+      </div>
+      <div class="ct-card sr d1">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>{% trans "Same-Day Response" %}</h3>
+        <p>{% trans "We respond to all enquiries the same day, 7 days a week." %}</p>
+      </div>
+      <div class="ct-card sr d2">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>{% trans "Dedicated Team" %}</h3>
+        <p>{% trans "Trained professionals assigned to your site every time." %}</p>
+      </div>
+      <div class="ct-card sr d3">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>{% trans "Free Quote" %}</h3>
+        <p>{% trans "Transparent pricing, no hidden fees. Your quote in 24h." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOTTOM CTA ══ -->
+<div class="cta-wrap">
+  <div class="cta-shell">
+    <div class="cta-band sr">
+      <div class="cta-copy">
+        <h2>{% trans "Ready to get a" %} <span>{% trans "free quote?" %}</span></h2>
+        <p>{% trans "Send us your request today and we will discuss scope, schedule and the best setup for your space." %}</p>
+      </div>
+      <div class="cta-btns">
+        <a href="tel:514-699-9218" class="cta-btn-w">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          514-699-9218
+        </a>
+        <a href="mailto:info@nettoyageboreal.ca" class="cta-btn-g">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@nettoyageboreal.ca
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

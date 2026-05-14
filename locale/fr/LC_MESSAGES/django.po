@@ -1,0 +1,1765 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: cleaning-platform\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-27 09:17-0400\n"
+"PO-Revision-Date: 2026-04-27 12:00-0400\n"
+"Last-Translator: Mohamed\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: core/settings.py:13
+msgid "English"
+msgstr "Anglais"
+
+#: core/settings.py:14
+msgid "French"
+msgstr "Français"
+
+#: main/views.py:55
+msgid "Invalid username or password."
+msgstr "Nom d'utilisateur ou mot de passe incorrect."
+
+#: main/views.py:100
+msgid "Your ticket has been submitted."
+msgstr "Votre ticket a bien été envoyé."
+
+#: main/views.py:120
+msgid "Your reply has been sent."
+msgstr "Votre réponse a bien été envoyée."
+
+#: templates/portal/base_portal.html:7 templates/portal/base_portal.html:329
+#: templates/portal/base_portal.html:387 templates/portal/login.html:9
+#: templates/public/base_public.html:470 templates/public/base_public.html:501
+#: templates/public/base_public.html:574
+msgid "Client Portal"
+msgstr "Espace client"
+
+#: templates/portal/base_portal.html:338
+msgid "Client"
+msgstr "Client"
+
+#: templates/portal/base_portal.html:343
+msgid "Support"
+msgstr "Assistance"
+
+#: templates/portal/base_portal.html:346 templates/portal/dashboard.html:4
+#: templates/portal/dashboard.html:5
+msgid "My Tickets"
+msgstr "Mes tickets"
+
+#: templates/portal/base_portal.html:350 templates/portal/ticket_archive.html:4
+#: templates/portal/ticket_archive.html:5
+msgid "Archive"
+msgstr "Archives"
+
+#: templates/portal/base_portal.html:354 templates/portal/dashboard.html:178
+#: templates/portal/ticket_new.html:4 templates/portal/ticket_new.html:5
+msgid "New Ticket"
+msgstr "Nouveau ticket"
+
+#: templates/portal/base_portal.html:358 templates/public/contact.html:578
+msgid "Company"
+msgstr "Entreprise"
+
+#: templates/portal/base_portal.html:361
+msgid "Website"
+msgstr "Site web"
+
+#: templates/portal/base_portal.html:365
+msgid "Contact Us"
+msgstr "Nous joindre"
+
+#: templates/portal/base_portal.html:372
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: templates/portal/base_portal.html:384
+msgid "Menu"
+msgstr "Menu"
+
+#: templates/portal/dashboard.html:150
+msgid "Open tickets"
+msgstr "Tickets ouverts"
+
+#: templates/portal/dashboard.html:159
+msgid "Closed tickets"
+msgstr "Tickets fermés"
+
+#: templates/portal/dashboard.html:168
+msgid "Need urgent help?"
+msgstr "Besoin d'aide rapidement ?"
+
+#: templates/portal/dashboard.html:175
+msgid "Open Tickets"
+msgstr "Tickets ouverts"
+
+#: templates/portal/dashboard.html:194 templates/portal/ticket_detail.html:133
+msgid "Open"
+msgstr "Ouvert"
+
+#: templates/portal/dashboard.html:207
+msgid "No open tickets"
+msgstr "Aucun ticket en cours"
+
+#: templates/portal/dashboard.html:208
+msgid ""
+"Everything looks good! Open a ticket if you have a question or a cleaning "
+"issue to report."
+msgstr ""
+"Tout est en ordre ! Ouvrez un ticket si vous avez une question ou un "
+"problème de nettoyage à signaler."
+
+#: templates/portal/dashboard.html:211
+msgid "Open a Ticket"
+msgstr "Ouvrir un ticket"
+
+#: templates/portal/login.html:6 templates/portal/login.html:25
+msgid "Login"
+msgstr "Connexion"
+
+#: templates/portal/login.html:19
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: templates/portal/login.html:22
+msgid "Password"
+msgstr "Mot de passe"
+
+#: templates/portal/ticket_archive.html:73
+msgid "Closed Tickets"
+msgstr "Tickets fermés"
+
+#: templates/portal/ticket_archive.html:76
+msgid "Back to open tickets"
+msgstr "Retour aux tickets ouverts"
+
+#: templates/portal/ticket_archive.html:89
+#: templates/portal/ticket_archive.html:92
+#: templates/portal/ticket_detail.html:135
+msgid "Closed"
+msgstr "Fermé"
+
+#: templates/portal/ticket_archive.html:105
+msgid "No closed tickets"
+msgstr "Aucun ticket fermé"
+
+#: templates/portal/ticket_archive.html:106
+msgid "Resolved tickets will appear here once they are closed."
+msgstr "Les tickets résolus s'afficheront ici une fois fermés."
+
+#: templates/portal/ticket_detail.html:124
+msgid "Back to my tickets"
+msgstr "Retour à mes tickets"
+
+#: templates/portal/ticket_detail.html:130
+msgid "Opened on"
+msgstr "Ouvert le"
+
+#: templates/portal/ticket_detail.html:153
+#: templates/portal/ticket_detail.html:174
+msgid "Attached image"
+msgstr "Image jointe"
+
+#: templates/portal/ticket_detail.html:189
+msgid "Add a reply"
+msgstr "Ajouter une réponse"
+
+#: templates/portal/ticket_detail.html:195
+msgid "Your message"
+msgstr "Votre message"
+
+#: templates/portal/ticket_detail.html:196
+msgid "Write your reply here…"
+msgstr "Rédigez votre réponse ici…"
+
+#: templates/portal/ticket_detail.html:199 templates/portal/ticket_new.html:128
+msgid "Attach photos"
+msgstr "Joindre des photos"
+
+#: templates/portal/ticket_detail.html:199 templates/portal/ticket_new.html:128
+msgid "optional"
+msgstr "facultatif"
+
+#: templates/portal/ticket_detail.html:204 templates/portal/ticket_new.html:134
+msgid "Click to attach photos"
+msgstr "Cliquez pour joindre des photos"
+
+#: templates/portal/ticket_detail.html:213
+msgid "Send Reply"
+msgstr "Envoyer la réponse"
+
+#: templates/portal/ticket_detail.html:221
+msgid "This ticket is closed."
+msgstr "Ce ticket est fermé."
+
+#: templates/portal/ticket_detail.html:222
+msgid "Open a new ticket"
+msgstr "Ouvrez un nouveau ticket"
+
+#: templates/portal/ticket_detail.html:223
+msgid "if you need further assistance."
+msgstr "si vous avez besoin d'aide supplémentaire."
+
+#: templates/portal/ticket_new.html:104
+msgid "Open a New Ticket"
+msgstr "Ouvrir un nouveau ticket"
+
+#: templates/portal/ticket_new.html:105
+msgid "Describe your issue and we will get back to you quickly."
+msgstr "Décrivez votre problème et nous vous répondrons dans les plus brefs délais."
+
+#: templates/portal/ticket_new.html:114
+msgid "Subject"
+msgstr "Objet"
+
+#: templates/portal/ticket_new.html:116
+msgid "e.g. Issue with the cleaning of the reception area"
+msgstr "p. ex. Problème de nettoyage à l'accueil"
+
+#: templates/portal/ticket_new.html:121
+msgid "Describe your issue"
+msgstr "Décrivez votre problème"
+
+#: templates/portal/ticket_new.html:123
+msgid "Please describe what happened, when, and where in your space…"
+msgstr "Décrivez ce qui s'est passé, à quel moment et à quel endroit dans vos locaux…"
+
+#: templates/portal/ticket_new.html:135
+msgid "JPG, PNG, WEBP — multiple files allowed"
+msgstr "JPG, PNG, WEBP — plusieurs fichiers acceptés"
+
+#: templates/portal/ticket_new.html:145
+msgid "Submit Ticket"
+msgstr "Envoyer le ticket"
+
+#: templates/portal/ticket_new.html:148
+msgid "Cancel"
+msgstr "Annuler"
+
+#: templates/public/about.html:4 templates/public/about.html:187
+#: templates/public/base_public.html:572
+msgid "About Us"
+msgstr "À propos"
+
+#: templates/public/about.html:180 templates/public/home.html:270
+msgid "About Nettoyage Boréal"
+msgstr "À propos de Nettoyage Boréal"
+
+#: templates/public/about.html:185 templates/public/base_public.html:466
+#: templates/public/base_public.html:497 templates/public/base_public.html:571
+#: templates/public/contact.html:425
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/public/about.html:189
+msgid "Our Story"
+msgstr "Notre histoire"
+
+#: templates/public/about.html:190
+msgid "Built on"
+msgstr "Fondée sur"
+
+#: templates/public/about.html:190
+msgid "trust,"
+msgstr "la confiance,"
+
+#: templates/public/about.html:190
+msgid "driven by results"
+msgstr "portée par les résultats"
+
+#: templates/public/about.html:191
+msgid ""
+"A local Montréal company with a simple mission: deliver honest, no-nonsense "
+"commercial cleaning that businesses can count on — every time."
+msgstr ""
+"Une entreprise montréalaise avec une mission claire : offrir un nettoyage "
+"commercial sérieux et sans détour, sur lequel les entreprises peuvent compter "
+"— à chaque fois."
+
+#: templates/public/about.html:199
+msgid "Professional cleaning team at work"
+msgstr "Équipe de nettoyage professionnelle au travail"
+
+#: templates/public/about.html:200
+msgid "Cleaning equipment"
+msgstr "Équipement de nettoyage"
+
+#: templates/public/about.html:203
+msgid "Rated"
+msgstr "Noté"
+
+#: templates/public/about.html:207
+msgid "Who We Are"
+msgstr "Qui nous sommes"
+
+#: templates/public/about.html:208 templates/public/home.html:271
+msgid "A nordic"
+msgstr "Un standard"
+
+#: templates/public/about.html:208 templates/public/home.html:271
+msgid "standard"
+msgstr "nordique"
+
+#: templates/public/about.html:208 templates/public/home.html:271
+msgid "of cleanliness"
+msgstr "de propreté"
+
+#: templates/public/about.html:209
+msgid ""
+"Nettoyage Boréal was founded with a simple goal: raise the bar for "
+"commercial cleaning in Montréal. We specialize in cleaning offices, clinics, "
+"warehouses and industrial spaces — with care, consistency, and absolutely no "
+"shortcuts."
+msgstr ""
+"Nettoyage Boréal a été fondé avec un objectif simple : hausser les standards "
+"du nettoyage commercial à Montréal. Nous nous spécialisons dans l'entretien "
+"des bureaux, cliniques, entrepôts et espaces industriels — avec rigueur, "
+"régularité et sans jamais couper les coins ronds."
+
+#: templates/public/about.html:210
+msgid ""
+"Our name reflects the standards we hold ourselves to — inspired by the pure "
+"air and quiet strength of the boreal north. Freshness, efficiency, and "
+"reliability are not just words for us. They define every job we take."
+msgstr ""
+"Notre nom reflète l'exigence que nous nous imposons — inspirée par l'air pur "
+"et la force tranquille du nord boréal. La fraîcheur, l'efficacité et la "
+"fiabilité ne sont pas que des mots pour nous. Ils définissent chacun de nos "
+"mandats."
+
+#: templates/public/about.html:212
+msgid ""
+"Too many companies overpromise and cut corners. We built something different "
+"— a business that keeps its word, values long-term relationships, and treats "
+"every property with respect."
+msgstr ""
+"Trop d'entreprises font de grandes promesses puis bâclent le travail. Nous "
+"avons bâti quelque chose de différent — une entreprise qui tient parole, "
+"privilégie les relations durables et traite chaque espace avec respect."
+
+#: templates/public/about.html:213
+msgid "— Founder, Nettoyage Boréal"
+msgstr "— Fondateur, Nettoyage Boréal"
+
+#: templates/public/about.html:215
+msgid "Work with us"
+msgstr "Travailler avec nous"
+
+#: templates/public/about.html:225 templates/public/home.html:241
+msgid "Years of experience"
+msgstr "Années d'expérience"
+
+#: templates/public/about.html:229 templates/public/home.html:245
+msgid "Clients served"
+msgstr "Clients desservis"
+
+#: templates/public/about.html:233
+msgid "Days a week available"
+msgstr "Jours de disponibilité par semaine"
+
+#: templates/public/about.html:237
+msgid "Quote turnaround"
+msgstr "Délai pour recevoir une soumission"
+
+#: templates/public/about.html:246
+msgid "Our Journey"
+msgstr "Notre parcours"
+
+#: templates/public/about.html:247
+msgid "How we"
+msgstr "Comment nous"
+
+#: templates/public/about.html:247
+msgid "got here"
+msgstr "en sommes arrivés là"
+
+#: templates/public/about.html:252
+msgid "The Beginning"
+msgstr "Les débuts"
+
+#: templates/public/about.html:253
+msgid "Founded in Montréal"
+msgstr "Fondée à Montréal"
+
+#: templates/public/about.html:254
+msgid ""
+"A small team of professionals saw a gap in the industry and set out to build "
+"something different — an honest, reliable commercial cleaning company rooted "
+"in Montréal."
+msgstr ""
+"Une petite équipe de professionnels a repéré un manque dans l'industrie et a "
+"décidé de faire les choses autrement — en fondant une entreprise de nettoyage "
+"commercial honnête et fiable, bien ancrée à Montréal."
+
+#: templates/public/about.html:258
+msgid "Montréal office"
+msgstr "Bureaux à Montréal"
+
+#: templates/public/about.html:263
+msgid "Medical cleaning"
+msgstr "Nettoyage médical"
+
+#: templates/public/about.html:267
+msgid "Expanding"
+msgstr "En croissance"
+
+#: templates/public/about.html:268
+msgid "Medical & Dental Clients"
+msgstr "Clients médicaux et dentaires"
+
+#: templates/public/about.html:269
+msgid ""
+"Word of mouth brought us our first medical clients. We developed specialized "
+"disinfection protocols to meet the strict hygiene requirements of clinics "
+"and dental offices."
+msgstr ""
+"Le bouche-à-oreille nous a amenés nos premiers clients du milieu médical. "
+"Nous avons alors mis au point des protocoles de désinfection adaptés aux "
+"exigences strictes des cliniques et des cabinets dentaires."
+
+#: templates/public/about.html:274
+msgid "Growth"
+msgstr "Croissance"
+
+#: templates/public/about.html:275
+msgid "Industrial & Warehouse Services"
+msgstr "Services pour entrepôts et espaces industriels"
+
+#: templates/public/about.html:276
+msgid ""
+"We expanded into warehouses and industrial facilities, adding specialized "
+"equipment and training to serve large-scale commercial properties across "
+"Greater Montréal."
+msgstr ""
+"Nous avons étendu nos services aux entrepôts et installations industrielles, "
+"en investissant dans de l'équipement spécialisé et en formant nos équipes "
+"pour répondre aux besoins des grandes propriétés commerciales du Grand Montréal."
+
+#: templates/public/about.html:280 templates/public/about.html:402
+#: templates/public/about.html:403 templates/public/home.html:409
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#: templates/public/about.html:285
+msgid "Clean modern space"
+msgstr "Espace moderne et propre"
+
+#: templates/public/about.html:289
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#: templates/public/about.html:290
+msgid "200+ Businesses Trust Us"
+msgstr "Plus de 200 entreprises nous font confiance"
+
+#: templates/public/about.html:291
+msgid ""
+"Today we serve over 200 businesses across Greater Montréal — 7 days a week, "
+"with the same care and consistency we brought to our very first client."
+msgstr ""
+"Nous desservons aujourd'hui plus de 200 entreprises dans le Grand Montréal "
+"— 7 jours sur 7, avec le même soin et la même rigueur qu'avec notre tout "
+"premier client."
+
+#: templates/public/about.html:303
+msgid "Our Core Values"
+msgstr "Nos valeurs fondamentales"
+
+#: templates/public/about.html:304
+msgid "What we"
+msgstr "Ce en quoi"
+
+#: templates/public/about.html:304
+msgid "stand for"
+msgstr "nous croyons"
+
+#: templates/public/about.html:306
+msgid ""
+"At Nettoyage Boréal, we don't just clean — we uphold a standard. These "
+"values guide every job we take and every space we step into."
+msgstr ""
+"Chez Nettoyage Boréal, nous ne faisons pas que nettoyer — nous maintenons "
+"une exigence. Ces valeurs guident chacun de nos mandats et chaque espace "
+"que nous entretenons."
+
+#: templates/public/about.html:311
+msgid "Accountability"
+msgstr "Responsabilité"
+
+#: templates/public/about.html:312
+msgid ""
+"We don't make excuses — we make things right. If we say we'll be there, we "
+"will. If something needs attention, we handle it. You can count on us to own "
+"the work from start to finish."
+msgstr ""
+"On ne cherche pas d'excuses — on règle les problèmes. Si on dit qu'on sera "
+"là, on y sera. Si quelque chose nécessite de l'attention, on s'en occupe. "
+"Vous pouvez compter sur nous du début à la fin."
+
+#: templates/public/about.html:316
+msgid "Attention to Detail"
+msgstr "Souci du détail"
+
+#: templates/public/about.html:317
+msgid ""
+"We notice the small things others overlook. From spotless corners to "
+"polished entryways, we are thorough because that is what you deserve. "
+"Details matter — and we never cut corners."
+msgstr ""
+"On remarque ce que d'autres laissent passer. Des coins impeccables aux "
+"entrées soignées, on fait le travail à fond parce que c'est ce que vous "
+"méritez. Les détails comptent — et on ne coupe jamais les coins ronds."
+
+#: templates/public/about.html:321
+msgid "Professionalism"
+msgstr "Professionnalisme"
+
+#: templates/public/about.html:322
+msgid ""
+"Our team arrives on time, in uniform, and ready to work. We treat your "
+"business with respect and discretion. You won't have to micromanage — we "
+"handle things with care."
+msgstr ""
+"Notre équipe arrive à l'heure, en uniforme et prête à travailler. On traite "
+"votre entreprise avec respect et discrétion. Pas besoin de nous surveiller "
+"— on prend les choses en main."
+
+#: templates/public/about.html:326
+msgid "Eco-Responsibility"
+msgstr "Éco-responsabilité"
+
+#: templates/public/about.html:327
+msgid ""
+"We use non-toxic, sustainable cleaning products that are safe for your "
+"employees, clients, and the environment — without compromising on results."
+msgstr ""
+"On utilise des produits de nettoyage non toxiques et durables, sécuritaires "
+"pour vos employés, vos clients et l'environnement — sans rien sacrifier sur "
+"la qualité."
+
+#: templates/public/about.html:331
+msgid "Long-term Partnerships"
+msgstr "Relations à long terme"
+
+#: templates/public/about.html:332
+msgid ""
+"We are not interested in one-time jobs. We build long-term relationships "
+"with our clients — understanding their spaces, routines and expectations to "
+"deliver consistent quality over time."
+msgstr ""
+"On ne cherche pas les contrats ponctuels. On bâtit des relations durables "
+"avec nos clients — en apprenant à connaître leurs locaux, leurs habitudes et "
+"leurs attentes pour livrer une qualité constante dans le temps."
+
+#: templates/public/about.html:336
+msgid "Flexible Scheduling"
+msgstr "Horaires flexibles"
+
+#: templates/public/about.html:337
+msgid ""
+"We clean on your schedule — days, evenings, or weekends. Our goal is zero "
+"disruption to your operations while keeping your space consistently "
+"immaculate."
+msgstr ""
+"On s'adapte à votre horaire — de jour, en soirée ou la fin de semaine. "
+"L'objectif : zéro perturbation pour vos opérations, et des locaux toujours "
+"impeccables."
+
+#: templates/public/about.html:347
+msgid "Our Team"
+msgstr "Notre équipe"
+
+#: templates/public/about.html:348
+msgid "The people behind"
+msgstr "Les gens derrière"
+
+#: templates/public/about.html:348
+msgid "the clean"
+msgstr "la propreté"
+
+#: templates/public/about.html:349
+msgid ""
+"Every member of our team is trained, vetted, and committed to the Boréal "
+"standard. We are proud of the people who represent us in your space every "
+"day."
+msgstr ""
+"Chaque membre de notre équipe est formé, sélectionné avec soin et engagé "
+"envers le standard Boréal. On est fiers des gens qui vous représentent dans "
+"vos locaux chaque jour."
+
+#: templates/public/about.html:353
+msgid "Team member"
+msgstr "Membre de l'équipe"
+
+#: templates/public/about.html:355
+msgid "Founder & Director"
+msgstr "Fondateur et directeur"
+
+#: templates/public/about.html:356
+msgid "Team Leadership"
+msgstr "Direction"
+
+#: templates/public/about.html:357
+msgid ""
+"Built Nettoyage Boréal from the ground up with a focus on reliability and "
+"honest service."
+msgstr ""
+"A bâti Nettoyage Boréal de zéro, avec comme priorité la fiabilité et un "
+"service honnête."
+
+#: templates/public/about.html:361
+msgid "Operations manager"
+msgstr "Directeur des opérations"
+
+#: templates/public/about.html:363
+msgid "Operations Manager"
+msgstr "Directeur des opérations"
+
+#: templates/public/about.html:364
+msgid "Field Operations"
+msgstr "Opérations terrain"
+
+#: templates/public/about.html:365
+msgid ""
+"Coordinates all cleaning schedules and ensures every job meets our quality "
+"standards."
+msgstr ""
+"Coordonne l'ensemble des horaires de nettoyage et s'assure que chaque "
+"mandat respecte nos standards de qualité."
+
+#: templates/public/about.html:369
+msgid "Client relations"
+msgstr "Relations clients"
+
+#: templates/public/about.html:371
+msgid "Client Relations"
+msgstr "Relations clients"
+
+#: templates/public/about.html:372
+msgid "Client Success"
+msgstr "Satisfaction client"
+
+#: templates/public/about.html:373
+msgid ""
+"Your main point of contact — here to ensure you are always satisfied with "
+"our service."
+msgstr ""
+"Votre interlocutrice principale — disponible pour s'assurer que vous êtes "
+"toujours satisfait de notre service."
+
+#: templates/public/about.html:384
+msgid "Our Work"
+msgstr "Nos réalisations"
+
+#: templates/public/about.html:385
+msgid "Snapshots from"
+msgstr "Aperçu de"
+
+#: templates/public/about.html:385
+msgid "recent projects"
+msgstr "mandats récents"
+
+#: templates/public/about.html:390 templates/public/about.html:391
+msgid "Office"
+msgstr "Bureau"
+
+#: templates/public/about.html:394
+msgid "Clinic"
+msgstr "Clinique"
+
+#: templates/public/about.html:395 templates/public/home.html:321
+#: templates/public/home.html:406
+msgid "Medical"
+msgstr "Médical"
+
+#: templates/public/about.html:398 templates/public/home.html:223
+#: templates/public/home.html:377
+msgid "Cleaning"
+msgstr "Nettoyage"
+
+#: templates/public/about.html:399 templates/public/home.html:223
+msgid "Commercial"
+msgstr "Commercial"
+
+#: templates/public/about.html:406
+msgid "Clean office space"
+msgstr "Espace de bureau propre"
+
+#: templates/public/about.html:407
+msgid "Corporate"
+msgstr "Corporatif"
+
+#: templates/public/about.html:410
+msgid "Modern space"
+msgstr "Espace moderne"
+
+#: templates/public/about.html:411
+msgid "Modern spaces"
+msgstr "Espaces modernes"
+
+#: templates/public/about.html:414 templates/public/about.html:415
+#: templates/public/home.html:333 templates/public/home.html:414
+#: templates/public/home.html:416
+msgid "Industrial"
+msgstr "Industriel"
+
+#: templates/public/about.html:424
+msgid "Want a team that takes your cleaning seriously?"
+msgstr "Vous cherchez une équipe qui prend votre nettoyage au sérieux ?"
+
+#: templates/public/about.html:425
+msgid ""
+"Let's talk. We'll walk through your space, provide a clear quote, and build "
+"a plan that works for you."
+msgstr ""
+"Parlons-en. On visitera vos locaux, on vous remettra une soumission claire "
+"et on élaborera un plan adapté à vos besoins."
+
+#: templates/public/about.html:428 templates/public/home.html:229
+msgid "Get a Free Quote"
+msgstr "Obtenir une soumission gratuite"
+
+#: templates/public/base_public.html:8
+msgid ""
+"Services de nettoyage commercial professionnel à Montréal. Bureaux, "
+"cliniques, entrepôts. Soumission gratuite en 24h."
+msgstr ""
+"Services de nettoyage commercial professionnel à Montréal. Bureaux, "
+"cliniques, entrepôts. Soumission gratuite en 24h."
+
+#: templates/public/base_public.html:429 templates/public/base_public.html:588
+#: templates/public/contact.html:481 templates/public/contact.html:534
+#: templates/public/home.html:486
+msgid "Montréal & Greater Region"
+msgstr "Montréal et région"
+
+#: templates/public/base_public.html:467 templates/public/base_public.html:498
+msgid "About"
+msgstr "À propos"
+
+#: templates/public/base_public.html:468 templates/public/base_public.html:499
+#: templates/public/base_public.html:573 templates/public/base_public.html:585
+#: templates/public/contact.html:4 templates/public/contact.html:427
+msgid "Contact"
+msgstr "Contact"
+
+#: templates/public/base_public.html:475
+msgid "Open menu"
+msgstr "Ouvrir le menu"
+
+#: templates/public/base_public.html:491
+msgid "Close"
+msgstr "Fermer"
+
+#: templates/public/base_public.html:505
+msgid "Contact us"
+msgstr "Nous joindre"
+
+#: templates/public/base_public.html:558
+msgid ""
+"Inspired by the pure air and quiet strength of the boreal north — freshness, "
+"reliability and professionalism for every commercial space."
+msgstr ""
+"Inspiré par l'air pur et la force tranquille du nord boréal — fraîcheur, "
+"fiabilité et professionnalisme pour chaque espace commercial."
+
+#: templates/public/base_public.html:570
+msgid "Pages"
+msgstr "Pages"
+
+#: templates/public/base_public.html:578 templates/public/contact.html:596
+#: templates/public/home.html:310
+msgid "Office Cleaning"
+msgstr "Nettoyage de bureaux"
+
+#: templates/public/base_public.html:579
+msgid "Clinic & Dental"
+msgstr "Cliniques et dentaires"
+
+#: templates/public/base_public.html:580 templates/public/home.html:334
+msgid "Warehouse & Industrial"
+msgstr "Entrepôts et industriel"
+
+#: templates/public/base_public.html:581
+msgid "Retail Spaces"
+msgstr "Commerces de détail"
+
+#: templates/public/base_public.html:589 templates/public/contact.html:490
+#: templates/public/contact.html:543 templates/public/home.html:490
+msgid "7 days a week"
+msgstr "7 jours sur 7"
+
+#: templates/public/base_public.html:594
+msgid "All rights reserved."
+msgstr "Tous droits réservés."
+
+#: templates/public/base_public.html:597 templates/public/contact.html:625
+msgid "Insured & Local"
+msgstr "Assurés et locaux"
+
+#: templates/public/base_public.html:600
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+#: templates/public/contact.html:432 templates/public/home.html:496
+msgid "Get in touch"
+msgstr "Prenez contact"
+
+#: templates/public/contact.html:436
+msgid "Let's talk about"
+msgstr "Parlons de"
+
+#: templates/public/contact.html:437 templates/public/home.html:298
+msgid "your space"
+msgstr "votre espace"
+
+#: templates/public/contact.html:439
+msgid ""
+"Tell us what you need and we will get back to you quickly. No pressure, no "
+"fluff — just practical help for your cleaning needs."
+msgstr ""
+"Dites-nous ce qu'il vous faut et on vous répondra rapidement. Sans pression, "
+"sans baratin — juste de l'aide concrète pour vos besoins en nettoyage."
+
+#: templates/public/contact.html:448
+msgid "Send Email"
+msgstr "Envoyer un courriel"
+
+#: templates/public/contact.html:455
+msgid "Quick Contact"
+msgstr "Contact rapide"
+
+#: templates/public/contact.html:462 templates/public/contact.html:588
+#: templates/public/home.html:478 templates/public/home.html:505
+msgid "Phone"
+msgstr "Téléphone"
+
+#: templates/public/contact.html:471 templates/public/contact.html:584
+#: templates/public/home.html:482
+msgid "Email"
+msgstr "Courriel"
+
+#: templates/public/contact.html:480 templates/public/home.html:486
+msgid "Service Area"
+msgstr "Zone desservie"
+
+#: templates/public/contact.html:487 templates/public/home.html:490
+msgid "Availability"
+msgstr "Disponibilité"
+
+#: templates/public/contact.html:505
+msgid "Contact Information"
+msgstr "Coordonnées"
+
+#: templates/public/contact.html:506
+msgid "Simple,"
+msgstr "Simple,"
+
+#: templates/public/contact.html:506
+msgid "fast"
+msgstr "rapide"
+
+#: templates/public/contact.html:506
+msgid "and direct"
+msgstr "et direct"
+
+#: templates/public/contact.html:507
+msgid ""
+"Use the form to send us your request. Whether it's a quote, extra "
+"information, or a specific cleaning need — we respond quickly and clearly."
+msgstr ""
+"Utilisez le formulaire pour nous envoyer votre demande. Soumission, "
+"renseignements ou besoin particulier — on répond vite et clairement."
+
+#: templates/public/contact.html:515
+msgid "Call Us"
+msgstr "Appelez-nous"
+
+#: templates/public/contact.html:524
+msgid "Email Us"
+msgstr "Écrivez-nous"
+
+#: templates/public/contact.html:533
+msgid "Coverage"
+msgstr "Territoire desservi"
+
+#: templates/public/contact.html:542
+msgid "Hours"
+msgstr "Heures d'ouverture"
+
+#: templates/public/contact.html:551
+msgid ""
+"We typically respond the same day — whether that's answering your question, "
+"planning a visit, or preparing a quote."
+msgstr ""
+"On répond généralement le jour même — que ce soit pour répondre à votre "
+"question, planifier une visite ou préparer une soumission."
+
+#: templates/public/contact.html:558
+msgid "Send a Message"
+msgstr "Nous envoyer un message"
+
+#: templates/public/contact.html:559
+msgid "Tell us what"
+msgstr "Dites-nous ce"
+
+#: templates/public/contact.html:559
+msgid "you need"
+msgstr "dont vous avez besoin"
+
+#: templates/public/contact.html:560
+msgid "Fill out the form and we will be in touch shortly."
+msgstr "Remplissez le formulaire et on vous recontacte rapidement."
+
+#: templates/public/contact.html:566
+msgid ""
+"Thank you! Your message has been received. We will be in touch with you "
+"shortly."
+msgstr "Merci ! Votre message a bien été reçu. On vous recontacte sous peu."
+
+#: templates/public/contact.html:574 templates/public/home.html:504
+msgid "Full Name"
+msgstr "Nom et prénom"
+
+#: templates/public/contact.html:579
+msgid "Acme Inc. (optional)"
+msgstr "Acme inc. (facultatif)"
+
+#: templates/public/contact.html:593
+msgid "Service Needed"
+msgstr "Service souhaité"
+
+#: templates/public/contact.html:595
+msgid "Select a service…"
+msgstr "Choisissez un service…"
+
+#: templates/public/contact.html:597
+msgid "Clinic / Medical"
+msgstr "Clinique / Médical"
+
+#: templates/public/contact.html:598
+msgid "Warehouse / Industrial"
+msgstr "Entrepôt / Industriel"
+
+#: templates/public/contact.html:599
+msgid "Retail / Commercial"
+msgstr "Commerce de détail / Commercial"
+
+#: templates/public/contact.html:600
+msgid "Other"
+msgstr "Autre"
+
+#: templates/public/contact.html:604 templates/public/home.html:512
+msgid "Message"
+msgstr "Message"
+
+#: templates/public/contact.html:605
+msgid "Describe your space, frequency, and any specific requirements…"
+msgstr "Décrivez vos locaux, la fréquence souhaitée et toute exigence particulière…"
+
+#: templates/public/contact.html:608 templates/public/home.html:516
+msgid "Send Message"
+msgstr "Envoyer"
+
+#: templates/public/contact.html:611
+msgid "Your information is confidential and never shared with third parties."
+msgstr "Vos informations sont confidentielles et ne sont jamais transmises à des tiers."
+
+#: templates/public/contact.html:626
+msgid "Fully insured company based in Montréal, serving the greater region."
+msgstr "Entreprise pleinement assurée, basée à Montréal et au service de toute la région."
+
+#: templates/public/contact.html:630
+msgid "Same-Day Response"
+msgstr "Réponse le jour même"
+
+#: templates/public/contact.html:631
+msgid "We respond to all enquiries the same day, 7 days a week."
+msgstr "On répond à toutes les demandes le jour même, 7 jours sur 7."
+
+#: templates/public/contact.html:635
+msgid "Dedicated Team"
+msgstr "Équipe attitrée"
+
+#: templates/public/contact.html:636
+msgid "Trained professionals assigned to your site every time."
+msgstr "Des professionnels formés, assignés à vos locaux à chaque visite."
+
+#: templates/public/contact.html:640 templates/public/home.html:495
+msgid "Free Quote"
+msgstr "Soumission gratuite"
+
+#: templates/public/contact.html:641
+msgid "Transparent pricing, no hidden fees. Your quote in 24h."
+msgstr "Prix transparents, sans frais cachés. Votre soumission en 24h."
+
+#: templates/public/contact.html:652
+msgid "Ready to get a"
+msgstr "Prêt à obtenir une"
+
+#: templates/public/contact.html:652
+msgid "free quote?"
+msgstr "soumission gratuite ?"
+
+#: templates/public/contact.html:653
+msgid ""
+"Send us your request today and we will discuss scope, schedule and the best "
+"setup for your space."
+msgstr ""
+"Envoyez-nous votre demande dès aujourd'hui et on discutera ensemble de "
+"l'étendue des travaux, des horaires et de la meilleure façon de répondre à "
+"vos besoins."
+
+#: templates/public/home.html:4
+msgid "Nettoyage Commercial Montréal"
+msgstr "Nettoyage Commercial Montréal"
+
+#: templates/public/home.html:220
+msgid "Available 7 days a week"
+msgstr "Disponible 7 jours sur 7"
+
+#: templates/public/home.html:223
+msgid "Professional"
+msgstr "Professionnel"
+
+#: templates/public/home.html:224
+msgid ""
+"Serving offices, clinics, warehouses & industrial spaces across Greater "
+"Montréal"
+msgstr ""
+"Bureaux, cliniques, entrepôts et espaces industriels dans tout le Grand Montréal"
+
+#: templates/public/home.html:226
+msgid ""
+"Local, insured teams. Eco-friendly products. Free quote in 24 hours — no "
+"commitment."
+msgstr ""
+"Équipes locales et assurées. Produits écologiques. Soumission gratuite en "
+"24 heures — sans engagement."
+
+#: templates/public/home.html:249
+msgid "Days a week"
+msgstr "Jours par semaine"
+
+#: templates/public/home.html:253
+msgid "Free quote"
+msgstr "Soumission gratuite"
+
+#: templates/public/home.html:262
+msgid "Professional cleaning team"
+msgstr "Équipe de nettoyage professionnelle"
+
+#: templates/public/home.html:263
+msgid "Cleaning supplies"
+msgstr "Produits de nettoyage"
+
+#: templates/public/home.html:266
+msgid "Rated service"
+msgstr "Service bien coté"
+
+#: templates/public/home.html:272
+msgid ""
+"Nettoyage Boréal is a reliable, local commercial cleaning company serving "
+"Québec. Inspired by the pure air and quiet strength of the boreal north, we "
+"deliver freshness, efficiency and reliability — with care, consistency, and "
+"no shortcuts."
+msgstr ""
+"Nettoyage Boréal est une entreprise de nettoyage commercial locale et fiable "
+"au service du Québec. Inspirés par l'air pur et la force tranquille du nord "
+"boréal, on offre fraîcheur, efficacité et fiabilité — avec soin, constance "
+"et sans jamais couper les coins ronds."
+
+#: templates/public/home.html:276
+msgid "Always on time"
+msgstr "Toujours à l'heure"
+
+#: templates/public/home.html:276
+msgid "Our team arrives on schedule and does the job right, every time."
+msgstr "Notre équipe arrive à l'heure et fait le travail correctement, chaque fois."
+
+#: templates/public/home.html:280
+msgid "Fully insured"
+msgstr "Pleinement assurés"
+
+#: templates/public/home.html:280
+msgid "All our teams are fully insured. Your space is always protected."
+msgstr "Toutes nos équipes sont pleinement assurées. Vos locaux sont toujours entre bonnes mains."
+
+#: templates/public/home.html:284
+msgid "Eco-friendly products"
+msgstr "Produits écologiques"
+
+#: templates/public/home.html:284
+msgid "Non-toxic, sustainable products safe for your employees and clients."
+msgstr "Des produits non toxiques et durables, sécuritaires pour vos employés et vos clients."
+
+#: templates/public/home.html:287
+msgid "Learn more about us"
+msgstr "En savoir plus"
+
+#: templates/public/home.html:297
+msgid "Our Services"
+msgstr "Nos services"
+
+#: templates/public/home.html:298
+msgid "Cleaning adapted to"
+msgstr "Un nettoyage adapté à"
+
+#: templates/public/home.html:300
+msgid ""
+"Whether you run a small office, a busy clinic or a large industrial "
+"facility, we offer flexible and reliable cleaning services that adapt to "
+"your schedule and standards."
+msgstr ""
+"Que vous gériez un petit bureau, une clinique achalandée ou une grande "
+"installation industrielle, on offre des services de nettoyage flexibles et "
+"fiables, adaptés à votre horaire et à vos standards."
+
+#: templates/public/home.html:305 templates/public/home.html:419
+msgid "Office cleaning"
+msgstr "Nettoyage de bureaux"
+
+#: templates/public/home.html:309 templates/public/home.html:401
+msgid "Offices"
+msgstr "Bureaux"
+
+#: templates/public/home.html:311
+msgid ""
+"Complete cleaning of workspaces, meeting rooms, kitchens and common areas. "
+"Tailored to your hours so your team works in a healthy, professional "
+"environment every day."
+msgstr ""
+"Entretien complet des postes de travail, salles de réunion, cuisines et "
+"aires communes. Adapté à vos horaires pour que votre équipe évolue chaque "
+"jour dans un environnement sain et professionnel."
+
+#: templates/public/home.html:312 templates/public/home.html:324
+#: templates/public/home.html:336
+msgid "Get a quote"
+msgstr "Demander une soumission"
+
+#: templates/public/home.html:317
+msgid "Clinic cleaning"
+msgstr "Nettoyage de clinique"
+
+#: templates/public/home.html:322
+msgid "Clinic & Dental Cleaning"
+msgstr "Nettoyage de cliniques et cabinets dentaires"
+
+#: templates/public/home.html:323
+msgid ""
+"Rigorous disinfection protocols adapted to medical and dental environments. "
+"We understand the strict hygiene standards required in health care settings."
+msgstr ""
+"Protocoles de désinfection rigoureux, adaptés aux environnements médicaux "
+"et dentaires. On connaît les exigences strictes des milieux de la santé et "
+"on y répond."
+
+#: templates/public/home.html:329
+msgid "Warehouse cleaning"
+msgstr "Nettoyage d'entrepôt"
+
+#: templates/public/home.html:335
+msgid ""
+"Large-scale floor cleaning, dust control and sanitation for warehouses and "
+"industrial facilities. Scheduled around your operations to minimize "
+"disruption."
+msgstr ""
+"Nettoyage de planchers à grande échelle, contrôle de la poussière et "
+"assainissement pour entrepôts et installations industrielles. Planifié selon "
+"vos opérations pour éviter toute perturbation."
+
+#: templates/public/home.html:349
+msgid "Why Choose Us"
+msgstr "Pourquoi nous choisir"
+
+#: templates/public/home.html:350
+msgid "Services that"
+msgstr "Des services qui"
+
+#: templates/public/home.html:350
+msgid "work for you"
+msgstr "travaillent pour vous"
+
+#: templates/public/home.html:352
+msgid ""
+"We are not just here to clean — we are here to make your workday easier. We "
+"help businesses maintain immaculate environments without disrupting "
+"operations."
+msgstr ""
+"On n'est pas seulement là pour nettoyer — on est là pour simplifier votre "
+"quotidien. On aide les entreprises à maintenir des environnements impeccables "
+"sans jamais perturber leurs activités."
+
+#: templates/public/home.html:357
+msgid "Time-saving solutions"
+msgstr "Un gain de temps réel"
+
+#: templates/public/home.html:358
+msgid ""
+"We clean at your pace, with minimal interruption. Our streamlined process "
+"keeps your space professional without the hassle."
+msgstr ""
+"On nettoie à votre rythme, avec un minimum d'interruptions. Notre processus "
+"rodé maintient vos locaux en ordre, sans vous compliquer la vie."
+
+#: templates/public/home.html:362
+msgid "Insured & accountable"
+msgstr "Assurés et responsables"
+
+#: templates/public/home.html:363
+msgid ""
+"Fully insured teams. Your space and assets are always protected when we "
+"work. No worries, no surprises."
+msgstr ""
+"Équipes pleinement assurées. Vos locaux et vos biens sont toujours protégés "
+"pendant notre passage. Aucune mauvaise surprise."
+
+#: templates/public/home.html:367
+msgid "Affordable pricing"
+msgstr "Des tarifs accessibles"
+
+#: templates/public/home.html:368
+msgid ""
+"Flexible rates for all business sizes — from small offices to large "
+"warehouses. High-quality service without overpaying."
+msgstr ""
+"Des tarifs flexibles pour toutes les tailles d'entreprises — des petits "
+"bureaux aux grands entrepôts. Un service de qualité sans se ruiner."
+
+#: templates/public/home.html:372
+msgid "Local Montréal team"
+msgstr "Une équipe 100 % montréalaise"
+
+#: templates/public/home.html:373
+msgid ""
+"We are a local company — we know Montréal, we serve Montréal. Faster "
+"response, better service, and real community roots."
+msgstr ""
+"On est une entreprise d'ici — on connaît Montréal, on sert Montréal. "
+"Réponse plus rapide, meilleur service et de vraies racines dans la communauté."
+
+#: templates/public/home.html:378
+msgid "Clean office"
+msgstr "Bureau propre"
+
+#: templates/public/home.html:387
+msgid "Ready for a"
+msgstr "Prêt pour des"
+
+#: templates/public/home.html:387
+msgid "cleaner"
+msgstr "locaux plus propres"
+
+#: templates/public/home.html:387
+msgid "workplace?"
+msgstr "?"
+
+#: templates/public/home.html:388
+msgid ""
+"Book your commercial cleaning today. Free quote in 24 hours — no commitment "
+"required."
+msgstr ""
+"Réservez votre nettoyage commercial dès maintenant. Soumission gratuite en "
+"24 heures — sans engagement."
+
+#: templates/public/home.html:390
+msgid "Book Now"
+msgstr "Réserver maintenant"
+
+#: templates/public/home.html:391
+msgid "Call us"
+msgstr "Appelez-nous"
+
+#: templates/public/home.html:399
+msgid "Clean space"
+msgstr "Espace propre"
+
+#: templates/public/home.html:404
+msgid "Medical clinic"
+msgstr "Clinique médicale"
+
+#: templates/public/home.html:411
+msgid "Warehouses"
+msgstr "Entrepôts"
+
+#: templates/public/home.html:421
+msgid "Commercial spaces"
+msgstr "Espaces commerciaux"
+
+#: templates/public/home.html:424
+msgid "Cleaning team"
+msgstr "Équipe de nettoyage"
+
+#: templates/public/home.html:426
+msgid "Our team"
+msgstr "Notre équipe"
+
+#: templates/public/home.html:434
+msgid "Testimonials"
+msgstr "Témoignages"
+
+#: templates/public/home.html:435
+msgid "What our"
+msgstr "Ce que disent"
+
+#: templates/public/home.html:435
+msgid "clients say"
+msgstr "nos clients"
+
+#: templates/public/home.html:441
+msgid ""
+"Nettoyage Boréal transformed our office. The team is always on time, "
+"professional and thorough. Our employees noticed the difference immediately."
+msgstr ""
+"Nettoyage Boréal a transformé nos bureaux. L'équipe est toujours à l'heure, "
+"professionnelle et minutieuse. Nos employés ont vu la différence dès le "
+"premier jour."
+
+#: templates/public/home.html:444
+msgid "Office Manager, Montréal"
+msgstr "Directrice de bureau, Montréal"
+
+#: templates/public/home.html:450
+msgid ""
+"As a dental clinic, hygiene is critical. Boréal understands our standards "
+"and consistently delivers. We have been working with them for over two years."
+msgstr ""
+"Dans une clinique dentaire, l'hygiène est primordiale. Boréal comprend nos "
+"exigences et les respecte à chaque visite. Ça fait plus de deux ans qu'on "
+"travaille avec eux."
+
+#: templates/public/home.html:453
+msgid "Dental Clinic, Laval"
+msgstr "Clinique dentaire, Laval"
+
+#: templates/public/home.html:459
+msgid ""
+"They handle our warehouse cleaning on weekends without any disruption to "
+"operations. Reliable, affordable and always professional. Highly recommended."
+msgstr ""
+"Ils s'occupent du nettoyage de notre entrepôt les fins de semaine, sans "
+"jamais perturber nos opérations. Fiables, abordables et toujours "
+"professionnels. Je les recommande sans hésitation."
+
+#: templates/public/home.html:462
+msgid "Warehouse Director, Longueuil"
+msgstr "Directeur d'entrepôt, Longueuil"
+
+#: templates/public/home.html:474
+msgid "Let's talk cleanliness"
+msgstr "Parlons de vos besoins"
+
+#: templates/public/home.html:475
+msgid "Have questions or need a quote? We respond within 24 hours."
+msgstr "Des questions ou besoin d'une soumission ? On vous répond dans les 24 heures."
+
+#: templates/public/home.html:497
+msgid "Fill out the form and we will get back to you within 24 hours."
+msgstr "Remplissez le formulaire et on vous recontacte dans les 24 heures."
+
+#: templates/public/home.html:499
+msgid "Thank you! We will be in touch shortly."
+msgstr "Merci ! On vous recontacte sous peu."
+
+#: templates/public/home.html:508
+msgid "Email Address"
+msgstr "Adresse courriel"
+
+#: templates/public/home.html:513
+msgid "Tell us about your space and cleaning needs..."
+msgstr "Parlez-nous de vos locaux et de vos besoins en nettoyage…"
+
+#: main/views.py
+msgid "Reply sent."
+msgstr "Réponse envoyée."
+
+#: main/views.py
+msgid "Ticket closed."
+msgstr "Ticket fermé."
+
+#: main/views.py
+msgid "Ticket reopened."
+msgstr "Ticket rouvert."
+
+#: main/views.py
+msgid "Username \"%(username)s\" is already taken."
+msgstr "Le nom d'utilisateur « %(username)s » est déjà utilisé."
+
+#: main/views.py
+msgid "Client updated successfully."
+msgstr "Le client a bien été mis à jour."
+
+#: main/views.py
+msgid "Client account deleted."
+msgstr "Le compte client a été supprimé."
+
+#: main/views.py
+msgid "Password updated successfully."
+msgstr "Le mot de passe a bien été mis à jour."
+
+#: main/views.py
+msgid "Passwords do not match."
+msgstr "Les mots de passe ne correspondent pas."
+
+#: main/views.py
+msgid "Password must be at least 8 characters."
+msgstr "Le mot de passe doit contenir au moins 8 caractères."
+
+#: templates/staff/base_staff.html
+msgid "Staff Panel"
+msgstr "Panneau de gestion"
+
+#: templates/staff/base_staff.html
+msgid "Staff Access"
+msgstr "Accès personnel"
+
+#: templates/staff/base_staff.html
+msgid "Administrator"
+msgstr "Administrateur"
+
+#: templates/staff/base_staff.html
+msgid "Tickets"
+msgstr "Tickets"
+
+#: templates/staff/base_staff.html
+msgid "Leads"
+msgstr "Prospects"
+
+#: templates/staff/base_staff.html
+msgid "Management"
+msgstr "Gestion"
+
+#: templates/staff/base_staff.html
+msgid "Staff"
+msgstr "Personnel"
+
+#: templates/staff/dashboard.html
+msgid "View closed tickets"
+msgstr "Voir les tickets fermés"
+
+#: templates/staff/dashboard.html
+msgid "All clear!"
+msgstr "Tout est à jour !"
+
+#: templates/staff/dashboard.html
+msgid "No open tickets right now. All client requests have been handled."
+msgstr "Aucun ticket en cours. Toutes les demandes clients ont été traitées."
+
+#: templates/staff/ticket_detail.html
+msgid "Opened"
+msgstr "Ouvert le"
+
+#: templates/staff/ticket_detail.html
+msgid "Actions:"
+msgstr "Actions :"
+
+#: templates/staff/ticket_detail.html
+msgid "Close Ticket"
+msgstr "Fermer le ticket"
+
+#: templates/staff/ticket_detail.html
+msgid "Reopen Ticket"
+msgstr "Rouvrir le ticket"
+
+#: templates/staff/ticket_detail.html
+msgid "View all closed"
+msgstr "Voir tous les fermés"
+
+#: templates/staff/ticket_detail.html
+msgid "Reply to Client"
+msgstr "Répondre au client"
+
+#: templates/staff/ticket_detail.html
+msgid "Write your reply to the client…"
+msgstr "Rédigez votre réponse au client…"
+
+#: templates/staff/ticket_detail.html
+msgid "This ticket is closed. Reopen it above to send a reply."
+msgstr "Ce ticket est fermé. Rouvrez-le ci-dessus pour envoyer une réponse."
+
+#: templates/staff/ticket_archive.html
+msgid "Tickets you close will appear here for reference."
+msgstr "Les tickets fermés s'afficheront ici pour référence."
+
+#: templates/staff/leads.html
+msgid "To contact"
+msgstr "À contacter"
+
+#: templates/staff/leads.html
+msgid "Contacted"
+msgstr "Contacté"
+
+#: templates/staff/leads.html
+msgid "To Contact"
+msgstr "À contacter"
+
+#: templates/staff/leads.html
+msgid "Service"
+msgstr "Service"
+
+#: templates/staff/leads.html
+msgid "Received"
+msgstr "Reçu le"
+
+#: templates/staff/leads.html
+msgid "Mark as contacted"
+msgstr "Marquer comme contacté"
+
+#: templates/staff/leads.html
+msgid "Show more"
+msgstr "Afficher plus"
+
+#: templates/staff/leads.html
+msgid "Show less"
+msgstr "Afficher moins"
+
+#: templates/staff/leads.html
+msgid "All caught up!"
+msgstr "Tout est à jour !"
+
+#: templates/staff/leads.html
+msgid "No leads waiting to be contacted."
+msgstr "Aucun prospect à contacter pour le moment."
+
+#: templates/staff/leads.html
+msgid "No contacted leads yet"
+msgstr "Aucun prospect contacté pour l'instant"
+
+#: templates/staff/leads.html
+msgid "Toggle the switch on a lead above once you've reached out."
+msgstr "Activez le bouton d'un prospect ci-dessus une fois que vous l'avez joint."
+
+#: templates/staff/leads.html
+msgid "Mark as not contacted"
+msgstr "Marquer comme non contacté"
+
+#: templates/staff/clients.html
+msgid "All Clients"
+msgstr "Tous les clients"
+
+#: templates/staff/clients.html
+msgid "Search by name, email, company…"
+msgstr "Rechercher par nom, courriel, entreprise…"
+
+#: templates/staff/clients.html
+msgid "New Client"
+msgstr "Nouveau client"
+
+#: templates/staff/clients.html
+msgid "Since"
+msgstr "Client depuis"
+
+#: templates/staff/clients.html
+msgid "Actions"
+msgstr "Actions"
+
+#: templates/staff/clients.html
+msgid "Edit"
+msgstr "Modifier"
+
+#: templates/staff/clients.html
+msgid "No clients yet"
+msgstr "Aucun client pour l'instant"
+
+#: templates/staff/clients.html
+msgid "Create the first client account to get started."
+msgstr "Créez le premier compte client pour démarrer."
+
+#: templates/staff/clients.html
+msgid "No clients match your search."
+msgstr "Aucun client ne correspond à votre recherche."
+
+#: templates/staff/client_create.html
+msgid "Back to clients"
+msgstr "Retour à la liste des clients"
+
+#: templates/staff/client_create.html
+msgid "Client account created successfully"
+msgstr "Compte client créé avec succès"
+
+#: templates/staff/client_create.html
+msgid "Copy these credentials now — the password will not be shown again."
+msgstr "Copiez ces identifiants maintenant — le mot de passe ne sera plus affiché."
+
+#: templates/staff/client_create.html
+msgid "Create Client Account"
+msgstr "Créer un compte client"
+
+#: templates/staff/client_create.html
+msgid "The client will use these credentials to access the portal."
+msgstr "Le client utilisera ces identifiants pour accéder à son espace."
+
+#: templates/staff/client_create.html templates/staff/client_detail.html
+msgid "Personal Information"
+msgstr "Informations personnelles"
+
+#: templates/staff/client_create.html templates/staff/client_detail.html
+msgid "First Name"
+msgstr "Prénom"
+
+#: templates/staff/client_create.html templates/staff/client_detail.html
+msgid "Last Name"
+msgstr "Nom"
+
+#: templates/staff/client_create.html templates/staff/client_detail.html
+msgid "Company Name"
+msgstr "Nom de l'entreprise"
+
+#: templates/staff/client_create.html templates/staff/client_detail.html
+msgid "Login Credentials"
+msgstr "Identifiants de connexion"
+
+#: templates/staff/client_create.html
+msgid "The username is generated automatically from the client's name. Set a temporary password — you will need to share it with the client manually."
+msgstr "Le nom d'utilisateur est généré automatiquement à partir du nom du client. Définissez un mot de passe temporaire — vous devrez le communiquer manuellement au client."
+
+#: templates/staff/client_create.html
+msgid "Lowercase, no spaces. e.g. jean.tremblay"
+msgstr "Minuscules, sans espaces. Ex. : jean.tremblay"
+
+#: templates/staff/client_create.html
+msgid "Temporary Password"
+msgstr "Mot de passe temporaire"
+
+#: templates/staff/client_create.html
+msgid "You will see this once after creation."
+msgstr "Visible une seule fois après la création."
+
+#: templates/staff/client_create.html
+msgid "Create Account"
+msgstr "Créer le compte"
+
+#: templates/staff/client_create.html templates/portal/change_password.html
+msgid "Min. 8 characters"
+msgstr "8 caractères min."
+
+#: templates/staff/client_detail.html
+msgid "Client Profile"
+msgstr "Profil du client"
+
+#: templates/staff/client_detail.html
+msgid "Client since"
+msgstr "Client depuis le"
+
+#: templates/staff/client_detail.html
+msgid "Edit Client Information"
+msgstr "Modifier les informations du client"
+
+#: templates/staff/client_detail.html
+msgid "Leave blank to keep current"
+msgstr "Laisser vide pour ne pas modifier"
+
+#: templates/staff/client_detail.html
+msgid "Only fill this if you want to reset the password."
+msgstr "À remplir uniquement si vous souhaitez réinitialiser le mot de passe."
+
+#: templates/staff/client_detail.html
+msgid "Save Changes"
+msgstr "Enregistrer"
+
+#: templates/staff/client_detail.html
+msgid "Danger Zone"
+msgstr "Zone de danger"
+
+#: templates/staff/client_detail.html
+msgid ""
+"Permanently delete <strong>%(name)s</strong>'s account. This will remove "
+"their profile and all associated data. This action cannot be undone."
+msgstr ""
+"Supprimer définitivement le compte de <strong>%(name)s</strong>. Son profil "
+"et toutes les données associées seront effacés. Cette action est irréversible."
+
+#: templates/staff/client_detail.html
+msgid "Delete Account"
+msgstr "Supprimer le compte"
+
+#: templates/staff/client_detail.html
+msgid "Delete this account?"
+msgstr "Supprimer ce compte ?"
+
+#: templates/staff/client_detail.html
+msgid ""
+"You are about to permanently delete <strong>%(name)s</strong>. Their "
+"profile and all associated data will be removed. This cannot be undone."
+msgstr ""
+"Vous êtes sur le point de supprimer définitivement le compte de "
+"<strong>%(name)s</strong>. Son profil et toutes les données associées seront "
+"effacés. Cette action est irréversible."
+
+#: templates/staff/client_detail.html
+msgid "Yes, delete permanently"
+msgstr "Oui, supprimer définitivement"
+
+#: templates/portal/base_portal.html
+msgid "Account"
+msgstr "Mon compte"
+
+#: templates/portal/change_password.html
+msgid "Change Password"
+msgstr "Changer le mot de passe"
+
+#: templates/portal/change_password.html
+msgid "Enter your current password then choose a new one."
+msgstr "Entrez votre mot de passe actuel, puis choisissez-en un nouveau."
+
+#: templates/portal/change_password.html
+msgid "Back to dashboard"
+msgstr "Retour au tableau de bord"
+
+#: templates/portal/change_password.html
+msgid "Confirm New Password"
+msgstr "Confirmer le nouveau mot de passe"
+
+#: templates/portal/change_password.html
+msgid "Repeat new password"
+msgstr "Répétez le nouveau mot de passe"
+
+#: templates/portal/change_password.html
+msgid "Must match the new password above."
+msgstr "Doit correspondre au nouveau mot de passe."
+
+#: templates/portal/change_password.html
+msgid "Update Password"
+msgstr "Mettre à jour le mot de passe"
+
+#: templates/portal/change_password.html
+msgid "Very weak"
+msgstr "Très faible"
+
+#: templates/portal/change_password.html
+msgid "Weak"
+msgstr "Faible"
+
+#: templates/portal/change_password.html
+msgid "Fair"
+msgstr "Moyen"
+
+#: templates/portal/change_password.html
+msgid "Strong"
+msgstr "Fort"
+
+#: templates/portal/change_password.html
+msgid "Very strong"
+msgstr "Très fort"
+
+#~ msgid "You have no open tickets."
+#~ msgstr "Vous n'avez aucun ticket en cours."
+
+#~ msgid "We are a professional cleaning company based in Montreal."
+#~ msgstr ""
+#~ "Nous sommes une entreprise de nettoyage professionnelle basée à Montréal."
+
+#~ msgid ""
+#~ "Our team is dedicated to providing high quality service to every client."
+#~ msgstr ""
+#~ "Notre équipe s'engage à offrir un service de qualité à chaque client."

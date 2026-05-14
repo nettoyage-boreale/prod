@@ -1,0 +1,200 @@
+{% extends 'staff/base_staff.html' %}
+{% load i18n %}
+
+{% block title %}{{ client.user.get_full_name|default:client.user.username }}{% endblock %}
+{% block page_title %}{% trans "Client Profile" %}{% endblock %}
+{% block nav_clients %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+.client-wrap{max-width:680px}
+
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);text-decoration:none;margin-bottom:1rem;transition:color .18s}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none}
+.back-link:hover{color:var(--blue)}
+
+/* Profile header */
+.profile-head{
+  background:var(--navy);border-radius:var(--r-md);
+  padding:1.5rem;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap;
+}
+.profile-head-left{display:flex;align-items:center;gap:1rem}
+.profile-avatar{width:52px;height:52px;border-radius:50%;background:rgba(27,170,214,.22);border:2px solid rgba(27,170,214,.5);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:var(--blue);flex-shrink:0}
+.profile-name{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.profile-username{font-size:.8rem;color:rgba(255,255,255,.4)}
+.profile-since{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem}
+
+/* Form card */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:1.25rem}
+.form-card-head{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.7rem}
+.form-card-head svg{width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2}
+.form-card-head-title{font-size:.9rem;font-weight:700;color:var(--navy)}
+
+.form-section{padding:1.4rem 1.5rem;border-bottom:1px solid var(--border)}
+.form-section:last-of-type{border-bottom:none}
+.form-section-title{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row:last-child{margin-bottom:0}
+.fg{display:flex;flex-direction:column;gap:.42rem}
+.fg label{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--navy)}
+.fg input{width:100%;border:1.5px solid var(--border);background:var(--white);color:var(--text);border-radius:var(--r-sm);padding:.82rem 1rem;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.fg input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,170,214,.11)}
+.fg input::placeholder{color:var(--text-muted);font-size:.87rem}
+.fg .hint{font-size:.74rem;color:var(--text-muted);margin-top:.2rem}
+
+.form-footer{padding:1.1rem 1.5rem;border-top:1px solid var(--border);background:var(--off-white);display:flex;align-items:center;gap:.75rem}
+
+/* Delete zone */
+.danger-card{background:var(--white);border:1px solid #fecaca;border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden}
+.danger-head{padding:1.1rem 1.5rem;border-bottom:1px solid #fecaca;display:flex;align-items:center;gap:.7rem}
+.danger-head svg{width:16px;height:16px;stroke:#c0392b;fill:none;stroke-width:2}
+.danger-head-title{font-size:.9rem;font-weight:700;color:#c0392b}
+.danger-body{padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.danger-body p{font-size:.875rem;color:var(--text-muted);line-height:1.65}
+.danger-body strong{color:var(--navy)}
+
+/* Delete confirm modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,22,40,.55);backdrop-filter:blur(4px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .22s}
+.modal-backdrop.open{opacity:1;pointer-events:auto}
+.modal{background:var(--white);border-radius:16px;padding:2rem;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(10,22,40,.2);transform:translateY(12px);transition:transform .22s}
+.modal-backdrop.open .modal{transform:translateY(0)}
+.modal-ico{width:52px;height:52px;border-radius:14px;background:#fef2f2;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.modal-ico svg{width:24px;height:24px;stroke:#c0392b;fill:none;stroke-width:1.8}
+.modal h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.modal p{font-size:.875rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem}
+.modal-actions{display:flex;gap:.75rem}
+
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="client-wrap">
+
+  <a href="{% url 'staff_clients' %}" class="back-link">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    {% trans "Back to clients" %}
+  </a>
+
+  <!-- Profile header -->
+  <div class="profile-head">
+    <div class="profile-head-left">
+      <div class="profile-avatar">{{ client.user.get_full_name|default:client.user.username|slice:":2"|upper }}</div>
+      <div>
+        <div class="profile-name">{{ client.user.get_full_name|default:client.user.username }}</div>
+        <div class="profile-username">@{{ client.user.username }}</div>
+        <div class="profile-since">{% trans "Client since" %} {{ client.created_at|date:"M d, Y" }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit form -->
+  <div class="form-card">
+    <div class="form-card-head">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      <span class="form-card-head-title">{% trans "Edit Client Information" %}</span>
+    </div>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="update">
+
+      <div class="form-section">
+        <div class="form-section-title">{% trans "Personal Information" %}</div>
+        <div class="form-row">
+          <div class="fg">
+            <label for="first_name">{% trans "First Name" %}</label>
+            <input type="text" id="first_name" name="first_name" value="{{ client.user.first_name }}" placeholder="Jean">
+          </div>
+          <div class="fg">
+            <label for="last_name">{% trans "Last Name" %}</label>
+            <input type="text" id="last_name" name="last_name" value="{{ client.user.last_name }}" placeholder="Tremblay">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label for="email">{% trans "Email" %}</label>
+            <input type="email" id="email" name="email" value="{{ client.user.email }}" placeholder="jean@entreprise.ca">
+          </div>
+          <div class="fg">
+            <label for="phone">{% trans "Phone" %}</label>
+            <input type="tel" id="phone" name="phone" value="{{ client.phone }}" placeholder="514-000-0000">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">{% trans "Company" %}</div>
+        <div class="fg">
+          <label for="company_name">{% trans "Company Name" %}</label>
+          <input type="text" id="company_name" name="company_name" value="{{ client.company_name }}" placeholder="Acme Inc.">
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">{% trans "Login Credentials" %}</div>
+        <div class="form-row">
+          <div class="fg">
+            <label for="username">{% trans "Username" %}</label>
+            <input type="text" id="username" name="username" value="{{ client.user.username }}" required>
+          </div>
+          <div class="fg">
+            <label for="new_password">{% trans "New Password" %}</label>
+            <input type="text" id="new_password" name="new_password" placeholder="{% trans 'Leave blank to keep current' %}">
+            <span class="hint">{% trans "Only fill this if you want to reset the password." %}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          {% trans "Save Changes" %}
+        </button>
+        <a href="{% url 'staff_clients' %}" class="btn btn-ghost">{% trans "Cancel" %}</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Danger zone -->
+  <div class="danger-card">
+    <div class="danger-head">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="danger-head-title">{% trans "Danger Zone" %}</span>
+    </div>
+    <div class="danger-body">
+      <p>{% blocktrans with name=client.user.get_full_name|default:client.user.username %}Permanently delete <strong>{{ name }}</strong>'s account. This will remove their profile and all associated data. This action cannot be undone.{% endblocktrans %}</p>
+      <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteModal').classList.add('open')">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+        {% trans "Delete Account" %}
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Delete confirm modal -->
+<div class="modal-backdrop" id="deleteModal">
+  <div class="modal">
+    <div class="modal-ico">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+    </div>
+    <h3>{% trans "Delete this account?" %}</h3>
+    <p>{% blocktrans with name=client.user.get_full_name|default:client.user.username %}You are about to permanently delete <strong>{{ name }}</strong>. Their profile and all associated data will be removed. This cannot be undone.{% endblocktrans %}</p>
+    <div class="modal-actions">
+      <form method="POST" style="flex:1">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete">
+        <button type="submit" class="btn btn-danger" style="width:100%;justify-content:center">
+          {% trans "Yes, delete permanently" %}
+        </button>
+      </form>
+      <button type="button" class="btn btn-ghost" onclick="document.getElementById('deleteModal').classList.remove('open')">
+        {% trans "Cancel" %}
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

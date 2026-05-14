@@ -1,0 +1,495 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% trans "Client Portal" %}{% endblock %} — Nettoyage Boréal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:      #0a1628;
+  --blue:      #1BAAD6;
+  --blue-hover:#1597be;
+  --blue-light:#e8f7fd;
+  --blue-mid:  rgba(27,170,214,0.12);
+  --white:     #ffffff;
+  --off-white: #f6fbfd;
+  --sidebar-w: 240px;
+  --text:      #0f1f30;
+  --text-body: #3a5567;
+  --text-muted:#6b8599;
+  --border:    #e4eef2;
+  --sh-sm:     0 2px 8px rgba(10,22,40,0.07);
+  --sh-md:     0 6px 24px rgba(10,22,40,0.10);
+  --r-sm:      8px;
+  --r-md:      12px;
+}
+
+html{height:100%}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:400;
+  color:var(--text);
+  background:var(--off-white);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.portal-wrap{
+  display:flex;
+  flex:1;
+  min-height:100vh;
+}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  background:var(--navy);
+  display:flex;
+  flex-direction:column;
+  position:fixed;
+  top:0;left:0;bottom:0;
+  z-index:200;
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+}
+
+/* Logo */
+.sidebar-logo{
+  display:flex;align-items:center;gap:.75rem;
+  padding:1.5rem 1.25rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  text-decoration:none;
+  flex-shrink:0;
+}
+.sidebar-logo-img{
+  height:52px;width:auto;
+  filter:brightness(0) invert(1);
+  opacity:.9;
+}
+.sidebar-logo-label{
+  font-size:.65rem;font-weight:600;
+  color:rgba(255,255,255,.4);
+  letter-spacing:.12em;text-transform:uppercase;
+  line-height:1.3;
+}
+
+/* User chip */
+.sidebar-user{
+  display:flex;align-items:center;gap:.7rem;
+  padding:1rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;
+}
+.sidebar-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(27,170,214,.22);
+  border:1.5px solid rgba(27,170,214,.4);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:.8rem;font-weight:700;color:var(--blue);
+}
+.sidebar-user-name{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.82);line-height:1.2}
+.sidebar-user-role{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+
+/* Nav links */
+.sidebar-nav{
+  flex:1;
+  padding:.75rem .75rem;
+  display:flex;flex-direction:column;gap:.15rem;
+  overflow-y:auto;
+}
+.sidebar-label{
+  font-size:.65rem;font-weight:700;
+  color:rgba(255,255,255,.25);
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:.6rem .5rem .3rem;
+  margin-top:.5rem;
+}
+.sidebar-link{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.72rem 1rem;
+  border-radius:var(--r-sm);
+  color:rgba(255,255,255,.55);
+  text-decoration:none;
+  font-size:.875rem;font-weight:500;
+  transition:background .18s,color .18s;
+  white-space:nowrap;
+}
+.sidebar-link svg{
+  width:17px;height:17px;
+  stroke:currentColor;fill:none;stroke-width:1.9;
+  flex-shrink:0;opacity:.7;transition:opacity .18s;
+}
+.sidebar-link:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.88)}
+.sidebar-link:hover svg{opacity:1}
+.sidebar-link.active{background:rgba(27,170,214,.18);color:var(--blue)}
+.sidebar-link.active svg{color:var(--blue);opacity:1}
+.sidebar-sep{height:1px;background:rgba(255,255,255,.07);margin:.5rem 0}
+
+/* Logout at bottom */
+.sidebar-footer{
+  padding:.75rem;
+  border-top:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;
+}
+.sidebar-logout{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.7rem 1rem;
+  border-radius:var(--r-sm);
+  color:rgba(255,255,255,.4);
+  text-decoration:none;
+  font-size:.86rem;font-weight:500;
+  transition:background .18s,color .18s;
+  width:100%;
+  border:none;background:transparent;cursor:pointer;
+  font-family:inherit;
+}
+.sidebar-logout svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;flex-shrink:0}
+
+/* Language switcher */
+.sidebar-lang{padding:.6rem .75rem .4rem;border-top:1px solid rgba(255,255,255,.07);margin-top:.4rem}
+.sidebar-lang select{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.55);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.8rem;padding:.45rem .75rem;
+  border-radius:var(--r-sm);outline:none;cursor:pointer;
+}
+.sidebar-lang select option{background:#0a1628;color:#fff}
+.sidebar-logout:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.72)}
+
+/* ══════════════════════════════
+   MAIN AREA
+══════════════════════════════ */
+.portal-main{
+  flex:1;
+  margin-left:var(--sidebar-w);
+  display:flex;flex-direction:column;
+  min-width:0;
+}
+
+/* Topbar */
+.portal-topbar{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  height:60px;
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+  position:sticky;top:0;z-index:100;
+  box-shadow:var(--sh-sm);
+}
+.portal-topbar-left{display:flex;align-items:center;gap:.75rem}
+.portal-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;gap:4px;
+  width:36px;height:36px;
+  background:none;border:none;cursor:pointer;
+  padding:4px;border-radius:var(--r-sm);
+  transition:background .18s;flex-shrink:0;
+}
+.portal-hamburger:hover{background:var(--blue-light)}
+.portal-hamburger span{display:block;height:2px;background:var(--navy);border-radius:2px;transition:transform .28s,opacity .2s}
+.portal-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.portal-hamburger.open span:nth-child(2){opacity:0}
+.portal-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.portal-page-title{
+  font-size:.95rem;font-weight:700;color:var(--navy);
+}
+.portal-topbar-right{display:flex;align-items:center;gap:.75rem}
+.portal-topbar-user{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.82rem;color:var(--text-muted);
+}
+.portal-topbar-avatar{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--blue-light);
+  border:1.5px solid var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:var(--blue);
+  flex-shrink:0;
+}
+
+/* Page content */
+.portal-content{
+  flex:1;
+  padding:2rem;
+  max-width:1100px;
+  width:100%;
+}
+
+/* ══════════════════════════════
+   FLASH MESSAGES
+══════════════════════════════ */
+.portal-msgs{
+  padding:.75rem 2rem 0;
+}
+.portal-msg{
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-left:4px solid var(--blue);
+  border-radius:var(--r-md);
+  padding:.8rem 1.1rem;
+  font-size:.875rem;color:var(--text);
+  box-shadow:var(--sh-sm);
+  margin-bottom:.5rem;
+  animation:msgIn .3s ease;
+}
+.portal-msg.error{border-left-color:#c0392b;color:#7a1f1f}
+.portal-msg svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+@keyframes msgIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════
+   MOBILE OVERLAY
+══════════════════════════════ */
+.portal-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:199;
+  background:rgba(10,22,40,.5);
+  backdrop-filter:blur(3px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .32s;
+}
+.portal-overlay.open{opacity:1;pointer-events:auto}
+
+/* ══════════════════════════════
+   SHARED CARD / UTIL
+══════════════════════════════ */
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  box-shadow:var(--sh-sm);
+}
+.card-head{
+  padding:1.25rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.card-title{font-size:.95rem;font-weight:700;color:var(--navy)}
+.card-body{padding:1.5rem}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.72rem;font-weight:600;
+  padding:.28rem .7rem;border-radius:100px;
+  white-space:nowrap;
+}
+.badge-open{background:rgba(27,170,214,.12);color:var(--blue)}
+.badge-closed{background:rgba(107,133,153,.12);color:var(--text-muted)}
+.badge-success{background:rgba(22,163,74,.1);color:#15803d}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:inherit;font-size:.875rem;font-weight:600;
+  padding:.72rem 1.4rem;border-radius:var(--r-sm);
+  text-decoration:none;border:none;cursor:pointer;
+  transition:background .18s,transform .15s,box-shadow .18s;
+}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;transition:transform .18s}
+.btn:hover svg{transform:translateX(2px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(27,170,214,.2)}
+.btn-primary:hover{background:var(--blue-hover);transform:translateY(-1px);box-shadow:0 6px 18px rgba(27,170,214,.28)}
+.btn-secondary{background:var(--blue-light);color:var(--blue)}
+.btn-secondary:hover{background:rgba(27,170,214,.2)}
+.btn-danger{background:rgba(192,57,43,.1);color:#c0392b}
+.btn-danger:hover{background:rgba(192,57,43,.18)}
+.btn-ghost{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.btn-sm{font-size:.8rem;padding:.5rem 1rem}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .portal-main{margin-left:0}
+  .portal-hamburger{display:flex}
+  .portal-overlay{display:block}
+  .portal-content{padding:1.25rem}
+  .portal-msgs{padding:.75rem 1.25rem 0}
+  .portal-topbar{padding:0 1.25rem}
+}
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<div class="portal-wrap">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="portalSidebar">
+
+    <a href="{% url 'home' %}" class="sidebar-logo">
+      <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal" class="sidebar-logo-img">
+      <span class="sidebar-logo-label">{% trans "Client Portal" %}</span>
+    </a>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">
+        {{ request.user.get_full_name|default:request.user.username|slice:":2"|upper }}
+      </div>
+      <div>
+        <div class="sidebar-user-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+        <div class="sidebar-user-role">{% trans "Client" %}</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-label">{% trans "Support" %}</div>
+      <a href="{% url 'dashboard' %}" class="sidebar-link {% block nav_tickets %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        {% trans "My Tickets" %}
+      </a>
+      <a href="{% url 'ticket_archive' %}" class="sidebar-link {% block nav_archive %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+        {% trans "Archive" %}
+      </a>
+      <a href="{% url 'ticket_new' %}" class="sidebar-link {% block nav_new %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        {% trans "New Ticket" %}
+      </a>
+      <div class="sidebar-sep"></div>
+        <div class="sidebar-label">{% trans "Account" %}</div>
+        <a href="{% url 'portal_change_password' %}" class="sidebar-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          {% trans "Change Password" %}
+        </a>
+
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-label">{% trans "Company" %}</div>
+      <a href="{% url 'home' %}" class="sidebar-link">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        {% trans "Website" %}
+      </a>
+      <a href="{% url 'contact' %}" class="sidebar-link">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        {% trans "Contact Us" %}
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_available_languages as LANGUAGES %}
+      <div class="sidebar-lang">
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.path }}">
+          <select name="language" onchange="this.form.submit()">
+            {% for lc, ln in LANGUAGES %}
+            <option value="{{ lc }}" {% if lc == LANGUAGE_CODE %}selected{% endif %}>{{ ln }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+      <a href="{% url 'logout' %}" class="sidebar-logout">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        {% trans "Logout" %}
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div class="portal-main">
+
+    <!-- Topbar -->
+    <div class="portal-topbar">
+      <div class="portal-topbar-left">
+        <button class="portal-hamburger" id="portalHamburger" aria-label="{% trans 'Menu' %}">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="portal-page-title">{% block page_title %}{% trans "Client Portal" %}{% endblock %}</span>
+      </div>
+      <div class="portal-topbar-right">
+        <div class="portal-topbar-user">
+          <div class="portal-topbar-avatar">
+            {{ request.user.get_full_name|default:request.user.username|slice:":2"|upper }}
+          </div>
+          {{ request.user.get_full_name|default:request.user.username }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Flash messages -->
+    {% if messages %}
+    <div class="portal-msgs">
+      {% for message in messages %}
+      <div class="portal-msg {% if message.tags %}{{ message.tags }}{% endif %}">
+        {% if 'error' in message.tags %}
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        {% else %}
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {% endif %}
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Page content -->
+    <div class="portal-content">
+      {% block content %}{% endblock %}
+    </div>
+
+  </div><!-- /portal-main -->
+
+</div><!-- /portal-wrap -->
+
+<!-- Mobile overlay -->
+<div class="portal-overlay" id="portalOverlay"></div>
+
+{% block extra_js %}{% endblock %}
+
+<script>
+const sidebar   = document.getElementById('portalSidebar');
+const hamburger = document.getElementById('portalHamburger');
+const overlay   = document.getElementById('portalOverlay');
+
+function openSidebar(){
+  sidebar.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSidebar(){
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+overlay.addEventListener('click', closeSidebar);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSidebar() });
+
+/* auto-dismiss messages */
+setTimeout(() => {
+  document.querySelectorAll('.portal-msg').forEach(el => {
+    el.style.transition = 'opacity .4s';
+    el.style.opacity = '0';
+    setTimeout(() => el.remove(), 420);
+  });
+}, 4000);
+</script>
+</body>
+</html>

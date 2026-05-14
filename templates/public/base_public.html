@@ -1,0 +1,643 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Nettoyage Boréal{% endblock %} | Nettoyage Boréal</title>
+<meta name="description" content="{% block meta_desc %}{% trans 'Services de nettoyage commercial professionnel à Montréal. Bureaux, cliniques, entrepôts. Soumission gratuite en 24h.' %}{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:       #0a1628;
+  --navy-soft:  #0f2035;
+  --blue:       #1BAAD6;
+  --blue-hover: #1597be;
+  --blue-light: #e8f7fd;
+  --blue-glow:  rgba(27,170,214,0.18);
+  --white:      #ffffff;
+  --off-white:  #f6fbfd;
+  --text:       #0d1f2d;
+  --text-body:  #3a5567;
+  --text-muted: #6b8599;
+  --border:     #e4eef2;
+  --border-nav: #eaf3f7;
+}
+
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:400;
+  color:var(--text);
+  background:var(--white);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ══════════════════════════════
+   TOPBAR
+══════════════════════════════ */
+.topbar{
+  background:var(--navy);
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 4rem;
+  gap:1rem;
+}
+.tb-left{display:flex;gap:1.75rem;align-items:center}
+.tb-item{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.74rem;color:rgba(255,255,255,.5);
+  letter-spacing:.01em;white-space:nowrap;
+}
+.tb-item svg{width:11px;height:11px;stroke:var(--blue);fill:none;stroke-width:2;flex-shrink:0}
+.tb-item a{color:inherit;text-decoration:none;transition:color .18s}
+.tb-item a:hover{color:#fff}
+.tb-right{display:flex;align-items:center}
+.tb-lang select{
+  background:none;border:none;outline:none;
+  color:rgba(255,255,255,.4);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.73rem;letter-spacing:.06em;
+  text-transform:uppercase;cursor:pointer;
+}
+.tb-lang select option{background:var(--navy);color:#fff}
+
+/* ══════════════════════════════
+   NAVBAR
+══════════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:500;
+  background:var(--white);
+  border-bottom:2px solid var(--border-nav);
+  height:90px;              /* tall enough for the bear */
+  padding:0 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;
+  transition:box-shadow .25s,border-color .25s;
+}
+nav.scrolled{
+  box-shadow:0 4px 24px rgba(10,22,40,.08);
+  border-color:var(--border);
+}
+
+/* ── Logo ── */
+.nav-logo{
+  display:flex;align-items:center;
+  text-decoration:none;flex-shrink:0;
+  /* let logo overflow nav top/bottom slightly */
+  margin-top:-8px;
+  margin-bottom:-8px;
+}
+.nav-logo-img{
+  height:96px;          /* big bear */
+  width:auto;
+  display:block;
+  object-fit:contain;
+  transition:transform .22s,opacity .22s;
+}
+.nav-logo:hover .nav-logo-img{transform:scale(1.03);opacity:.9}
+
+/* ── Links ── */
+.nav-links{
+  display:flex;align-items:center;gap:.2rem;
+  margin-left:auto;
+}
+.nav-link{
+  font-size:.9rem;font-weight:500;
+  color:var(--text-body);
+  text-decoration:none;
+  padding:.55rem 1.1rem;
+  border-radius:7px;
+  white-space:nowrap;
+  transition:color .18s,background .18s;
+}
+.nav-link:hover{color:var(--blue);background:var(--blue-light)}
+.nav-link.active{color:var(--blue);background:var(--blue-light);font-weight:600}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--blue);color:#fff !important;
+  font-size:.88rem !important;font-weight:700 !important;
+  padding:.65rem 1.6rem;border-radius:8px;
+  margin-left:.6rem;
+  transition:background .18s,transform .15s,box-shadow .18s !important;
+  box-shadow:0 2px 10px rgba(27,170,214,.22);
+}
+.nav-cta:hover{
+  background:var(--blue-hover) !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 6px 20px rgba(27,170,214,.32) !important;
+}
+.nav-cta svg{width:14px;height:14px;stroke:currentColor;fill:none}
+
+/* ══════════════════════════════
+   HAMBURGER
+══════════════════════════════ */
+.hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;
+  background:none;border:none;cursor:pointer;
+  padding:4px;border-radius:7px;
+  flex-shrink:0;
+  transition:background .18s;
+}
+.hamburger:hover{background:var(--blue-light)}
+.hamburger span{
+  display:block;height:2.5px;background:var(--navy);
+  border-radius:2px;
+  transition:transform .3s ease,opacity .2s,width .2s;
+}
+.hamburger span:nth-child(3){width:60%}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){width:100%;transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ══════════════════════════════
+   MOBILE OVERLAY + DRAWER
+══════════════════════════════ */
+.mob-bg{
+  position:fixed;inset:0;z-index:600;
+  background:rgba(10,22,40,.48);
+  backdrop-filter:blur(5px);
+  opacity:0;pointer-events:none;
+  transition:opacity .35s;
+}
+.mob-bg.open{opacity:1;pointer-events:all}
+
+.mob-drawer{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(340px,100vw);z-index:700;
+  background:var(--white);
+  transform:translateX(110%);
+  transition:transform .38s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  box-shadow:-8px 0 40px rgba(10,22,40,.14);
+}
+.mob-drawer.open{transform:translateX(0)}
+
+.mob-drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  min-height:72px;
+}
+.mob-drawer-head .nav-logo-img{height:58px;margin:0}
+.mob-x{
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--blue-light);border:none;border-radius:7px;
+  cursor:pointer;transition:background .18s;flex-shrink:0;
+}
+.mob-x:hover{background:rgba(27,170,214,.22)}
+.mob-x svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:2.4}
+
+.mob-nav{
+  flex:1;padding:1rem 1.25rem;
+  display:flex;flex-direction:column;gap:.2rem;
+  overflow-y:auto;
+}
+.mob-nav-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.1rem;border-radius:10px;
+  color:var(--text);font-size:1rem;font-weight:600;
+  text-decoration:none;
+  transition:background .18s,color .18s;
+}
+.mob-nav-link:hover,.mob-nav-link.active{background:var(--blue-light);color:var(--blue)}
+.mob-nav-link svg{width:15px;height:15px;stroke:currentColor;fill:none;opacity:.28;transition:opacity .18s,transform .18s}
+.mob-nav-link:hover svg,.mob-nav-link.active svg{opacity:.6;transform:translateX(3px)}
+.mob-sep{height:1px;background:var(--border);margin:.4rem 0}
+.mob-cta-link{background:var(--blue);color:#fff !important;margin-top:.4rem}
+.mob-cta-link:hover{background:var(--blue-hover) !important}
+.mob-cta-link svg{opacity:.5 !important}
+
+.mob-drawer-foot{
+  padding:1.25rem 1.5rem;
+  border-top:1px solid var(--border);
+}
+.mob-foot-label{
+  font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-muted);font-weight:600;margin-bottom:.75rem;
+}
+.mob-contact{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.875rem;color:var(--text-body);
+  text-decoration:none;margin-bottom:.55rem;
+  transition:color .18s;
+}
+.mob-contact:hover{color:var(--blue)}
+.mob-contact svg{width:13px;height:13px;stroke:var(--blue);fill:none;flex-shrink:0;stroke-width:2}
+.mob-lang{margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--border)}
+.mob-lang select{
+  width:100%;background:var(--off-white);
+  border:1px solid var(--border);color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.85rem;padding:.55rem .85rem;
+  border-radius:7px;outline:none;cursor:pointer;
+}
+
+/* ══════════════════════════════
+   FLASH MESSAGES
+══════════════════════════════ */
+.flash-wrap{
+  position:fixed;top:88px;right:1.5rem;z-index:800;
+  display:flex;flex-direction:column;gap:.5rem;
+  pointer-events:none;
+}
+.flash{
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-left:4px solid var(--blue);
+  border-radius:10px;padding:.85rem 1.1rem;
+  font-size:.875rem;color:var(--text);
+  box-shadow:0 6px 24px rgba(10,22,40,.1);
+  pointer-events:all;
+  animation:flashIn .3s ease;
+  max-width:310px;
+}
+.flash.error{border-left-color:#c0392b;color:#8c2020}
+.flash svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+@keyframes flashIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════
+   SHARED UTILITIES
+══════════════════════════════ */
+/* Tag pill */
+.pill{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--blue-light);color:var(--blue);
+  font-size:.71rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;padding:.36rem .85rem;border-radius:100px;
+  margin-bottom:1rem;
+}
+.pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* Headings */
+.sh{
+  font-size:clamp(1.9rem,2.8vw,2.75rem);
+  font-weight:700;line-height:1.16;
+  color:var(--navy);margin-bottom:1.1rem;
+}
+.sh .hl{color:var(--blue)}
+.sh em{font-family:'Lora',serif;font-style:italic;font-weight:500;color:var(--blue)}
+
+/* Body */
+.bc{font-size:.97rem;line-height:1.85;color:var(--text-body)}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:600;font-size:.9rem;
+  text-decoration:none;border:none;cursor:pointer;
+  border-radius:8px;
+  transition:background .18s,transform .16s,box-shadow .18s;
+  letter-spacing:.01em;
+}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;transition:transform .18s}
+.btn:hover svg{transform:translateX(3px)}
+
+.btn-blue{background:var(--blue);color:#fff;padding:.9rem 2rem;box-shadow:0 2px 10px rgba(27,170,214,.2)}
+.btn-blue:hover{background:var(--blue-hover);transform:translateY(-2px);box-shadow:0 8px 22px rgba(27,170,214,.3)}
+
+.btn-outline-blue{background:transparent;color:var(--blue);border:1.5px solid var(--blue);padding:.88rem 1.9rem}
+.btn-outline-blue:hover{background:var(--blue);color:#fff}
+
+.btn-white{background:#fff;color:var(--blue);padding:.9rem 2rem;box-shadow:0 2px 10px rgba(10,22,40,.1)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(10,22,40,.18)}
+
+.btn-ghost-w{background:transparent;color:rgba(255,255,255,.82);border:1.5px solid rgba(255,255,255,.32);padding:.88rem 1.8rem}
+.btn-ghost-w:hover{color:#fff;border-color:rgba(255,255,255,.65);background:rgba(255,255,255,.06)}
+
+/* Scroll reveal */
+.sr{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.sr.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer{background:var(--navy)}
+
+.ft{
+  padding:5rem 4rem 3.5rem;
+  display:grid;
+  grid-template-columns:2.2fr 1fr 1fr 1fr;
+  gap:3rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.ft-logo-img{
+  height:80px;width:auto;display:block;
+  filter:brightness(0) invert(1);opacity:.85;
+  margin-bottom:1.2rem;
+  transition:opacity .2s;
+}
+.ft-logo:hover .ft-logo-img{opacity:1}
+.ft-logo{text-decoration:none;display:inline-block}
+
+.ft-tagline{
+  font-size:.83rem;color:rgba(255,255,255,.36);
+  line-height:1.8;max-width:260px;margin-bottom:1.75rem;
+}
+.ft-socials{display:flex;gap:.55rem}
+.ft-soc{
+  width:36px;height:36px;border-radius:7px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.09);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+  transition:background .18s,border-color .18s;
+}
+.ft-soc:hover{background:rgba(27,170,214,.2);border-color:rgba(27,170,214,.4)}
+.ft-soc svg{width:15px;height:15px;stroke:rgba(255,255,255,.48);fill:none;stroke-width:1.8}
+
+.ft-col-h{
+  font-size:.72rem;font-weight:700;
+  color:rgba(255,255,255,.65);
+  letter-spacing:.13em;text-transform:uppercase;
+  margin-bottom:1.15rem;
+}
+.ft-col a{
+  display:block;font-size:.84rem;
+  color:rgba(255,255,255,.36);
+  text-decoration:none;
+  padding:.08rem 0;margin-bottom:.55rem;
+  transition:color .18s;
+}
+.ft-col a:hover{color:rgba(27,170,214,.9)}
+
+.fb{
+  padding:1.4rem 4rem;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.fb-copy{font-size:.75rem;color:rgba(255,255,255,.26)}
+.fb-badge{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.75rem;color:rgba(255,255,255,.26);
+}
+.fb-badge svg{width:12px;height:12px;stroke:rgba(27,170,214,.7);fill:none}
+.fb-links{display:flex;gap:1.5rem}
+.fb-links a{font-size:.75rem;color:rgba(255,255,255,.26);text-decoration:none;transition:color .18s}
+.fb-links a:hover{color:rgba(27,170,214,.85)}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width:1200px){
+  .topbar,nav,.ft,.fb{padding-left:2.5rem;padding-right:2.5rem}
+}
+@media(max-width:1024px){
+  .ft{grid-template-columns:1fr 1fr;padding-left:2rem;padding-right:2rem}
+  .fb{padding-left:2rem;padding-right:2rem}
+}
+@media(max-width:768px){
+  .topbar{display:none}
+  nav{padding:0 1.25rem;height:72px}
+  .nav-logo-img{height:64px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .ft{padding:3rem 1.5rem 2.5rem;grid-template-columns:1fr}
+  .fb{padding:1.25rem 1.5rem;flex-direction:column;gap:.65rem}
+  .fb-links{flex-wrap:wrap}
+}
+@media(max-width:480px){.mob-drawer{width:100vw}}
+
+.page-content{min-height:60vh}
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     TOPBAR
+══════════════════════════════ -->
+<div class="topbar">
+  <div class="tb-left">
+    <div class="tb-item">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      {% trans "Montréal & Greater Region" %}
+    </div>
+    <div class="tb-item">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      <a href="tel:514-699-9218">514-699-9218</a>
+    </div>
+    <div class="tb-item">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:info@nettoyageboreal.ca">info@nettoyageboreal.ca</a>
+    </div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-lang">
+      <form action="{% url 'set_language' %}" method="post" id="tbLangForm">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        <select name="language" onchange="document.getElementById('tbLangForm').submit()">
+          {% for lc,ln in LANGUAGES %}
+          <option value="{{ lc }}" {% if lc == LANGUAGE_CODE %}selected{% endif %}>{{ lc|upper }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav id="navbar">
+  <a href="{% url 'home' %}" class="nav-logo">
+    <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal" class="nav-logo-img">
+  </a>
+
+  <div class="nav-links">
+    <a href="{% url 'home' %}"          class="nav-link {% block nav_home %}{% endblock %}">{% trans "Home" %}</a>
+    <a href="{% url 'about' %}"         class="nav-link {% block nav_about %}{% endblock %}">{% trans "About" %}</a>
+    <a href="{% url 'contact' %}"       class="nav-link {% block nav_contact %}{% endblock %}">{% trans "Contact" %}</a>
+    <a href="{% url 'login' %}"         class="nav-link nav-cta">
+      {% trans "Client Portal" %}
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+    </a>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="{% trans 'Open menu' %}" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── Mobile overlay ── -->
+<div class="mob-bg" id="mobBg"></div>
+
+<!-- ══════════════════════════════
+     MOBILE DRAWER
+══════════════════════════════ -->
+<div class="mob-drawer" id="mobDrawer" role="dialog" aria-modal="true">
+  <div class="mob-drawer-head">
+    <a href="{% url 'home' %}" class="nav-logo">
+      <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal" class="nav-logo-img">
+    </a>
+    <button class="mob-x" id="mobX" aria-label="{% trans 'Close' %}">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="mob-nav">
+    <a href="{% url 'home' %}"          class="mob-nav-link {% block mob_home %}{% endblock %}">{% trans "Home" %}<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="{% url 'about' %}"         class="mob-nav-link {% block mob_about %}{% endblock %}">{% trans "About" %}<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="{% url 'contact' %}"       class="mob-nav-link {% block mob_contact %}{% endblock %}">{% trans "Contact" %}<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <div class="mob-sep"></div>
+    <a href="{% url 'login' %}"         class="mob-nav-link mob-cta-link">{% trans "Client Portal" %}<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+
+  <div class="mob-drawer-foot">
+    <div class="mob-foot-label">{% trans "Contact us" %}</div>
+    <a href="tel:514-699-9218" class="mob-contact">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      514-699-9218
+    </a>
+    <a href="mailto:info@nettoyageboreal.ca" class="mob-contact">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      info@nettoyageboreal.ca
+    </a>
+    <div class="mob-lang">
+      <form action="{% url 'set_language' %}" method="post" id="mobLangForm">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <select name="language" onchange="document.getElementById('mobLangForm').submit()">
+          {% for lc,ln in LANGUAGES %}
+          <option value="{{ lc }}" {% if lc == LANGUAGE_CODE %}selected{% endif %}>{{ ln }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ── Flash messages ── -->
+{% if messages %}
+<div class="flash-wrap" id="flashWrap">
+  {% for message in messages %}
+  <div class="flash {% if message.tags %}{{ message.tags }}{% endif %}">
+    {% if 'error' in message.tags %}
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    {% else %}
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    {% endif %}
+    {{ message }}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- ══════════════════════════════
+     PAGE CONTENT
+══════════════════════════════ -->
+<main class="page-content">{% block content %}{% endblock %}</main>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="ft">
+    <div>
+      <a href="{% url 'home' %}" class="ft-logo">
+        <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal" class="ft-logo-img">
+      </a>
+      <p class="ft-tagline">{% trans "Inspired by the pure air and quiet strength of the boreal north — freshness, reliability and professionalism for every commercial space." %}</p>
+      <div class="ft-socials">
+        <a href="#" class="ft-soc" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="ft-soc" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="ft-col">
+      <div class="ft-col-h">{% trans "Pages" %}</div>
+      <a href="{% url 'home' %}">{% trans "Home" %}</a>
+      <a href="{% url 'about' %}">{% trans "About Us" %}</a>
+      <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
+      <a href="{% url 'login' %}">{% trans "Client Portal" %}</a>
+    </div>
+
+    <div class="ft-col">
+      <a href="#">{% trans "Office Cleaning" %}</a>
+      <a href="#">{% trans "Clinic & Dental" %}</a>
+      <a href="#">{% trans "Warehouse & Industrial" %}</a>
+      <a href="#">{% trans "Retail Spaces" %}</a>
+    </div>
+
+    <div class="ft-col">
+      <div class="ft-col-h">{% trans "Contact" %}</div>
+      <a href="tel:514-699-9218">514-699-9218</a>
+      <a href="mailto:info@nettoyageboreal.ca">info@nettoyageboreal.ca</a>
+      <a href="#">{% trans "Montréal & Greater Region" %}</a>
+      <a href="#">{% trans "7 days a week" %}</a>
+    </div>
+  </div>
+
+  <div class="fb">
+    <p class="fb-copy">© 2026 Nettoyage Boréal. {% trans "All rights reserved." %}</p>
+    <div class="fb-badge">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      {% trans "Insured & Local" %}
+    </div>
+    <div class="fb-links">
+      <a href="#">{% trans "Privacy Policy" %}</a>
+    </div>
+  </div>
+</footer>
+
+{% block extra_js %}{% endblock %}
+
+<script>
+/* ── NAVBAR SCROLL ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>30),{passive:true});
+
+/* ── MOBILE MENU ── */
+const hbg=document.getElementById('hamburger');
+const drw=document.getElementById('mobDrawer');
+const bg=document.getElementById('mobBg');
+const mx=document.getElementById('mobX');
+function openM(){hbg.classList.add('open');hbg.setAttribute('aria-expanded','true');drw.classList.add('open');bg.classList.add('open');document.body.style.overflow='hidden';mx.focus()}
+function closeM(){hbg.classList.remove('open');hbg.setAttribute('aria-expanded','false');drw.classList.remove('open');bg.classList.remove('open');document.body.style.overflow='';hbg.focus()}
+hbg.addEventListener('click',openM);
+mx.addEventListener('click',closeM);
+bg.addEventListener('click',closeM);
+drw.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeM));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+
+/* ── SCROLL REVEAL ── */
+const srObs=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.sr').forEach(el=>srObs.observe(el));
+
+/* ── COUNT UP ── */
+const cuObs=new IntersectionObserver((es,o)=>es.forEach(e=>{
+  if(e.isIntersecting){
+    const el=e.target,t=+el.dataset.target,s=performance.now(),d=1800;
+    (function u(n){const p=Math.min((n-s)/d,1),ease=1-Math.pow(1-p,3);el.textContent=Math.floor(ease*t);if(p<1)requestAnimationFrame(u)})(s);
+    o.unobserve(el);
+  }
+}),{threshold:.5});
+document.querySelectorAll('.count-up').forEach(el=>cuObs.observe(el));
+
+/* ── AUTO-DISMISS FLASH ── */
+setTimeout(()=>{const w=document.getElementById('flashWrap');if(w){w.style.transition='opacity .45s';w.style.opacity='0';setTimeout(()=>w.remove(),460)}},4000);
+</script>
+</body>
+</html>

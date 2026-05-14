@@ -1,0 +1,163 @@
+{% extends 'portal/base_portal.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "New Ticket" %}{% endblock %}
+{% block page_title %}{% trans "New Ticket" %}{% endblock %}
+{% block nav_new %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+.form-wrap {
+  max-width: 680px;
+}
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+}
+.form-card-head {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: .75rem;
+}
+.form-card-head-ico {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.form-card-head-ico svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; stroke-width: 2 }
+.form-card-head h2 { font-size: .95rem; font-weight: 700; color: var(--navy) }
+.form-card-head p { font-size: .78rem; color: var(--text-muted); margin-top: .1rem }
+.form-card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem }
+
+.fg { display: flex; flex-direction: column; gap: .45rem }
+.fg label {
+  font-size: .73rem; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--navy);
+}
+.fg label .req { color: var(--blue); margin-left: 2px }
+.fg input[type=text],
+.fg textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--text);
+  border-radius: var(--r-sm); padding: .82rem 1rem;
+  font-family: inherit; font-size: .9rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.fg textarea { min-height: 160px; resize: vertical }
+.fg input[type=text]:focus,
+.fg textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(27,170,214,.11);
+}
+.fg input[type=text]::placeholder,
+.fg textarea::placeholder { color: var(--text-muted); font-size: .87rem }
+
+/* File upload zone */
+.file-zone {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--r-sm);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  position: relative;
+}
+.file-zone:hover { border-color: var(--blue); background: var(--blue-light) }
+.file-zone input[type=file] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.file-zone-ico {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto .75rem;
+}
+.file-zone-ico svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 1.9 }
+.file-zone-label { font-size: .88rem; font-weight: 600; color: var(--navy); margin-bottom: .25rem }
+.file-zone-hint { font-size: .78rem; color: var(--text-muted) }
+.file-zone-names { font-size: .8rem; color: var(--blue); margin-top: .5rem; font-weight: 500 }
+
+/* Form footer */
+.form-footer {
+  display: flex; align-items: center; gap: .75rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--off-white);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-wrap">
+  <div class="form-card">
+    <div class="form-card-head">
+      <div class="form-card-head-ico">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      </div>
+      <div>
+        <h2>{% trans "Open a New Ticket" %}</h2>
+        <p>{% trans "Describe your issue and we will get back to you quickly." %}</p>
+      </div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-card-body">
+
+        <div class="fg">
+          <label for="f-title">{% trans "Subject" %}<span class="req">*</span></label>
+          <input type="text" id="f-title" name="title"
+                 placeholder="{% trans 'e.g. Issue with the cleaning of the reception area' %}"
+                 required>
+        </div>
+
+        <div class="fg">
+          <label for="f-body">{% trans "Describe your issue" %}<span class="req">*</span></label>
+          <textarea id="f-body" name="body"
+                    placeholder="{% trans 'Please describe what happened, when, and where in your space…' %}"
+                    required></textarea>
+        </div>
+
+        <div class="fg">
+          <label>{% trans "Attach photos" %} <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted)">({% trans "optional" %})</span></label>
+          <div class="file-zone" id="fileZone">
+            <input type="file" name="images" multiple accept="image/*" id="fileInput">
+            <div class="file-zone-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <div class="file-zone-label">{% trans "Click to attach photos" %}</div>
+            <div class="file-zone-hint">{% trans "JPG, PNG, WEBP — multiple files allowed" %}</div>
+            <div class="file-zone-names" id="fileNames"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          {% trans "Submit Ticket" %}
+        </button>
+        <a href="{% url 'dashboard' %}" class="btn btn-ghost">
+          {% trans "Cancel" %}
+        </a>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function() {
+  const names = Array.from(this.files).map(f => f.name).join(', ');
+  const el = document.getElementById('fileNames');
+  el.textContent = names || '';
+});
+</script>
+{% endblock %}

@@ -1,0 +1,299 @@
+{% extends 'staff/base_staff.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Leads" %}{% endblock %}
+{% block page_title %}{% trans "Leads" %}{% endblock %}
+{% block nav_leads %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.75rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--sh-sm)}
+.stat-card-ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stat-card-ico svg{width:20px;height:20px;fill:none;stroke-width:1.9}
+.stat-card-num{font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1}
+.stat-card-label{font-size:.75rem;color:var(--text-muted);margin-top:.2rem}
+
+/* ── SECTION HEADER ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:1rem;flex-wrap:wrap}
+.section-header-left{display:flex;align-items:center;gap:.75rem}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--navy);margin:0}
+.section-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 .45rem;background:var(--blue-light);color:var(--blue);font-size:.72rem;font-weight:700;border-radius:100px}
+
+/* ── TABLE ── */
+.leads-table-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:2rem}
+.leads-table{width:100%;border-collapse:collapse}
+.leads-table thead tr{background:var(--off-white);border-bottom:1px solid var(--border)}
+.leads-table th{padding:.75rem 1rem;text-align:left;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap}
+.leads-table th:first-child{padding-left:1.25rem}
+.leads-table th:last-child{padding-right:1.25rem;text-align:center}
+.leads-table tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+.leads-table tbody tr:last-child{border-bottom:none}
+.leads-table tbody tr:hover{background:var(--off-white)}
+.leads-table td{padding:.9rem 1rem;font-size:.875rem;color:var(--text-body);vertical-align:middle}
+.leads-table td:first-child{padding-left:1.25rem}
+.leads-table td:last-child{padding-right:1.25rem;text-align:center}
+
+/* ── LEAD CELLS ── */
+.lead-name{font-weight:600;color:var(--navy);margin-bottom:.18rem}
+.lead-email{font-size:.78rem;color:var(--text-muted)}
+.lead-phone{font-size:.83rem;color:var(--text-body)}
+.lead-date{font-size:.8rem;color:var(--text-muted);white-space:nowrap}
+.lead-service{display:inline-flex;align-items:center;padding:.22rem .65rem;background:var(--blue-light);color:var(--blue);font-size:.7rem;font-weight:600;border-radius:100px;white-space:nowrap}
+.lead-message{font-size:.82rem;color:var(--text-muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lead-message-full{display:none;font-size:.82rem;color:var(--text-body);line-height:1.65;max-width:300px;white-space:normal}
+.lead-msg-btn{background:none;border:none;cursor:pointer;color:var(--blue);font-size:.72rem;font-weight:600;padding:0;margin-top:.2rem;display:block;font-family:inherit;transition:color .18s}
+.lead-msg-btn:hover{color:var(--blue-hover)}
+
+/* ── TOGGLE ── */
+.toggle-form{display:flex;justify-content:center}
+.toggle{position:relative;width:42px;height:24px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-track{
+  position:absolute;inset:0;border-radius:100px;cursor:pointer;
+  background:var(--border);
+  transition:background .22s;
+  border:1.5px solid #d0dde5;
+}
+.toggle input:checked + .toggle-track{background:var(--blue);border-color:var(--blue)}
+.toggle-thumb{
+  position:absolute;top:3px;left:3px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--white);
+  box-shadow:0 1px 4px rgba(10,22,40,.2);
+  transition:transform .22s;
+  pointer-events:none;
+}
+.toggle input:checked ~ .toggle-thumb{transform:translateX(18px)}
+/* accessibility ring */
+.toggle input:focus-visible + .toggle-track{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ── EMPTY ── */
+.empty-row td{padding:3rem 1.5rem;text-align:center}
+.empty-inner{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.empty-ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto .25rem}
+.empty-ico svg{width:22px;height:22px;fill:none;stroke-width:1.8}
+.empty-label{font-size:.88rem;font-weight:600;color:var(--navy)}
+.empty-sub{font-size:.8rem;color:var(--text-muted)}
+
+/* ── NEW SECTION ACCENT ── */
+.section-new .section-count{background:rgba(234,88,12,.1);color:#c2410c}
+.section-new h2{color:var(--navy)}
+.section-new .leads-table thead tr{background:#fff9f5}
+.section-new .leads-table th{color:#a16207}
+.section-new .leads-table tbody tr:hover{background:#fff9f5}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stats-row .stat-card:last-child{grid-column:span 2}
+  .col-message,.col-service{display:none}
+}
+@media(max-width:768px){
+  .leads-table-wrap{overflow-x:auto}
+  .stats-row{grid-template-columns:1fr}
+  .stats-row .stat-card:last-child{grid-column:span 1}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Stats -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-card-ico" style="background:rgba(234,88,12,.1)">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:#c2410c"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+    </div>
+    <div>
+      <div class="stat-card-num">{{ new_leads|length }}</div>
+      <div class="stat-card-label">{% trans "To contact" %}</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-ico" style="background:rgba(22,163,74,.1)">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:#15803d"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div>
+      <div class="stat-card-num">{{ contacted_leads|length }}</div>
+      <div class="stat-card-label">{% trans "Contacted" %}</div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- ══ TO CONTACT ══ -->
+<div class="section-header section-new">
+  <div class="section-header-left">
+    <h2>{% trans "To Contact" %}</h2>
+    <span class="section-count" style="background:rgba(234,88,12,.1);color:#c2410c">{{ new_leads|length }}</span>
+  </div>
+</div>
+
+<div class="leads-table-wrap">
+  <table class="leads-table">
+    <thead>
+      <tr>
+        <th>{% trans "Contact" %}</th>
+        <th>{% trans "Phone" %}</th>
+        <th class="col-service">{% trans "Service" %}</th>
+        <th class="col-message">{% trans "Message" %}</th>
+        <th>{% trans "Received" %}</th>
+        <th>{% trans "Contacted" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lead in new_leads %}
+      <tr>
+        <td>
+          <div class="lead-name">{{ lead.name }}</div>
+          <div class="lead-email">{{ lead.email }}</div>
+        </td>
+        <td>
+          {% if lead.phone %}
+            <span class="lead-phone">{{ lead.phone }}</span>
+          {% else %}
+            <span style="color:var(--border)">—</span>
+          {% endif %}
+        </td>
+        <td class="col-service">
+          {% if lead.service %}
+            <span class="lead-service">{{ lead.service }}</span>
+          {% else %}
+            <span style="color:var(--border)">—</span>
+          {% endif %}
+        </td>
+        <td class="col-message">
+          <div class="lead-message" id="msg-short-{{ lead.id }}">{{ lead.message }}</div>
+          <div class="lead-message-full" id="msg-full-{{ lead.id }}">{{ lead.message }}</div>
+          {% if lead.message|length > 60 %}
+            <button class="lead-msg-btn" onclick="toggleMsg({{ lead.id }})">{% trans "Show more" %}</button>
+          {% endif %}
+        </td>
+        <td>
+          <span class="lead-date">{{ lead.created_at|date:"M d, Y" }}</span>
+          <div style="font-size:.72rem;color:var(--text-muted);margin-top:.1rem">{{ lead.created_at|time:"H:i" }}</div>
+        </td>
+        <td>
+          <form class="toggle-form" method="POST" action="{% url 'staff_toggle_lead' lead.id %}">
+            {% csrf_token %}
+            <label class="toggle" title="{% trans 'Mark as contacted' %}">
+              <input type="checkbox" onchange="this.form.submit()" {% if lead.is_contacted %}checked{% endif %}>
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr class="empty-row">
+        <td colspan="6">
+          <div class="empty-inner">
+            <div class="empty-ico" style="background:rgba(22,163,74,.08)">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:#15803d"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="empty-label">{% trans "All caught up!" %}</span>
+            <span class="empty-sub">{% trans "No leads waiting to be contacted." %}</span>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ CONTACTED ══ -->
+<div class="section-header" style="margin-top:.5rem">
+  <div class="section-header-left">
+    <h2>{% trans "Contacted" %}</h2>
+    <span class="section-count">{{ contacted_leads|length }}</span>
+  </div>
+</div>
+
+<div class="leads-table-wrap">
+  <table class="leads-table">
+    <thead>
+      <tr>
+        <th>{% trans "Contact" %}</th>
+        <th>{% trans "Phone" %}</th>
+        <th class="col-service">{% trans "Service" %}</th>
+        <th class="col-message">{% trans "Message" %}</th>
+        <th>{% trans "Received" %}</th>
+        <th>{% trans "Contacted" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lead in contacted_leads %}
+      <tr style="opacity:.75">
+        <td>
+          <div class="lead-name">{{ lead.name }}</div>
+          <div class="lead-email">{{ lead.email }}</div>
+        </td>
+        <td>
+          {% if lead.phone %}
+            <span class="lead-phone">{{ lead.phone }}</span>
+          {% else %}
+            <span style="color:var(--border)">—</span>
+          {% endif %}
+        </td>
+        <td class="col-service">
+          {% if lead.service %}
+            <span class="lead-service">{{ lead.service }}</span>
+          {% else %}
+            <span style="color:var(--border)">—</span>
+          {% endif %}
+        </td>
+        <td class="col-message">
+          <div class="lead-message" id="msg-short-c-{{ lead.id }}">{{ lead.message }}</div>
+          <div class="lead-message-full" id="msg-full-c-{{ lead.id }}">{{ lead.message }}</div>
+          {% if lead.message|length > 60 %}
+            <button class="lead-msg-btn" onclick="toggleMsg('c-{{ lead.id }}')">{% trans "Show more" %}</button>
+          {% endif %}
+        </td>
+        <td>
+          <span class="lead-date">{{ lead.created_at|date:"M d, Y" }}</span>
+          <div style="font-size:.72rem;color:var(--text-muted);margin-top:.1rem">{{ lead.created_at|time:"H:i" }}</div>
+        </td>
+        <td>
+          <form class="toggle-form" method="POST" action="{% url 'staff_toggle_lead' lead.id %}">
+            {% csrf_token %}
+            <label class="toggle" title="{% trans 'Mark as not contacted' %}">
+              <input type="checkbox" onchange="this.form.submit()" {% if lead.is_contacted %}checked{% endif %}>
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr class="empty-row">
+        <td colspan="6">
+          <div class="empty-inner">
+            <div class="empty-ico" style="background:var(--off-white)">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--text-muted)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span class="empty-label">{% trans "No contacted leads yet" %}</span>
+            <span class="empty-sub">{% trans "Toggle the switch on a lead above once you've reached out." %}</span>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+const _showMore = "{% trans 'Show more' %}";
+const _showLess = "{% trans 'Show less' %}";
+function toggleMsg(id) {
+  const short = document.getElementById('msg-short-' + id);
+  const full  = document.getElementById('msg-full-'  + id);
+  const btn   = short.nextElementSibling.nextElementSibling;
+  const isHidden = full.style.display !== 'block';
+  short.style.display = isHidden ? 'none'  : 'block';
+  full.style.display  = isHidden ? 'block' : 'none';
+  if (btn) btn.textContent = isHidden ? _showLess : _showMore;
+}
+</script>
+{% endblock %}

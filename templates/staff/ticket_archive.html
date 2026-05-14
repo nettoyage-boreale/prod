@@ -1,0 +1,98 @@
+{% extends 'staff/base_staff.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Closed Tickets" %}{% endblock %}
+{% block page_title %}{% trans "Closed Tickets" %}{% endblock %}
+{% block nav_closed %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:1rem}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--navy)}
+
+.ticket-list{display:flex;flex-direction:column;gap:.6rem}
+
+.ticket-row{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;
+  text-decoration:none;
+  transition:border-color .18s,box-shadow .18s,transform .15s;
+  box-shadow:var(--sh-sm);
+}
+.ticket-row:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(27,170,214,.1);transform:translateY(-1px)}
+.ticket-row-ico{width:38px;height:38px;border-radius:9px;background:var(--off-white);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ticket-row-ico svg{width:17px;height:17px;stroke:var(--text-muted);fill:none;stroke-width:2}
+.ticket-row-body{flex:1;min-width:0}
+.ticket-row-title{font-size:.9rem;font-weight:600;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.2rem}
+.ticket-row-meta{font-size:.77rem;color:var(--text-muted);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.ticket-row-meta-sep{color:var(--border)}
+.ticket-row-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.ticket-row-arrow{width:28px;height:28px;border-radius:50%;background:var(--off-white);display:flex;align-items:center;justify-content:center;transition:background .18s}
+.ticket-row:hover .ticket-row-arrow{background:var(--blue)}
+.ticket-row-arrow svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:2.5;transition:stroke .18s}
+.ticket-row:hover .ticket-row-arrow svg{stroke:#fff}
+
+.client-chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--off-white);border:1px solid var(--border);border-radius:100px;padding:.18rem .6rem;font-size:.72rem;font-weight:600;color:var(--text-muted)}
+.client-chip svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
+
+.empty-state{background:var(--white);border:1px dashed var(--border);border-radius:var(--r-md);padding:4rem 2rem;text-align:center}
+.empty-state-ico{width:56px;height:56px;border-radius:14px;background:var(--off-white);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.empty-state-ico svg{width:26px;height:26px;stroke:var(--text-muted);fill:none;stroke-width:1.8}
+.empty-state h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.empty-state p{font-size:.88rem;color:var(--text-muted);line-height:1.7}
+
+@media(max-width:640px){
+  .ticket-row-meta{flex-direction:column;align-items:flex-start;gap:.2rem}
+  .ticket-row-meta-sep{display:none}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="section-header">
+  <h2>{% trans "Closed Tickets" %}</h2>
+  <a href="{% url 'staff_dashboard' %}" class="btn btn-ghost btn-sm">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    {% trans "Back to open tickets" %}
+  </a>
+</div>
+
+{% if tickets %}
+  <div class="ticket-list">
+    {% for ticket in tickets %}
+    <a href="{% url 'staff_ticket_detail' ticket.id %}" class="ticket-row">
+      <div class="ticket-row-ico">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      </div>
+      <div class="ticket-row-body">
+        <div class="ticket-row-title">{{ ticket.title }}</div>
+        <div class="ticket-row-meta">
+          <span class="client-chip">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            {{ ticket.customer.user.get_full_name|default:ticket.customer.user.username }}
+          </span>
+          <span class="ticket-row-meta-sep">·</span>
+          <span>{% trans "Closed" %} {{ ticket.updated_at|date:"M d, Y" }}</span>
+        </div>
+      </div>
+      <div class="ticket-row-right">
+        <span class="badge badge-closed">{% trans "Closed" %}</span>
+        <div class="ticket-row-arrow">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <div class="empty-state-ico">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+    </div>
+    <h3>{% trans "No closed tickets" %}</h3>
+    <p>{% trans "Tickets you close will appear here for reference." %}</p>
+  </div>
+{% endif %}
+
+{% endblock %}

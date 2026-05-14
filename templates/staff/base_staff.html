@@ -1,0 +1,486 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% trans "Staff Panel" %}{% endblock %} — Nettoyage Boréal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:      #0a1628;
+  --blue:      #1BAAD6;
+  --blue-hover:#1597be;
+  --blue-light:#e8f7fd;
+  --white:     #ffffff;
+  --off-white: #f6fbfd;
+  --sidebar-w: 240px;
+  --text:      #0f1f30;
+  --text-body: #3a5567;
+  --text-muted:#6b8599;
+  --border:    #e4eef2;
+  --sh-sm:     0 2px 8px rgba(10,22,40,.07);
+  --sh-md:     0 6px 24px rgba(10,22,40,.10);
+  --r-sm:      8px;
+  --r-md:      12px;
+  /* staff accent — slightly warmer to distinguish from client portal */
+  --staff:     #0f4c75;
+  --staff2:    #1a6b9a;
+}
+
+html{height:100%}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:400;
+  color:var(--text);
+  background:var(--off-white);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.staff-wrap{ display:flex; flex:1; min-height:100vh }
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  background:var(--navy);
+  display:flex;
+  flex-direction:column;
+  position:fixed;
+  top:0;left:0;bottom:0;
+  z-index:200;
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+}
+
+.sidebar-logo{
+  display:flex;align-items:center;gap:.75rem;
+  padding:1.5rem 1.25rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  text-decoration:none;flex-shrink:0;
+}
+.sidebar-logo img{
+  height:52px;width:auto;
+  filter:brightness(0) invert(1);opacity:.9;
+}
+.sidebar-logo-label{
+  font-size:.65rem;font-weight:600;
+  color:rgba(255,255,255,.4);
+  letter-spacing:.12em;text-transform:uppercase;line-height:1.3;
+}
+
+/* Staff badge under logo */
+.sidebar-staff-badge{
+  margin:.75rem 1.25rem .5rem;
+  display:flex;align-items:center;gap:.55rem;
+  background:rgba(27,170,214,.12);
+  border:1px solid rgba(27,170,214,.22);
+  border-radius:var(--r-sm);
+  padding:.5rem .85rem;
+  font-size:.72rem;font-weight:600;
+  color:var(--blue);letter-spacing:.06em;
+  flex-shrink:0;
+}
+.sidebar-staff-badge svg{width:13px;height:13px;stroke:var(--blue);fill:none;stroke-width:2.2;flex-shrink:0}
+
+/* User chip */
+.sidebar-user{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.85rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  flex-shrink:0;
+}
+.sidebar-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(27,170,214,.22);
+  border:1.5px solid rgba(27,170,214,.4);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:.8rem;font-weight:700;color:var(--blue);
+}
+.sidebar-user-name{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.82);line-height:1.2}
+.sidebar-user-role{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+
+/* Nav */
+.sidebar-nav{
+  flex:1;padding:.75rem;
+  display:flex;flex-direction:column;gap:.15rem;
+  overflow-y:auto;
+}
+.sidebar-label{
+  font-size:.65rem;font-weight:700;
+  color:rgba(255,255,255,.25);
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:.6rem .5rem .3rem;margin-top:.5rem;
+}
+.sidebar-link{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.72rem 1rem;border-radius:var(--r-sm);
+  color:rgba(255,255,255,.55);text-decoration:none;
+  font-size:.875rem;font-weight:500;
+  transition:background .18s,color .18s;white-space:nowrap;
+}
+.sidebar-link svg{
+  width:17px;height:17px;stroke:currentColor;fill:none;
+  stroke-width:1.9;flex-shrink:0;opacity:.7;transition:opacity .18s;
+}
+.sidebar-link:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.88)}
+.sidebar-link:hover svg{opacity:1}
+.sidebar-link.active{background:rgba(27,170,214,.18);color:var(--blue)}
+.sidebar-link.active svg{color:var(--blue);opacity:1}
+.sidebar-sep{height:1px;background:rgba(255,255,255,.07);margin:.5rem 0}
+
+/* Ticket count badge */
+.sidebar-count{
+  margin-left:auto;
+  background:rgba(27,170,214,.2);
+  color:var(--blue);
+  font-size:.68rem;font-weight:700;
+  padding:.15rem .5rem;border-radius:100px;
+}
+
+/* Footer */
+.sidebar-footer{
+  padding:.75rem;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0;
+}
+.sidebar-logout{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.7rem 1rem;border-radius:var(--r-sm);
+  color:rgba(255,255,255,.4);text-decoration:none;
+  font-size:.86rem;font-weight:500;
+  transition:background .18s,color .18s;
+  width:100%;border:none;background:transparent;
+  cursor:pointer;font-family:inherit;
+}
+.sidebar-logout svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;flex-shrink:0}
+.sidebar-logout:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.72)}
+
+/* ══════════════════════════════
+   MAIN AREA
+══════════════════════════════ */
+.staff-main{
+  flex:1;margin-left:var(--sidebar-w);
+  display:flex;flex-direction:column;min-width:0;
+}
+
+/* Topbar */
+.staff-topbar{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  height:60px;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  position:sticky;top:0;z-index:100;
+  box-shadow:var(--sh-sm);
+}
+.staff-topbar-left{display:flex;align-items:center;gap:.75rem}
+.staff-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;gap:4px;
+  width:36px;height:36px;background:none;border:none;cursor:pointer;
+  padding:4px;border-radius:var(--r-sm);transition:background .18s;flex-shrink:0;
+}
+.staff-hamburger:hover{background:var(--blue-light)}
+.staff-hamburger span{display:block;height:2px;background:var(--navy);border-radius:2px;transition:transform .28s,opacity .2s}
+.staff-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.staff-hamburger.open span:nth-child(2){opacity:0}
+.staff-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.staff-page-title{font-size:.95rem;font-weight:700;color:var(--navy)}
+
+.staff-topbar-right{display:flex;align-items:center;gap:.75rem}
+.staff-topbar-user{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.82rem;color:var(--text-muted);
+}
+.staff-topbar-avatar{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--blue-light);border:1.5px solid var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:var(--blue);flex-shrink:0;
+}
+.staff-label{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:rgba(27,170,214,.1);color:var(--blue);
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;
+  padding:.2rem .6rem;border-radius:100px;
+  border:1px solid rgba(27,170,214,.2);
+}
+
+/* Content */
+.staff-content{
+  flex:1;padding:2rem;
+  max-width:1200px;width:100%;
+}
+
+/* ══════════════════════════════
+   FLASH MESSAGES
+══════════════════════════════ */
+.staff-msgs{padding:.75rem 2rem 0}
+.staff-msg{
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-left:4px solid var(--blue);
+  border-radius:var(--r-md);
+  padding:.8rem 1.1rem;font-size:.875rem;color:var(--text);
+  box-shadow:var(--sh-sm);margin-bottom:.5rem;
+  animation:msgIn .3s ease;
+}
+.staff-msg.error{border-left-color:#c0392b;color:#7a1f1f}
+.staff-msg svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+@keyframes msgIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════
+   OVERLAY  — fixed pointer-events bug:
+   always display:block so opacity transition works,
+   pointer-events:none until .open so it never eats taps
+══════════════════════════════ */
+.staff-overlay{
+  display:block;               /* always in DOM so transition works */
+  position:fixed;inset:0;z-index:199;
+  background:rgba(10,22,40,.5);
+  backdrop-filter:blur(3px);
+  opacity:0;
+  pointer-events:none;         /* never eats taps when hidden */
+  transition:opacity .32s;
+}
+.staff-overlay.open{
+  opacity:1;
+  pointer-events:auto;         /* only capture input when sidebar is open */
+}
+
+/* ══════════════════════════════
+   SHARED UTILITIES
+══════════════════════════════ */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--sh-sm)}
+.card-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.card-title{font-size:.95rem;font-weight:700;color:var(--navy)}
+.card-body{padding:1.5rem}
+
+.badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;padding:.28rem .7rem;border-radius:100px;white-space:nowrap}
+.badge-open{background:rgba(27,170,214,.12);color:var(--blue)}
+.badge-closed{background:rgba(107,133,153,.12);color:var(--text-muted)}
+.badge-new{background:rgba(22,163,74,.1);color:#15803d}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:inherit;font-size:.875rem;font-weight:600;padding:.72rem 1.4rem;border-radius:var(--r-sm);text-decoration:none;border:none;cursor:pointer;transition:background .18s,transform .15s,box-shadow .18s}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;transition:transform .18s}
+.btn:hover svg{transform:translateX(2px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(27,170,214,.2)}
+.btn-primary:hover{background:var(--blue-hover);transform:translateY(-1px);box-shadow:0 6px 18px rgba(27,170,214,.28)}
+.btn-success{background:rgba(22,163,74,.1);color:#15803d}
+.btn-success:hover{background:rgba(22,163,74,.18)}
+.btn-danger{background:rgba(192,57,43,.1);color:#c0392b}
+.btn-danger:hover{background:rgba(192,57,43,.18)}
+.btn-ghost{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.btn-sm{font-size:.8rem;padding:.5rem 1rem}
+
+/* ── Sidebar language switcher ── */
+.sidebar-lang{
+  padding:.6rem .75rem .4rem;
+  border-top:1px solid rgba(255,255,255,.07);
+  margin-top:.4rem;
+}
+.sidebar-lang select{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.55);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.8rem;padding:.45rem .75rem;
+  border-radius:var(--r-sm);outline:none;cursor:pointer;
+}
+.sidebar-lang select option{background:var(--navy);color:#fff}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .staff-main{margin-left:0}
+  .staff-hamburger{display:flex}
+  .staff-content{padding:1.25rem}
+  .staff-msgs{padding:.75rem 1.25rem 0}
+  .staff-topbar{padding:0 1.25rem}
+}
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<div class="staff-wrap">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="staffSidebar">
+
+    <a href="{% url 'home' %}" class="sidebar-logo">
+      <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal">
+      <span class="sidebar-logo-label">{% trans "Staff Panel" %}</span>
+    </a>
+
+    <div class="sidebar-staff-badge">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      {% trans "Staff Access" %}
+    </div>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">
+        {{ request.user.username|slice:":2"|upper }}
+      </div>
+      <div>
+        <div class="sidebar-user-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+        <div class="sidebar-user-role">{% trans "Administrator" %}</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-label">{% trans "Tickets" %}</div>
+      <a href="{% url 'staff_dashboard' %}" class="sidebar-link {% block nav_open %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        {% trans "Open Tickets" %}
+        {% if open_count %}<span class="sidebar-count">{{ open_count }}</span>{% endif %}
+      </a>
+      <a href="{% url 'staff_archive' %}" class="sidebar-link {% block nav_closed %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+        {% trans "Closed Tickets" %}
+      </a>
+
+      <a href="{% url 'staff_leads' %}" class="sidebar-link {% block nav_leads %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        {% trans "Leads" %}
+        {% if new_leads_count %}<span class="sidebar-count">{{ new_leads_count }}</span>{% endif %}
+      </a>
+      <a href="{% url 'staff_clients' %}" class="sidebar-link {% block nav_clients %}{% endblock %}">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+          <path d="M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        {% trans "Clients" %}
+      </a>
+
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-label">{% trans "Management" %}</div>
+
+      <a href="{% url 'home' %}" class="sidebar-link">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        {% trans "Website" %}
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-lang">
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.path }}">
+          <select name="language" onchange="this.form.submit()">
+            {% for lc, ln in LANGUAGES %}
+            <option value="{{ lc }}" {% if lc == LANGUAGE_CODE %}selected{% endif %}>{{ ln }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+      <a href="{% url 'logout' %}" class="sidebar-logout">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        {% trans "Logout" %}
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div class="staff-main">
+
+    <div class="staff-topbar">
+      <div class="staff-topbar-left">
+        <button class="staff-hamburger" id="staffHamburger" aria-label="{% trans 'Menu' %}">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="staff-page-title">{% block page_title %}{% trans "Staff Panel" %}{% endblock %}</span>
+      </div>
+      <div class="staff-topbar-right">
+        <span class="staff-label">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:currentColor;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {% trans "Staff" %}
+        </span>
+        <div class="staff-topbar-user">
+          <div class="staff-topbar-avatar">{{ request.user.username|slice:":2"|upper }}</div>
+          {{ request.user.get_full_name|default:request.user.username }}
+        </div>
+      </div>
+    </div>
+
+    {% if messages %}
+    <div class="staff-msgs">
+      {% for message in messages %}
+      <div class="staff-msg {% if message.tags %}{{ message.tags }}{% endif %}">
+        {% if 'error' in message.tags %}
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        {% else %}
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {% endif %}
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="staff-content">
+      {% block content %}{% endblock %}
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Overlay — display:block always, pointer-events:none until open -->
+<div class="staff-overlay" id="staffOverlay"></div>
+
+{% block extra_js %}{% endblock %}
+
+<script>
+const sidebar   = document.getElementById('staffSidebar');
+const hamburger = document.getElementById('staffHamburger');
+const overlay   = document.getElementById('staffOverlay');
+
+function openSidebar(){
+  sidebar.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSidebar(){
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+overlay.addEventListener('click', closeSidebar);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSidebar() });
+
+setTimeout(() => {
+  document.querySelectorAll('.staff-msg').forEach(el => {
+    el.style.transition = 'opacity .4s';
+    el.style.opacity = '0';
+    setTimeout(() => el.remove(), 420);
+  });
+}, 4000);
+</script>
+</body>
+</html>
