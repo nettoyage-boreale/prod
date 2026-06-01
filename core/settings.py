@@ -72,7 +72,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
+CSRF_TRUSTED_ORIGINS = ['https://prod-production-8a67.up.railway.app']
+WHITENOISE_USE_FINDERS = True
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/Toronto'
 USE_TZ = True
