@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}{% trans "Staff Panel" %}{% endblock %} — Nettoyage Boréal</title>
+<title>{% block title %}{% trans "Staff Panel" %}{% endblock %}  Nettoyage Boréal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
   --sh-md:     0 6px 24px rgba(10,22,40,.10);
   --r-sm:      8px;
   --r-md:      12px;
-  /* staff accent — slightly warmer to distinguish from client portal */
+  /* staff accent  slightly warmer to distinguish from client portal */
   --staff:     #0f4c75;
   --staff2:    #1a6b9a;
 }
@@ -242,7 +242,7 @@ body{
 @keyframes msgIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
 /* ══════════════════════════════
-   OVERLAY  — fixed pointer-events bug:
+   OVERLAY   fixed pointer-events bug:
    always display:block so opacity transition works,
    pointer-events:none until .open so it never eats taps
 ══════════════════════════════ */
@@ -325,7 +325,6 @@ body{
   <aside class="sidebar" id="staffSidebar">
 
     <a href="{% url 'home' %}" class="sidebar-logo">
-      <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal">
       <span class="sidebar-logo-label">{% trans "Staff Panel" %}</span>
     </a>
 
@@ -448,7 +447,7 @@ body{
 
 </div>
 
-<!-- Overlay — display:block always, pointer-events:none until open -->
+<!-- Overlay  display:block always, pointer-events:none until open -->
 <div class="staff-overlay" id="staffOverlay"></div>
 
 {% block extra_js %}{% endblock %}

@@ -102,9 +102,9 @@
             </div>
           </div>
         </td>
-        <td>{{ client.user.email|default:"—" }}</td>
-        <td class="col-phone">{{ client.phone|default:"—" }}</td>
-        <td class="col-company">{{ client.company_name|default:"—" }}</td>
+        <td>{{ client.user.email|default:"" }}</td>
+        <td class="col-phone">{{ client.phone|default:"" }}</td>
+        <td class="col-company">{{ client.company_name|default:"" }}</td>
         <td class="col-date" style="font-size:.8rem;color:var(--text-muted)">{{ client.created_at|date:"M d, Y" }}</td>
         <td>
           <div class="row-actions">

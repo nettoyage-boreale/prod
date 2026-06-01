@@ -234,8 +234,8 @@ msgid "Please describe what happened, when, and where in your space…"
 msgstr "Décrivez ce qui s'est passé, à quel moment et à quel endroit dans vos locaux…"
 
 #: templates/portal/ticket_new.html:135
-msgid "JPG, PNG, WEBP — multiple files allowed"
-msgstr "JPG, PNG, WEBP — plusieurs fichiers acceptés"
+msgid "JPG, PNG, WEBP  multiple files allowed"
+msgstr "JPG, PNG, WEBP  plusieurs fichiers acceptés"
 
 #: templates/portal/ticket_new.html:145
 msgid "Submit Ticket"
@@ -269,21 +269,18 @@ msgid "Built on"
 msgstr "Fondée sur"
 
 #: templates/public/about.html:190
-msgid "trust,"
+msgid "trust driven by results,"
 msgstr "la confiance,"
 
-#: templates/public/about.html:190
-msgid "driven by results"
-msgstr "portée par les résultats"
 
 #: templates/public/about.html:191
 msgid ""
 "A local Montréal company with a simple mission: deliver honest, no-nonsense "
-"commercial cleaning that businesses can count on — every time."
+"commercial cleaning that businesses can count on  every time."
 msgstr ""
 "Une entreprise montréalaise avec une mission claire : offrir un nettoyage "
 "commercial sérieux et sans détour, sur lequel les entreprises peuvent compter "
-"— à chaque fois."
+" à chaque fois."
 
 #: templates/public/about.html:199
 msgid "Professional cleaning team at work"
@@ -317,21 +314,21 @@ msgstr "de propreté"
 msgid ""
 "Nettoyage Boréal was founded with a simple goal: raise the bar for "
 "commercial cleaning in Montréal. We specialize in cleaning offices, clinics, "
-"warehouses and industrial spaces — with care, consistency, and absolutely no "
+"warehouses and industrial spaces  with care, consistency, and absolutely no "
 "shortcuts."
 msgstr ""
 "Nettoyage Boréal a été fondé avec un objectif simple : hausser les standards "
 "du nettoyage commercial à Montréal. Nous nous spécialisons dans l'entretien "
-"des bureaux, cliniques, entrepôts et espaces industriels — avec rigueur, "
+"des bureaux, cliniques, entrepôts et espaces industriels  avec rigueur, "
 "régularité et sans jamais couper les coins ronds."
 
 #: templates/public/about.html:210
 msgid ""
-"Our name reflects the standards we hold ourselves to — inspired by the pure "
+"Our name reflects the standards we hold ourselves to  inspired by the pure "
 "air and quiet strength of the boreal north. Freshness, efficiency, and "
 "reliability are not just words for us. They define every job we take."
 msgstr ""
-"Notre nom reflète l'exigence que nous nous imposons — inspirée par l'air pur "
+"Notre nom reflète l'exigence que nous nous imposons  inspirée par l'air pur "
 "et la force tranquille du nord boréal. La fraîcheur, l'efficacité et la "
 "fiabilité ne sont pas que des mots pour nous. Ils définissent chacun de nos "
 "mandats."
@@ -339,16 +336,16 @@ msgstr ""
 #: templates/public/about.html:212
 msgid ""
 "Too many companies overpromise and cut corners. We built something different "
-"— a business that keeps its word, values long-term relationships, and treats "
+" a business that keeps its word, values long-term relationships, and treats "
 "every property with respect."
 msgstr ""
 "Trop d'entreprises font de grandes promesses puis bâclent le travail. Nous "
-"avons bâti quelque chose de différent — une entreprise qui tient parole, "
+"avons bâti quelque chose de différent  une entreprise qui tient parole, "
 "privilégie les relations durables et traite chaque espace avec respect."
 
 #: templates/public/about.html:213
-msgid "— Founder, Nettoyage Boréal"
-msgstr "— Fondateur, Nettoyage Boréal"
+msgid " Founder, Nettoyage Boréal"
+msgstr " Fondateur, Nettoyage Boréal"
 
 #: templates/public/about.html:215
 msgid "Work with us"
@@ -393,11 +390,11 @@ msgstr "Fondée à Montréal"
 #: templates/public/about.html:254
 msgid ""
 "A small team of professionals saw a gap in the industry and set out to build "
-"something different — an honest, reliable commercial cleaning company rooted "
+"something different  an honest, reliable commercial cleaning company rooted "
 "in Montréal."
 msgstr ""
 "Une petite équipe de professionnels a repéré un manque dans l'industrie et a "
-"décidé de faire les choses autrement — en fondant une entreprise de nettoyage "
+"décidé de faire les choses autrement  en fondant une entreprise de nettoyage "
 "commercial honnête et fiable, bien ancrée à Montréal."
 
 #: templates/public/about.html:258
@@ -463,11 +460,11 @@ msgstr "Plus de 200 entreprises nous font confiance"
 
 #: templates/public/about.html:291
 msgid ""
-"Today we serve over 200 businesses across Greater Montréal — 7 days a week, "
+"Today we serve over 200 businesses across Greater Montréal  7 days a week, "
 "with the same care and consistency we brought to our very first client."
 msgstr ""
 "Nous desservons aujourd'hui plus de 200 entreprises dans le Grand Montréal "
-"— 7 jours sur 7, avec le même soin et la même rigueur qu'avec notre tout "
+" 7 jours sur 7, avec le même soin et la même rigueur qu'avec notre tout "
 "premier client."
 
 #: templates/public/about.html:303
@@ -484,10 +481,10 @@ msgstr "nous croyons"
 
 #: templates/public/about.html:306
 msgid ""
-"At Nettoyage Boréal, we don't just clean — we uphold a standard. These "
+"At Nettoyage Boréal, we don't just clean  we uphold a standard. These "
 "values guide every job we take and every space we step into."
 msgstr ""
-"Chez Nettoyage Boréal, nous ne faisons pas que nettoyer — nous maintenons "
+"Chez Nettoyage Boréal, nous ne faisons pas que nettoyer  nous maintenons "
 "une exigence. Ces valeurs guident chacun de nos mandats et chaque espace "
 "que nous entretenons."
 
@@ -497,11 +494,11 @@ msgstr "Responsabilité"
 
 #: templates/public/about.html:312
 msgid ""
-"We don't make excuses — we make things right. If we say we'll be there, we "
+"We don't make excuses  we make things right. If we say we'll be there, we "
 "will. If something needs attention, we handle it. You can count on us to own "
 "the work from start to finish."
 msgstr ""
-"On ne cherche pas d'excuses — on règle les problèmes. Si on dit qu'on sera "
+"On ne cherche pas d'excuses  on règle les problèmes. Si on dit qu'on sera "
 "là, on y sera. Si quelque chose nécessite de l'attention, on s'en occupe. "
 "Vous pouvez compter sur nous du début à la fin."
 
@@ -513,11 +510,11 @@ msgstr "Souci du détail"
 msgid ""
 "We notice the small things others overlook. From spotless corners to "
 "polished entryways, we are thorough because that is what you deserve. "
-"Details matter — and we never cut corners."
+"Details matter  and we never cut corners."
 msgstr ""
 "On remarque ce que d'autres laissent passer. Des coins impeccables aux "
 "entrées soignées, on fait le travail à fond parce que c'est ce que vous "
-"méritez. Les détails comptent — et on ne coupe jamais les coins ronds."
+"méritez. Les détails comptent  et on ne coupe jamais les coins ronds."
 
 #: templates/public/about.html:321
 msgid "Professionalism"
@@ -526,12 +523,12 @@ msgstr "Professionnalisme"
 #: templates/public/about.html:322
 msgid ""
 "Our team arrives on time, in uniform, and ready to work. We treat your "
-"business with respect and discretion. You won't have to micromanage — we "
+"business with respect and discretion. You won't have to micromanage  we "
 "handle things with care."
 msgstr ""
 "Notre équipe arrive à l'heure, en uniforme et prête à travailler. On traite "
 "votre entreprise avec respect et discrétion. Pas besoin de nous surveiller "
-"— on prend les choses en main."
+" on prend les choses en main."
 
 #: templates/public/about.html:326
 msgid "Eco-Responsibility"
@@ -540,10 +537,10 @@ msgstr "Éco-responsabilité"
 #: templates/public/about.html:327
 msgid ""
 "We use non-toxic, sustainable cleaning products that are safe for your "
-"employees, clients, and the environment — without compromising on results."
+"employees, clients, and the environment  without compromising on results."
 msgstr ""
 "On utilise des produits de nettoyage non toxiques et durables, sécuritaires "
-"pour vos employés, vos clients et l'environnement — sans rien sacrifier sur "
+"pour vos employés, vos clients et l'environnement  sans rien sacrifier sur "
 "la qualité."
 
 #: templates/public/about.html:331
@@ -553,11 +550,11 @@ msgstr "Relations à long terme"
 #: templates/public/about.html:332
 msgid ""
 "We are not interested in one-time jobs. We build long-term relationships "
-"with our clients — understanding their spaces, routines and expectations to "
+"with our clients  understanding their spaces, routines and expectations to "
 "deliver consistent quality over time."
 msgstr ""
 "On ne cherche pas les contrats ponctuels. On bâtit des relations durables "
-"avec nos clients — en apprenant à connaître leurs locaux, leurs habitudes et "
+"avec nos clients  en apprenant à connaître leurs locaux, leurs habitudes et "
 "leurs attentes pour livrer une qualité constante dans le temps."
 
 #: templates/public/about.html:336
@@ -566,11 +563,11 @@ msgstr "Horaires flexibles"
 
 #: templates/public/about.html:337
 msgid ""
-"We clean on your schedule — days, evenings, or weekends. Our goal is zero "
+"We clean on your schedule  days, evenings, or weekends. Our goal is zero "
 "disruption to your operations while keeping your space consistently "
 "immaculate."
 msgstr ""
-"On s'adapte à votre horaire — de jour, en soirée ou la fin de semaine. "
+"On s'adapte à votre horaire  de jour, en soirée ou la fin de semaine. "
 "L'objectif : zéro perturbation pour vos opérations, et des locaux toujours "
 "impeccables."
 
@@ -650,10 +647,10 @@ msgstr "Satisfaction client"
 
 #: templates/public/about.html:373
 msgid ""
-"Your main point of contact — here to ensure you are always satisfied with "
+"Your main point of contact  here to ensure you are always satisfied with "
 "our service."
 msgstr ""
-"Votre interlocutrice principale — disponible pour s'assurer que vous êtes "
+"Votre interlocutrice principale  disponible pour s'assurer que vous êtes "
 "toujours satisfait de notre service."
 
 #: templates/public/about.html:384
@@ -766,10 +763,10 @@ msgstr "Nous joindre"
 
 #: templates/public/base_public.html:558
 msgid ""
-"Inspired by the pure air and quiet strength of the boreal north — freshness, "
+"Inspired by the pure air and quiet strength of the boreal north  freshness, "
 "reliability and professionalism for every commercial space."
 msgstr ""
-"Inspiré par l'air pur et la force tranquille du nord boréal — fraîcheur, "
+"Inspiré par l'air pur et la force tranquille du nord boréal  fraîcheur, "
 "fiabilité et professionnalisme pour chaque espace commercial."
 
 #: templates/public/base_public.html:570
@@ -825,10 +822,10 @@ msgstr "votre espace"
 #: templates/public/contact.html:439
 msgid ""
 "Tell us what you need and we will get back to you quickly. No pressure, no "
-"fluff — just practical help for your cleaning needs."
+"fluff  just practical help for your cleaning needs."
 msgstr ""
 "Dites-nous ce qu'il vous faut et on vous répondra rapidement. Sans pression, "
-"sans baratin — juste de l'aide concrète pour vos besoins en nettoyage."
+"sans baratin  juste de l'aide concrète pour vos besoins en nettoyage."
 
 #: templates/public/contact.html:448
 msgid "Send Email"
@@ -875,10 +872,10 @@ msgstr "et direct"
 #: templates/public/contact.html:507
 msgid ""
 "Use the form to send us your request. Whether it's a quote, extra "
-"information, or a specific cleaning need — we respond quickly and clearly."
+"information, or a specific cleaning need  we respond quickly and clearly."
 msgstr ""
 "Utilisez le formulaire pour nous envoyer votre demande. Soumission, "
-"renseignements ou besoin particulier — on répond vite et clairement."
+"renseignements ou besoin particulier  on répond vite et clairement."
 
 #: templates/public/contact.html:515
 msgid "Call Us"
@@ -898,10 +895,10 @@ msgstr "Heures d'ouverture"
 
 #: templates/public/contact.html:551
 msgid ""
-"We typically respond the same day — whether that's answering your question, "
+"We typically respond the same day  whether that's answering your question, "
 "planning a visit, or preparing a quote."
 msgstr ""
-"On répond généralement le jour même — que ce soit pour répondre à votre "
+"On répond généralement le jour même  que ce soit pour répondre à votre "
 "question, planifier une visite ou préparer une soumission."
 
 #: templates/public/contact.html:558
@@ -1040,11 +1037,11 @@ msgstr ""
 
 #: templates/public/home.html:226
 msgid ""
-"Local, insured teams. Eco-friendly products. Free quote in 24 hours — no "
+"Local, insured teams. Eco-friendly products. Free quote in 24 hours  no "
 "commitment."
 msgstr ""
 "Équipes locales et assurées. Produits écologiques. Soumission gratuite en "
-"24 heures — sans engagement."
+"24 heures  sans engagement."
 
 #: templates/public/home.html:249
 msgid "Days a week"
@@ -1070,12 +1067,12 @@ msgstr "Service bien coté"
 msgid ""
 "Nettoyage Boréal is a reliable, local commercial cleaning company serving "
 "Québec. Inspired by the pure air and quiet strength of the boreal north, we "
-"deliver freshness, efficiency and reliability — with care, consistency, and "
+"deliver freshness, efficiency and reliability  with care, consistency, and "
 "no shortcuts."
 msgstr ""
 "Nettoyage Boréal est une entreprise de nettoyage commercial locale et fiable "
 "au service du Québec. Inspirés par l'air pur et la force tranquille du nord "
-"boréal, on offre fraîcheur, efficacité et fiabilité — avec soin, constance "
+"boréal, on offre fraîcheur, efficacité et fiabilité  avec soin, constance "
 "et sans jamais couper les coins ronds."
 
 #: templates/public/home.html:276
@@ -1192,11 +1189,11 @@ msgstr "travaillent pour vous"
 
 #: templates/public/home.html:352
 msgid ""
-"We are not just here to clean — we are here to make your workday easier. We "
+"We are not just here to clean  we are here to make your workday easier. We "
 "help businesses maintain immaculate environments without disrupting "
 "operations."
 msgstr ""
-"On n'est pas seulement là pour nettoyer — on est là pour simplifier votre "
+"On n'est pas seulement là pour nettoyer  on est là pour simplifier votre "
 "quotidien. On aide les entreprises à maintenir des environnements impeccables "
 "sans jamais perturber leurs activités."
 
@@ -1230,10 +1227,10 @@ msgstr "Des tarifs accessibles"
 
 #: templates/public/home.html:368
 msgid ""
-"Flexible rates for all business sizes — from small offices to large "
+"Flexible rates for all business sizes  from small offices to large "
 "warehouses. High-quality service without overpaying."
 msgstr ""
-"Des tarifs flexibles pour toutes les tailles d'entreprises — des petits "
+"Des tarifs flexibles pour toutes les tailles d'entreprises  des petits "
 "bureaux aux grands entrepôts. Un service de qualité sans se ruiner."
 
 #: templates/public/home.html:372
@@ -1242,10 +1239,10 @@ msgstr "Une équipe 100 % montréalaise"
 
 #: templates/public/home.html:373
 msgid ""
-"We are a local company — we know Montréal, we serve Montréal. Faster "
+"We are a local company  we know Montréal, we serve Montréal. Faster "
 "response, better service, and real community roots."
 msgstr ""
-"On est une entreprise d'ici — on connaît Montréal, on sert Montréal. "
+"On est une entreprise d'ici  on connaît Montréal, on sert Montréal. "
 "Réponse plus rapide, meilleur service et de vraies racines dans la communauté."
 
 #: templates/public/home.html:378
@@ -1266,11 +1263,11 @@ msgstr "?"
 
 #: templates/public/home.html:388
 msgid ""
-"Book your commercial cleaning today. Free quote in 24 hours — no commitment "
+"Book your commercial cleaning today. Free quote in 24 hours  no commitment "
 "required."
 msgstr ""
 "Réservez votre nettoyage commercial dès maintenant. Soumission gratuite en "
-"24 heures — sans engagement."
+"24 heures  sans engagement."
 
 #: templates/public/home.html:390
 msgid "Book Now"
@@ -1588,8 +1585,8 @@ msgid "Client account created successfully"
 msgstr "Compte client créé avec succès"
 
 #: templates/staff/client_create.html
-msgid "Copy these credentials now — the password will not be shown again."
-msgstr "Copiez ces identifiants maintenant — le mot de passe ne sera plus affiché."
+msgid "Copy these credentials now  the password will not be shown again."
+msgstr "Copiez ces identifiants maintenant  le mot de passe ne sera plus affiché."
 
 #: templates/staff/client_create.html
 msgid "Create Client Account"
@@ -1620,8 +1617,8 @@ msgid "Login Credentials"
 msgstr "Identifiants de connexion"
 
 #: templates/staff/client_create.html
-msgid "The username is generated automatically from the client's name. Set a temporary password — you will need to share it with the client manually."
-msgstr "Le nom d'utilisateur est généré automatiquement à partir du nom du client. Définissez un mot de passe temporaire — vous devrez le communiquer manuellement au client."
+msgid "The username is generated automatically from the client's name. Set a temporary password  you will need to share it with the client manually."
+msgstr "Le nom d'utilisateur est généré automatiquement à partir du nom du client. Définissez un mot de passe temporaire  vous devrez le communiquer manuellement au client."
 
 #: templates/staff/client_create.html
 msgid "Lowercase, no spaces. e.g. jean.tremblay"

@@ -9,7 +9,7 @@ class CustomerProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.get_full_name()} — {self.company_name}"
+        return f"{self.user.get_full_name()}  {self.company_name}"
 
 
 class Lead(models.Model):
@@ -30,7 +30,7 @@ class Lead(models.Model):
     is_contacted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.name} — {self.email}"
+        return f"{self.name}  {self.email}"
 
 
 class Ticket(models.Model):

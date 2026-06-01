@@ -104,7 +104,7 @@
 .team-inner{max-width:1280px;margin:0 auto}
 .team-head{text-align:center;margin-bottom:4rem}
 .team-head .section-body{max-width:540px;margin:0 auto}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem; max-width: 860px;margin: 0 auto; }
 .team-card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s,box-shadow 0.3s}
 .team-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(27,170,214,0.1)}
 .team-card-img{height:260px;overflow:hidden;position:relative}
@@ -188,7 +188,7 @@
     </div>
     <div class="page-hero-tag"><span>{% trans "Our Story" %}</span></div>
     <h1 class="page-hero-h1">{% trans "Built on" %} <span class="hl">{% trans "trust," %}</span><br>{% trans "driven by results" %}</h1>
-    <p class="page-hero-sub">{% trans "A local Montréal company with a simple mission: deliver honest, no-nonsense commercial cleaning that businesses can count on — every time." %}</p>
+    <p class="page-hero-sub">{% trans "A local Montréal company with a simple mission: deliver honest, no-nonsense commercial cleaning that businesses can count on  every time." %}</p>
   </div>
 </section>
 
@@ -206,11 +206,11 @@
     <div class="sr sr-d1">
       <span class="section-tag">{% trans "Who We Are" %}</span>
       <h2 class="section-title">{% trans "A nordic" %} <span class="hl">{% trans "standard" %}</span><br>{% trans "of cleanliness" %}</h2>
-      <p class="section-body">{% trans "Nettoyage Boréal was founded with a simple goal: raise the bar for commercial cleaning in Montréal. We specialize in cleaning offices, clinics, warehouses and industrial spaces — with care, consistency, and absolutely no shortcuts." %}</p>
-      <p class="section-body" style="margin-top:1rem">{% trans "Our name reflects the standards we hold ourselves to — inspired by the pure air and quiet strength of the boreal north. Freshness, efficiency, and reliability are not just words for us. They define every job we take." %}</p>
+      <p class="section-body">{% trans "Nettoyage Boréal was founded with a simple goal: raise the bar for commercial cleaning in Montréal. We specialize in cleaning offices, clinics, warehouses and industrial spaces  with care, consistency, and absolutely no shortcuts." %}</p>
+      <p class="section-body" style="margin-top:1rem">{% trans "Our name reflects the standards we hold ourselves to  inspired by the pure air and quiet strength of the boreal north. Freshness, efficiency, and reliability are not just words for us. They define every job we take." %}</p>
       <div class="intro-quote">
-        <p>"{% trans "Too many companies overpromise and cut corners. We built something different — a business that keeps its word, values long-term relationships, and treats every property with respect." %}"</p>
-        <span>{% trans "— Founder, Nettoyage Boréal" %}</span>
+        <p>"{% trans "Too many companies overpromise and cut corners. We built something different  a business that keeps its word, values long-term relationships, and treats every property with respect." %}"</p>
+        <span>{% trans " Founder, Nettoyage Boréal" %}</span>
       </div>
       <a href="{% url 'contact' %}" class="btn-teal">{% trans "Work with us" %} <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -247,7 +247,7 @@
         <div class="story-item-left">
           <div class="story-year">{% trans "The Beginning" %}</div>
           <div class="story-event-title">{% trans "Founded in Montréal" %}</div>
-          <div class="story-event-desc">{% trans "A small team of professionals saw a gap in the industry and set out to build something different — an honest, reliable commercial cleaning company rooted in Montréal." %}</div>
+          <div class="story-event-desc">{% trans "A small team of professionals saw a gap in the industry and set out to build something different  an honest, reliable commercial cleaning company rooted in Montréal." %}</div>
         </div>
         <div class="story-item-dot"></div>
         <div class="story-item-right">
@@ -284,7 +284,7 @@
         <div class="story-item-right">
           <div class="story-year">{% trans "Today" %}</div>
           <div class="story-event-title">{% trans "200+ Businesses Trust Us" %}</div>
-          <div class="story-event-desc">{% trans "Today we serve over 200 businesses across Greater Montréal — 7 days a week, with the same care and consistency we brought to our very first client." %}</div>
+          <div class="story-event-desc">{% trans "Today we serve over 200 businesses across Greater Montréal  7 days a week, with the same care and consistency we brought to our very first client." %}</div>
         </div>
       </div>
     </div>
@@ -299,38 +299,38 @@
         <span class="section-tag">{% trans "Our Core Values" %}</span>
         <h2 class="section-title">{% trans "What we" %} <span class="hl">{% trans "stand for" %}</span></h2>
       </div>
-      <p class="section-body">{% trans "At Nettoyage Boréal, we don't just clean — we uphold a standard. These values guide every job we take and every space we step into." %}</p>
+      <p class="section-body">{% trans "At Nettoyage Boréal, we don't just clean  we uphold a standard. These values guide every job we take and every space we step into." %}</p>
     </div>
     <div class="values-grid">
       <div class="value-card sr">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="value-title">{% trans "Accountability" %}</div>
-        <div class="value-desc">{% trans "We don't make excuses — we make things right. If we say we'll be there, we will. If something needs attention, we handle it. You can count on us to own the work from start to finish." %}</div>
+        <div class="value-desc">{% trans "We don't make excuses  we make things right. If we say we'll be there, we will. If something needs attention, we handle it. You can count on us to own the work from start to finish." %}</div>
       </div>
       <div class="value-card sr sr-d1">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
         <div class="value-title">{% trans "Attention to Detail" %}</div>
-        <div class="value-desc">{% trans "We notice the small things others overlook. From spotless corners to polished entryways, we are thorough because that is what you deserve. Details matter — and we never cut corners." %}</div>
+        <div class="value-desc">{% trans "We notice the small things others overlook. From spotless corners to polished entryways, we are thorough because that is what you deserve. Details matter  and we never cut corners." %}</div>
       </div>
       <div class="value-card sr sr-d2">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
         <div class="value-title">{% trans "Professionalism" %}</div>
-        <div class="value-desc">{% trans "Our team arrives on time, in uniform, and ready to work. We treat your business with respect and discretion. You won't have to micromanage — we handle things with care." %}</div>
+        <div class="value-desc">{% trans "Our team arrives on time, in uniform, and ready to work. We treat your business with respect and discretion. You won't have to micromanage  we handle things with care." %}</div>
       </div>
       <div class="value-card sr sr-d1">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 12h8M12 8v8"/></svg></div>
         <div class="value-title">{% trans "Eco-Responsibility" %}</div>
-        <div class="value-desc">{% trans "We use non-toxic, sustainable cleaning products that are safe for your employees, clients, and the environment — without compromising on results." %}</div>
+        <div class="value-desc">{% trans "We use non-toxic, sustainable cleaning products that are safe for your employees, clients, and the environment  without compromising on results." %}</div>
       </div>
       <div class="value-card sr sr-d2">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
         <div class="value-title">{% trans "Long-term Partnerships" %}</div>
-        <div class="value-desc">{% trans "We are not interested in one-time jobs. We build long-term relationships with our clients — understanding their spaces, routines and expectations to deliver consistent quality over time." %}</div>
+        <div class="value-desc">{% trans "We are not interested in one-time jobs. We build long-term relationships with our clients  understanding their spaces, routines and expectations to deliver consistent quality over time." %}</div>
       </div>
       <div class="value-card sr sr-d3">
         <div class="value-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="value-title">{% trans "Flexible Scheduling" %}</div>
-        <div class="value-desc">{% trans "We clean on your schedule — days, evenings, or weekends. Our goal is zero disruption to your operations while keeping your space consistently immaculate." %}</div>
+        <div class="value-desc">{% trans "We clean on your schedule  days, evenings, or weekends. Our goal is zero disruption to your operations while keeping your space consistently immaculate." %}</div>
       </div>
     </div>
   </div>
@@ -342,7 +342,6 @@
     <div class="team-head sr">
       <span class="section-tag">{% trans "Our Team" %}</span>
       <h2 class="section-title">{% trans "The people behind" %} <span class="hl">{% trans "the clean" %}</span></h2>
-      <p class="section-body">{% trans "Every member of our team is trained, vetted, and committed to the Boréal standard. We are proud of the people who represent us in your space every day." %}</p>
     </div>
     <div class="team-grid">
       
@@ -359,52 +358,14 @@
         <div class="team-card-body">
           <div class="team-card-role">{% trans "Client Relations" %}</div>
           <div class="team-card-name">{% trans "Client Success" %}</div>
-          <div class="team-card-desc">{% trans "Your main point of contact — here to ensure you are always satisfied with our service." %}</div>
+          <div class="team-card-desc">{% trans "Your main point of contact  here to ensure you are always satisfied with our service." %}</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery">
-  <div class="gallery-head sr">
-    <div>
-      <span class="section-tag">{% trans "Our Work" %}</span>
-      <h2 class="section-title">{% trans "Snapshots from" %} <span class="hl">{% trans "recent projects" %}</span></h2>
-    </div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item tall sr">
-      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80" alt="{% trans 'Office' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Office" %}</span>
-    </div>
-    <div class="gallery-item sr sr-d1">
-      <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80" alt="{% trans 'Clinic' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Medical" %}</span>
-    </div>
-    <div class="gallery-item sr sr-d2">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="{% trans 'Cleaning' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Commercial" %}</span>
-    </div>
-    <div class="gallery-item sr sr-d3">
-      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="{% trans 'Warehouse' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Warehouse" %}</span>
-    </div>
-    <div class="gallery-item wide sr sr-d1">
-      <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=80" alt="{% trans 'Clean office space' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Corporate" %}</span>
-    </div>
-    <div class="gallery-item sr sr-d2">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="{% trans 'Modern space' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Modern spaces" %}</span>
-    </div>
-    <div class="gallery-item sr sr-d3">
-      <img src="https://images.unsplash.com/photo-1564540586988-aa4e53c3d799?w=600&q=80" alt="{% trans 'Industrial' %}">
-      <div class="gallery-overlay"></div><span class="gallery-label">{% trans "Industrial" %}</span>
-    </div>
-  </div>
-</section>
+
 
 <!-- CTA STRIP -->
 <section class="cta-strip">

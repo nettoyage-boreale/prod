@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}Nettoyage Boréal{% endblock %} | Nettoyage Boréal</title>
+<title>{% block title %}Nettoyage Boréal{% endblock %} </title>
+ <link rel="shortcut icon" type="image/png" href="{% static 'img/logo.png' %}">
 <meta name="description" content="{% block meta_desc %}{% trans 'Services de nettoyage commercial professionnel à Montréal. Bureaux, cliniques, entrepôts. Soumission gratuite en 24h.' %}{% endblock %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +97,7 @@ nav.scrolled{
   margin-bottom:-8px;
 }
 .nav-logo-img{
-  height:96px;          /* big bear */
+  height:80px;          /* big bear */
   width:auto;
   display:block;
   object-fit:contain;
@@ -434,7 +435,7 @@ footer{background:var(--navy)}
     </div>
     <div class="tb-item">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:info@nettoyageboreal.ca">info@nettoyageboreal.ca</a>
+      <a href="mailto:info@nettoyageboreal.com">info@nettoyageboreal.com</a>
     </div>
   </div>
   <div class="tb-right">
@@ -507,9 +508,9 @@ footer{background:var(--navy)}
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
       514-699-9218
     </a>
-    <a href="mailto:info@nettoyageboreal.ca" class="mob-contact">
+    <a href="mailto:info@nettoyageboreal.com" class="mob-contact">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      info@nettoyageboreal.ca
+      info@nettoyageboreal.com
     </a>
     <div class="mob-lang">
       <form action="{% url 'set_language' %}" method="post" id="mobLangForm">
@@ -552,10 +553,7 @@ footer{background:var(--navy)}
 <footer>
   <div class="ft">
     <div>
-      <a href="{% url 'home' %}" class="ft-logo">
-        <img src="{% static 'img/logo.png' %}" alt="Nettoyage Boréal" class="ft-logo-img">
-      </a>
-      <p class="ft-tagline">{% trans "Inspired by the pure air and quiet strength of the boreal north — freshness, reliability and professionalism for every commercial space." %}</p>
+      <p class="ft-tagline">{% trans "Inspired by the pure air and quiet strength of the boreal north  freshness, reliability and professionalism for every commercial space." %}</p>
       <div class="ft-socials">
         <a href="#" class="ft-soc" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -584,7 +582,7 @@ footer{background:var(--navy)}
     <div class="ft-col">
       <div class="ft-col-h">{% trans "Contact" %}</div>
       <a href="tel:514-699-9218">514-699-9218</a>
-      <a href="mailto:info@nettoyageboreal.ca">info@nettoyageboreal.ca</a>
+      <a href="mailto:info@nettoyageboreal.com">info@nettoyageboreal.com</a>
       <a href="#">{% trans "Montréal & Greater Region" %}</a>
       <a href="#">{% trans "7 days a week" %}</a>
     </div>
