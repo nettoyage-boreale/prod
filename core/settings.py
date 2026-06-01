@@ -25,9 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',           # ← moved BEFORE staticfiles
     'django.contrib.staticfiles',
     'cloudinary',
-    'cloudinary_storage',
     'main',
     'rosetta',
 ]
