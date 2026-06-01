@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 class CustomerProfile(models.Model):
@@ -60,7 +61,7 @@ class TicketMessage(models.Model):
 
 class TicketImage(models.Model):
     message = models.ForeignKey(TicketMessage, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='tickets/')
+    image = models.ImageField(upload_to='tickets/', storage=MediaCloudinaryStorage())
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     
