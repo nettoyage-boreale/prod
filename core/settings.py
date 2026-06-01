@@ -1,4 +1,5 @@
 from pathlib import Path
+from urllib.parse import urlparse
 from decouple import config, Csv
 import dj_database_url
 from django.utils.translation import gettext_lazy as _
@@ -86,7 +87,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media / Cloudinary
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_STORAGE = {'CLOUDINARY_URL': config('CLOUDINARY_URL')}
+_cu = urlparse(config('CLOUDINARY_URL'))
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': _cu.hostname,
+    'API_KEY': _cu.username,
+    'API_SECRET': _cu.password,
+}
 
 
 # Auth
