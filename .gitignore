@@ -10,7 +10,6 @@ media/
 staticfiles/
 .DS_Store
 *.log
-*.mo
 node_modules/
 .idea/
 .vscode/
