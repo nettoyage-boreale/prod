@@ -191,8 +191,11 @@
 }
 @media(max-width:768px){
   .logo-band{display:none}
-  .hero-content{padding:0 1.5rem}
-  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-content{padding:0 1.5rem 160px}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .hero-stat{padding:1rem .75rem}
+  .hero-stat-num{font-size:1.5rem}
+  .hero-stat-label{font-size:.62rem}
   .about,.services,.why,.testimonials,.contact{padding-left:1.5rem;padding-right:1.5rem}
   .about-inner,.services-head,.why-head,.contact-inner{grid-template-columns:1fr}
   .about-images{height:320px}
@@ -200,6 +203,7 @@
   .photo-grid{height:auto}
   .form-row-2{grid-template-columns:1fr}
   .parallax-banner{padding:4rem 1.5rem}
+  .hero-btns{flex-direction:column;align-items:flex-start;gap:.75rem}
 }
 </style>
 {% endblock %}

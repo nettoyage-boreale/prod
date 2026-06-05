@@ -114,14 +114,17 @@ def ticket_detail(request, ticket_id):
         customer=request.user.profile,
     )
     if request.method == 'POST' and ticket.status == 'open':
-        message = TicketMessage.objects.create(
-            ticket=ticket,
-            sender=request.user,
-            body=request.POST['body'],
-        )
-        for img in request.FILES.getlist('images'):
-            TicketImage.objects.create(message=message, image=img)
-        messages.success(request, _('Your reply has been sent.'))
+        body = request.POST.get('body', '').strip()
+        imgs = request.FILES.getlist('images')
+        if body or imgs:
+            message = TicketMessage.objects.create(
+                ticket=ticket,
+                sender=request.user,
+                body=body,
+            )
+            for img in imgs:
+                TicketImage.objects.create(message=message, image=img)
+            messages.success(request, _('Your reply has been sent.'))
         return redirect('ticket_detail', ticket_id=ticket.id)
     return render(request, 'portal/ticket_detail.html', {'ticket': ticket})
 
@@ -151,14 +154,17 @@ def staff_ticket_detail(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     if request.method == 'POST':
         if ticket.status == 'open':
-            message = TicketMessage.objects.create(
-                ticket=ticket,
-                sender=request.user,
-                body=request.POST['body'],
-            )
-            for img in request.FILES.getlist('images'):
-                TicketImage.objects.create(message=message, image=img)
-            messages.success(request, _('Reply sent.'))
+            body = request.POST.get('body', '').strip()
+            imgs = request.FILES.getlist('images')
+            if body or imgs:
+                message = TicketMessage.objects.create(
+                    ticket=ticket,
+                    sender=request.user,
+                    body=body,
+                )
+                for img in imgs:
+                    TicketImage.objects.create(message=message, image=img)
+                messages.success(request, _('Reply sent.'))
         return redirect('staff_ticket_detail', ticket_id=ticket.id)
     return render(request, 'staff/ticket_detail.html', {'ticket': ticket})
 

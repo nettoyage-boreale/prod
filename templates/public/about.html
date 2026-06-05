@@ -56,7 +56,7 @@
 
 /* ── STATS BAND ── */
 .stats-band{background:var(--navy);padding:4rem}
-.stats-band-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden}
+.stats-band-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden}
 .stat-item{padding:2.5rem 2rem;border-right:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;transition:background 0.3s}
 .stat-item:last-child{border-right:none}
 .stat-item:hover{background:rgba(27,170,214,0.08)}
@@ -155,6 +155,11 @@
   .page-hero-content{padding:0 1.5rem}
   .intro-inner,.values-head,.cta-strip-inner{grid-template-columns:1fr}
   .intro-images{height:280px}
+  .stats-band{padding:2.5rem 1.5rem}
+  .stats-band-inner{grid-template-columns:1fr;border-radius:12px}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:1.5rem 1.25rem}
+  .stat-item:last-child{border-bottom:none}
+  .stat-num{font-size:2rem}
   .story-timeline::before{left:20px}
   .story-item{grid-template-columns:1fr;padding-left:50px}
   .story-item-dot{left:20px;top:1.5rem;transform:translateX(-50%)}
@@ -335,37 +340,6 @@
     </div>
   </div>
 </section>
-
-<!-- TEAM -->
-<section class="team">
-  <div class="team-inner">
-    <div class="team-head sr">
-      <span class="section-tag">{% trans "Our Team" %}</span>
-      <h2 class="section-title">{% trans "The people behind" %} <span class="hl">{% trans "the clean" %}</span></h2>
-    </div>
-    <div class="team-grid">
-      
-      <div class="team-card sr sr-d1">
-        <div class="team-card-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="{% trans 'Operations manager' %}"></div>
-        <div class="team-card-body">
-          <div class="team-card-role">{% trans "Operations Manager" %}</div>
-          <div class="team-card-name">{% trans "Field Operations" %}</div>
-          <div class="team-card-desc">{% trans "Coordinates all cleaning schedules and ensures every job meets our quality standards." %}</div>
-        </div>
-      </div>
-      <div class="team-card sr sr-d2">
-        <div class="team-card-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" alt="{% trans 'Client relations' %}"></div>
-        <div class="team-card-body">
-          <div class="team-card-role">{% trans "Client Relations" %}</div>
-          <div class="team-card-name">{% trans "Client Success" %}</div>
-          <div class="team-card-desc">{% trans "Your main point of contact  here to ensure you are always satisfied with our service." %}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 
 <!-- CTA STRIP -->
 <section class="cta-strip">
