@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
+    path('politique-de-confidentialite/', views.privacy_policy, name='privacy_policy'),
 
     # Auth
     path('portal/login/', views.portal_login, name='login'),
