@@ -1,0 +1,535 @@
+{% load i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{% if LANGUAGE_CODE|slice:':2' == 'en' %}en{% else %}fr{% endif %}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if LANGUAGE_CODE|slice:':2' == 'en' %}Privacy Policy — Nettoyage Boréal{% else %}Politique de confidentialité — Nettoyage Boréal{% endif %}</title>
+<meta name="description" content="Politique de confidentialité de Nettoyage Boréal">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0a1628;
+    --navy-soft:  #0f2035;
+    --blue:       #1BAAD6;
+    --blue-hover: #1597be;
+    --blue-light: #e8f7fd;
+    --blue-glow:  rgba(27,170,214,0.18);
+    --white:      #ffffff;
+    --off-white:  #f6fbfd;
+    --text:       #0d1f2d;
+    --text-body:  #3a5567;
+    --text-muted: #6b8599;
+    --border:     #e4eef2;
+    --border-nav: #eaf3f7;
+    --radius: 14px;
+    --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--off-white); color: var(--text-body); font-family: var(--font-body); font-size: 16px; line-height: 1.7; }
+  a { color: var(--blue); }
+  a:hover { color: var(--blue-hover); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  /* Barre de langue (FR / EN) */
+  .langbar { background: var(--white); border-bottom: 1px solid var(--border-nav); position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 12px var(--blue-glow); }
+  .langbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; }
+  .langbar .brand { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--navy); }
+  .lang-switch { display: inline-flex; border: 2px solid var(--blue); border-radius: 999px; padding: 4px; background: var(--white); }
+  .lang-switch button { border: 0; background: transparent; font: 600 15px var(--font-body); padding: 9px 22px; border-radius: 999px; cursor: pointer; color: var(--navy); transition: background .2s, color .2s; }
+  .lang-switch button:hover { background: var(--blue-light); }
+  .to-top:hover { background: var(--blue-hover); }
+  .lang-switch button[aria-pressed="true"] { background: var(--blue); color: var(--white); }
+  .lang-switch button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+  /* Hero */
+  .hero { background: linear-gradient(135deg, var(--navy), var(--navy-soft)); color: var(--white); padding: 64px 20px 72px; }
+  .hero .wrap { padding: 0; }
+  .hero h1 { font-family: var(--font-head); font-size: clamp(28px, 4.5vw, 46px); line-height: 1.15; margin: 0 0 14px; font-weight: 800; }
+  .hero .updated { color: var(--blue-light); margin: 0; }
+  .hero .prevails { margin: 14px 0 0; font-size: 14.5px; color: var(--blue-light); background: var(--blue-glow); border-left: 3px solid var(--blue); padding: 10px 14px; border-radius: 6px; max-width: 640px; }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 270px 1fr; gap: 36px; padding: 44px 20px 70px; align-items: start; }
+  .toc { position: sticky; top: 96px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .toc h2 { font-family: var(--font-head); font-size: 14px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin: 0 0 10px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc a { display: block; text-decoration: none; color: var(--text-body); font-size: 14px; line-height: 1.4; padding: 7px 10px; border-radius: 8px; }
+  .toc a:hover, .toc a.active { background: var(--blue-light); color: var(--navy); }
+
+  .policy { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 44px clamp(20px, 5vw, 56px); min-width: 0; }
+  .policy section { scroll-margin-top: 100px; }
+  .policy section + section { border-top: 1px solid var(--border); margin-top: 34px; padding-top: 34px; }
+  .policy h2 { font-family: var(--font-head); font-size: 23px; line-height: 1.3; color: var(--navy); margin: 0 0 14px; }
+  .policy h3 { font-family: var(--font-head); font-size: 17.5px; color: var(--blue-hover); margin: 24px 0 8px; }
+  .policy p { margin: 0 0 14px; }
+  .policy ul { margin: 0 0 16px; padding-left: 0; list-style: none; }
+  .policy li { position: relative; padding-left: 24px; margin-bottom: 8px; }
+  .policy li::before { content: ""; position: absolute; left: 4px; top: .72em; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+  .contact-card { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 10px; padding: 16px 20px; margin: 16px 0 18px; }
+  .contact-card p { margin: 0 0 4px; }
+  .contact-card strong { color: var(--navy); }
+
+  .table-wrap { overflow-x: auto; margin: 6px 0 18px; border: 1px solid var(--border); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 12px 16px; vertical-align: top; }
+  thead th { background: var(--navy); color: var(--white); font-family: var(--font-head); font-weight: 600; }
+  tbody tr:nth-child(even) { background: var(--off-white); }
+  tbody td:first-child { font-weight: 600; color: var(--navy); width: 42%; }
+
+  [hidden] { display: none !important; }
+
+  .to-top { position: fixed; right: 18px; bottom: 18px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--blue); color: var(--white); font-size: 20px; cursor: pointer; box-shadow: 0 6px 18px var(--blue-glow); opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .to-top.show { opacity: 1; pointer-events: auto; }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: static; }
+  }
+  @media (max-width: 560px) {
+    .langbar .brand { display: none; }
+    .langbar .wrap { justify-content: center; }
+    .policy { padding: 28px 18px; }
+  }
+  @media print {
+    .langbar, .toc, .to-top { display: none !important; }
+    .hero { background: none; color: #000; padding: 0 0 20px; }
+    .hero .updated, .hero .prevails { color: #000; }
+    .layout { display: block; padding: 0; }
+    .policy { border: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="langbar">
+  <div class="wrap">
+    <span class="brand">Nettoyage Boréal</span>
+    <div class="lang-switch" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang="fr" aria-pressed="true" lang="fr">Français</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">English</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="wrap">
+    <div lang="fr" data-version="fr">
+      <h1>Politique de confidentialité — Nettoyage Boréal</h1>
+      <p class="updated">Dernière mise à jour : 7 octobre 2026</p>
+    </div>
+    <div lang="en" data-version="en" hidden>
+      <h1>Privacy Policy — Nettoyage Boréal</h1>
+      <p class="updated">Last updated: October 7, 2026</p>
+      <p class="prevails">The French version of this Policy prevails in case of any discrepancy.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap layout">
+  <aside class="toc" aria-label="Table des matières">
+    <h2 data-i18n="toc">Table des matières</h2>
+    <ol id="toc-list"></ol>
+  </aside>
+
+  <main>
+  <!-- ======================= FRANÇAIS ======================= -->
+  <article class="policy" lang="fr" data-version="fr">
+
+    <section id="fr-preambule">
+      <h2>Préambule et objet</h2>
+      <p>9563-9308 Québec inc., faisant affaires sous le nom de Nettoyage Boréal (NEQ 1181974024; « Nettoyage Boréal » ou « nous »), entreprise de nettoyage commercial desservant le Grand Montréal, s'engage à protéger les renseignements personnels de ses clients, prospects, employés, candidats, partenaires et visiteurs de son site Web, conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (RLRQ, c. P-39.1), telle que modifiée par la Loi modernisant des dispositions législatives en matière de protection des renseignements personnels (la « Loi 25 »).</p>
+      <p>La présente politique de confidentialité (la « Politique ») explique quels renseignements personnels nous recueillons, pourquoi nous les recueillons, comment nous les utilisons, les communiquons, les conservons et les protégeons, ainsi que les droits dont vous disposez à leur égard.</p>
+      <p>Cette Politique s'applique à nos services de nettoyage commercial, à notre site Web, à nos formulaires de demande de soumission (y compris ceux présentés dans nos publicités en ligne) et à nos communications. Elle ne s'applique pas aux sites ou plateformes de tiers auxquels nous pourrions renvoyer.</p>
+    </section>
+
+    <section id="fr-responsable">
+      <h2>Personne responsable de la protection des renseignements personnels</h2>
+      <p>Conformément à la loi, la personne exerçant la plus haute autorité au sein de Nettoyage Boréal est, d'office, responsable de la protection des renseignements personnels. Cette fonction est exercée par :</p>
+      <div class="contact-card">
+        <p><strong>Sanjith Rajkumar, copropriétaire et responsable de la protection des renseignements personnels</strong></p>
+        <p><a href="mailto:info@nettoyageboreal.com">info@nettoyageboreal.com</a> · <a href="tel:514-699-9218">514 699-9218</a></p>
+        <p>2275, boulevard Daniel-Johnson, bureau 1505, Laval (Québec) H7T 0S2</p>
+      </div>
+      <p>Cette personne est chargée notamment de :</p>
+      <ul>
+        <li>veiller à l'application de la présente Politique et des pratiques de gouvernance internes en matière de renseignements personnels;</li>
+        <li>répondre aux demandes d'accès, de rectification, de portabilité et de retrait du consentement;</li>
+        <li>superviser la réalisation des évaluations des facteurs relatifs à la vie privée (EFVP);</li>
+        <li>recevoir et traiter les plaintes relatives à la protection des renseignements personnels;</li>
+        <li>gérer les incidents de confidentialité, incluant les avis à la Commission d'accès à l'information du Québec (CAI) et aux personnes concernées, le cas échéant.</li>
+      </ul>
+      <p>Toute question ou demande concernant la protection des renseignements personnels peut être adressée à cette personne aux coordonnées ci-dessus.</p>
+    </section>
+
+    <section id="fr-collectes">
+      <h2>Renseignements personnels collectés</h2>
+      <p>Selon votre relation avec nous, nous pouvons recueillir les renseignements suivants :</p>
+      <ul>
+        <li><strong>Clients et prospects :</strong> nom, titre, entreprise, numéro de téléphone, adresse courriel, adresse des lieux à entretenir, ainsi que les renseignements fournis dans une demande de soumission (type de locaux, superficie, fréquence souhaitée, besoins particuliers);</li>
+        <li><strong>Accès aux lieux :</strong> renseignements nécessaires pour exécuter nos services, comme les heures d'accès, les clés, cartes d'accès ou codes d'alarme confiés par le client;</li>
+        <li><strong>Facturation :</strong> coordonnées de facturation et historique des paiements;</li>
+        <li><strong>Candidats et employés :</strong> coordonnées, curriculum vitae, disponibilités et, pour les employés, les renseignements requis pour la paie et nos obligations d'employeur (ex. numéro d'assurance sociale, renseignements bancaires pour le dépôt direct);</li>
+        <li><strong>Visiteurs du site Web et des publicités :</strong> adresse IP, type d'appareil et de navigateur, pages consultées et interactions avec nos publicités, recueillis au moyen de témoins (cookies) et de technologies similaires (voir ci-dessous).</li>
+      </ul>
+      <p>Nous pouvons aussi obtenir les coordonnées professionnelles de personnes-ressources au sein d'entreprises à partir de sources publiques ou de bases de données professionnelles, afin de leur présenter nos services.</p>
+      <p>Si vous utilisez notre portail client, nous recueillons aussi vos identifiants de connexion (le mot de passe est conservé sous forme chiffrée), l'historique de vos connexions et les renseignements que vous y consultez ou y transmettez.</p>
+    </section>
+
+    <section id="fr-finalites">
+      <h2>Finalités de la collecte et de l'utilisation</h2>
+      <p>Nous recueillons et utilisons vos renseignements personnels uniquement pour des finalités précises, déterminées avant ou au moment de la collecte, notamment pour :</p>
+      <ul>
+        <li>préparer et envoyer des soumissions et y faire un suivi;</li>
+        <li>fournir, planifier et améliorer nos services de nettoyage, incluant l'organisation de nos équipes et l'accès sécuritaire aux lieux;</li>
+        <li>facturer nos services, traiter les paiements et gérer votre accès au portail client;</li>
+        <li>communiquer avec vous au sujet de nos services;</li>
+        <li>vous envoyer des communications promotionnelles, avec votre consentement;</li>
+        <li>diffuser et mesurer l'efficacité de nos publicités en ligne;</li>
+        <li>recruter et gérer notre personnel;</li>
+        <li>assurer la sécurité de nos systèmes et prévenir la fraude;</li>
+        <li>respecter nos obligations légales et réglementaires;</li>
+        <li>réaliser des statistiques internes, sur une base dépersonnalisée ou anonymisée.</li>
+      </ul>
+      <p>Nous ne recueillons que les renseignements nécessaires à ces finalités et ne les utilisons pas à d'autres fins sans votre consentement, sauf dans les cas prévus par la loi.</p>
+    </section>
+
+    <section id="fr-temoins">
+      <h2>Témoins, technologies de suivi et publicité</h2>
+      <p>Notre site Web et nos campagnes publicitaires peuvent utiliser des témoins et des outils de mesure, comme Google Analytics, Google Ads et le pixel Meta (Facebook et Instagram). Ces outils permettent de mesurer la fréquentation, de comprendre l'efficacité de nos annonces et de présenter nos publicités à des personnes susceptibles d'être intéressées par nos services.</p>
+      <p>Les témoins non essentiels (mesure d'audience et publicité) sont désactivés par défaut et ne sont activés qu'avec votre consentement, que vous pouvez modifier en tout temps au moyen de notre bandeau de consentement aux témoins, accessible en tout temps par le lien « Gérer les témoins » au bas de notre site Web. Vous pouvez aussi gérer les témoins dans les paramètres de votre navigateur.</p>
+      <p>Lorsque vous remplissez un formulaire de demande de soumission directement dans une plateforme publicitaire (ex. Facebook ou Instagram), les renseignements fournis nous sont transmis par cette plateforme et sont traités conformément à la présente Politique. La plateforme traite aussi vos données selon sa propre politique de confidentialité.</p>
+    </section>
+
+    <section id="fr-consentement">
+      <h2>Consentement</h2>
+      <p>Sauf exception prévue par la loi, la collecte, l'utilisation et la communication de vos renseignements personnels sont assujetties à votre consentement. Ce consentement doit être manifeste, libre, éclairé et donné à des fins spécifiques.</p>
+      <p>Lorsque plusieurs finalités sont visées, une demande de consentement distincte est présentée pour chacune, dans un langage clair et simple. Le consentement à la collecte de renseignements sensibles est exprès.</p>
+      <p>Vous pouvez retirer votre consentement en tout temps, sous réserve de délais raisonnables et de dispositions législatives contraires, en communiquant avec la personne responsable identifiée ci-dessus. Vous pouvez aussi vous désabonner de nos communications promotionnelles au moyen du lien prévu à cet effet dans chaque message.</p>
+      <p>Certaines collectes ou communications sans consentement sont permises par la loi, notamment dans le cadre d'une transaction commerciale, à des fins d'étude ou de recherche, ou lorsque la loi l'autorise ou l'exige (ex. réquisition d'un tribunal).</p>
+    </section>
+
+    <section id="fr-communication">
+      <h2>Communication et transfert de renseignements personnels</h2>
+      <h3>Communication à des tiers</h3>
+      <p>Nous ne vendons pas vos renseignements personnels. Nous pouvons les communiquer à des tiers, notamment :</p>
+      <ul>
+        <li>à nos fournisseurs de services agissant pour notre compte (hébergement Web, logiciels infonuagiques de gestion de la clientèle, courriel, traitement de paie et de paiement, plateformes publicitaires), dans le cadre d'un contrat prévoyant des mesures de protection adéquates;</li>
+        <li>à des sous-traitants en nettoyage, le cas échéant, uniquement dans la mesure nécessaire à l'exécution des services et sous réserve d'engagements de confidentialité;</li>
+        <li>à nos conseillers professionnels (juridiques, comptables);</li>
+        <li>aux autorités compétentes lorsque la loi l'exige (ex. Revenu Québec, Agence du revenu du Canada, CNESST);</li>
+        <li>dans le cadre d'une transaction commerciale (ex. fusion, acquisition, vente d'entreprise), sous réserve des conditions prévues par la loi.</li>
+      </ul>
+      <h3>Transfert hors Québec</h3>
+      <p>Certains de nos fournisseurs (par exemple Google et Meta) peuvent conserver ou traiter des renseignements à l'extérieur du Québec, notamment aux États-Unis. Avant un tel transfert, nous procédons à une évaluation des facteurs relatifs à la vie privée (EFVP) tenant compte notamment :</p>
+      <ul>
+        <li>de la sensibilité des renseignements;</li>
+        <li>de la finalité de leur utilisation;</li>
+        <li>des mesures de protection, y compris contractuelles, dont ils bénéficieront;</li>
+        <li>du régime juridique applicable dans le territoire visé.</li>
+      </ul>
+      <p>Le transfert n'a lieu que si cette évaluation démontre que les renseignements bénéficieront d'une protection adéquate et, si nécessaire, sous réserve d'une entente écrite encadrant leur protection.</p>
+    </section>
+
+    <section id="fr-conservation">
+      <h2>Conservation et destruction</h2>
+      <p>Nous conservons vos renseignements personnels uniquement pendant la durée nécessaire à la réalisation des finalités pour lesquelles ils ont été recueillis, ou selon les délais prévus par la loi. À titre indicatif :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Renseignements</th><th>Durée de conservation</th></tr></thead>
+          <tbody>
+            <tr><td>Dossiers clients et factures</td><td>6 ans après la fin de l'année d'imposition visée (obligations fiscales)</td></tr>
+            <tr><td>Demandes de soumission sans suite</td><td>24 mois après le dernier contact</td></tr>
+            <tr><td>Clés, cartes et codes d'accès</td><td>Remis ou détruits à la fin du contrat</td></tr>
+            <tr><td>Dossiers d'employés</td><td>Selon les délais légaux applicables après la fin de l'emploi</td></tr>
+            <tr><td>Candidatures non retenues</td><td>12 mois après la réception</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>À l'expiration de ces délais, les renseignements sont détruits de façon sécuritaire ou anonymisés pour être utilisés à des fins sérieuses et légitimes, conformément à la loi.</p>
+    </section>
+
+    <section id="fr-securite">
+      <h2>Sécurité</h2>
+      <p>Nous prenons des mesures de sécurité raisonnables, adaptées à la sensibilité des renseignements, notamment : l'accès restreint aux seules personnes qui en ont besoin, des comptes protégés par mot de passe, la conservation sécuritaire des clés et codes d'accès des clients, et des engagements de confidentialité de la part de nos employés.</p>
+    </section>
+
+    <section id="fr-droits">
+      <h2>Vos droits</h2>
+      <p>Sous réserve des exceptions prévues par la loi, vous avez le droit :</p>
+      <ul>
+        <li>d'accéder aux renseignements personnels que nous détenons à votre sujet;</li>
+        <li>de faire rectifier tout renseignement inexact, incomplet ou équivoque;</li>
+        <li>de retirer votre consentement;</li>
+        <li>de demander que vos renseignements informatisés vous soient communiqués, ou à une personne que vous désignez, dans un format technologique structuré et couramment utilisé;</li>
+        <li>de demander la cessation de la diffusion ou la désindexation d'un renseignement, dans les conditions prévues par la loi.</li>
+      </ul>
+      <p>Pour exercer ces droits, écrivez à la personne responsable identifiée ci-dessus. Nous répondrons par écrit dans un délai de 30 jours suivant la réception de votre demande. Nous pourrions vous demander de confirmer votre identité.</p>
+    </section>
+
+    <section id="fr-incidents">
+      <h2>Incidents de confidentialité</h2>
+      <p>En cas d'incident de confidentialité, nous prenons rapidement des mesures pour en réduire les risques. Si l'incident présente un risque de préjudice sérieux, nous en avisons la Commission d'accès à l'information et les personnes concernées. Nous tenons un registre de tous les incidents.</p>
+    </section>
+
+    <section id="fr-plaintes">
+      <h2>Plaintes</h2>
+      <p>Toute plainte peut être adressée par écrit à la personne responsable identifiée ci-dessus. Si vous n'êtes pas satisfait de notre réponse, vous pouvez vous adresser à la Commission d'accès à l'information du Québec (<a href="https://www.cai.gouv.qc.ca" target="_blank" rel="noopener">cai.gouv.qc.ca</a>).</p>
+    </section>
+
+    <section id="fr-modifications">
+      <h2>Modifications de la Politique</h2>
+      <p>Nous pouvons modifier la présente Politique pour refléter l'évolution de nos pratiques ou de la loi. La version en vigueur est publiée sur notre site Web, avec sa date de mise à jour. En cas de modification importante, nous vous en informerons par un moyen approprié.</p>
+    </section>
+  </article>
+
+  <!-- ======================= ENGLISH ======================= -->
+  <article class="policy" lang="en" data-version="en" hidden>
+
+    <section id="en-preamble">
+      <h2>Preamble and purpose</h2>
+      <p>9563-9308 Québec inc., doing business as Nettoyage Boréal (NEQ 1181974024; “Nettoyage Boréal” or “we”), a commercial cleaning company serving Greater Montréal, is committed to protecting the personal information of its clients, prospects, employees, job applicants, partners and website visitors, in accordance with the Act respecting the protection of personal information in the private sector (CQLR, c. P-39.1), as amended by the Act to modernize legislative provisions as regards the protection of personal information (“Law 25”).</p>
+      <p>This privacy policy (the “Policy”) explains what personal information we collect, why we collect it, how we use, share, retain and protect it, and the rights you have regarding it.</p>
+      <p>This Policy applies to our commercial cleaning services, our website and client portal, our quote request forms (including those shown in our online ads) and our communications. It does not apply to third-party sites or platforms we may link to.</p>
+    </section>
+
+    <section id="en-person">
+      <h2>Person in charge of the protection of personal information</h2>
+      <p>Under the law, the person with the highest authority at Nettoyage Boréal is, by default, responsible for the protection of personal information. This role is held by:</p>
+      <div class="contact-card">
+        <p><strong>Sanjith Rajkumar, co-owner and person in charge of the protection of personal information</strong></p>
+        <p><a href="mailto:info@nettoyageboreal.com">info@nettoyageboreal.com</a> · <a href="tel:514-699-9218">514 699-9218</a></p>
+        <p>2275 Daniel-Johnson Blvd., Suite 1505, Laval, Québec H7T 0S2</p>
+      </div>
+      <p>This person is responsible in particular for:</p>
+      <ul>
+        <li>ensuring that this Policy and our internal governance practices are applied;</li>
+        <li>responding to requests for access, correction, portability and withdrawal of consent;</li>
+        <li>overseeing privacy impact assessments (PIAs);</li>
+        <li>receiving and handling privacy complaints;</li>
+        <li>managing confidentiality incidents, including notices to the Commission d'accès à l'information du Québec (CAI) and affected persons, where applicable.</li>
+      </ul>
+      <p>Any question or request about personal information may be sent to this person using the contact details above.</p>
+    </section>
+
+    <section id="en-collect">
+      <h2>Personal information we collect</h2>
+      <p>Depending on your relationship with us, we may collect:</p>
+      <ul>
+        <li><strong>Clients and prospects:</strong> name, title, company, phone number, email address, address of the premises to be cleaned, and information provided in a quote request (type of premises, square footage, desired frequency, specific needs);</li>
+        <li><strong>Access to premises:</strong> information needed to perform our services, such as access hours, keys, access cards or alarm codes entrusted to us by the client;</li>
+        <li><strong>Billing:</strong> billing contact details and payment history;</li>
+        <li><strong>Applicants and employees:</strong> contact details, résumé, availability and, for employees, information required for payroll and our obligations as an employer (e.g. social insurance number, banking information for direct deposit);</li>
+        <li><strong>Website and ad visitors:</strong> IP address, device and browser type, pages viewed and interactions with our ads, collected through cookies and similar technologies (see below).</li>
+      </ul>
+      <p>We may also obtain business contact information for people at companies from public sources or professional databases, in order to present our services to them.</p>
+      <p>If you use our client portal, we also collect your login credentials (passwords are stored in encrypted form), your login history and the information you view or submit there.</p>
+    </section>
+
+    <section id="en-purposes">
+      <h2>Purposes of collection and use</h2>
+      <p>We collect and use your personal information only for specific purposes, determined before or at the time of collection, including to:</p>
+      <ul>
+        <li>prepare and send quotes and follow up on them;</li>
+        <li>provide, schedule and improve our cleaning services, including organizing our teams and ensuring secure access to premises;</li>
+        <li>invoice our services, process payments and manage your access to the client portal;</li>
+        <li>communicate with you about our services;</li>
+        <li>send you promotional communications, with your consent;</li>
+        <li>run our online ads and measure their effectiveness;</li>
+        <li>recruit and manage our staff;</li>
+        <li>keep our systems secure and prevent fraud;</li>
+        <li>comply with our legal and regulatory obligations;</li>
+        <li>produce internal statistics, on a de-identified or anonymized basis.</li>
+      </ul>
+      <p>We collect only the information needed for these purposes and do not use it for other purposes without your consent, except where permitted by law.</p>
+    </section>
+
+    <section id="en-cookies">
+      <h2>Cookies, tracking technologies and advertising</h2>
+      <p>Our website and ad campaigns may use cookies and measurement tools such as Google Analytics, Google Ads and the Meta pixel (Facebook and Instagram). These tools help us measure traffic, understand how well our ads perform and show our ads to people likely to be interested in our services.</p>
+      <p>Non-essential cookies (analytics and advertising) are turned off by default and are only activated with your consent, which you can change at any time through our cookie consent banner, available via the “Manage cookies” link at the bottom of our website. You can also manage cookies in your browser settings.</p>
+      <p>When you fill out a quote request form directly on an advertising platform (e.g. Facebook or Instagram), the information you provide is sent to us by that platform and handled under this Policy. The platform also processes your data under its own privacy policy.</p>
+    </section>
+
+    <section id="en-consent">
+      <h2>Consent</h2>
+      <p>Except where the law provides otherwise, the collection, use and disclosure of your personal information require your consent. This consent must be manifest, free, informed and given for specific purposes.</p>
+      <p>When there are several purposes, a separate consent request is presented for each, in clear and simple language. Consent to the collection of sensitive information is express.</p>
+      <p>You may withdraw your consent at any time, subject to reasonable delays and legal provisions to the contrary, by contacting the person in charge named above. You can also unsubscribe from our promotional communications using the link provided in each message.</p>
+      <p>The law permits certain collection or disclosure without consent, for example in a business transaction, for study or research purposes, or where the law authorizes or requires it (e.g. a court order).</p>
+    </section>
+
+    <section id="en-sharing">
+      <h2>Sharing and transfer of personal information</h2>
+      <h3>Sharing with third parties</h3>
+      <p>We do not sell your personal information. We may share it with third parties, including:</p>
+      <ul>
+        <li>our service providers acting on our behalf (web hosting, cloud client-management software, email, payroll and payment processing, advertising platforms), under contracts that include adequate protection measures;</li>
+        <li>cleaning subcontractors, where applicable, only as needed to perform the services and subject to confidentiality commitments;</li>
+        <li>our professional advisers (legal, accounting);</li>
+        <li>competent authorities where required by law (e.g. Revenu Québec, the Canada Revenue Agency, the CNESST);</li>
+        <li>in a business transaction (e.g. merger, acquisition, sale of the business), subject to the conditions set by law.</li>
+      </ul>
+      <h3>Transfers outside Québec</h3>
+      <p>Some of our providers (such as Google and Meta) may store or process information outside Québec, including in the United States. Before any such transfer, we carry out a privacy impact assessment (PIA) that considers in particular:</p>
+      <ul>
+        <li>the sensitivity of the information;</li>
+        <li>the purpose of its use;</li>
+        <li>the protection measures, including contractual ones, that will apply;</li>
+        <li>the legal framework in the destination jurisdiction.</li>
+      </ul>
+      <p>The transfer takes place only if the assessment shows the information will receive adequate protection and, where necessary, under a written agreement governing its protection.</p>
+    </section>
+
+    <section id="en-retention">
+      <h2>Retention and destruction</h2>
+      <p>We keep your personal information only as long as needed to fulfil the purposes for which it was collected, or as required by law. As a guide:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Information</th><th>Retention period</th></tr></thead>
+          <tbody>
+            <tr><td>Client records and invoices</td><td>6 years after the end of the relevant tax year (tax obligations)</td></tr>
+            <tr><td>Quote requests that did not proceed</td><td>24 months after the last contact</td></tr>
+            <tr><td>Keys, access cards and codes</td><td>Returned or destroyed at the end of the contract</td></tr>
+            <tr><td>Employee records</td><td>As required by applicable law after employment ends</td></tr>
+            <tr><td>Unsuccessful applications</td><td>12 months after receipt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>When these periods end, the information is securely destroyed or anonymized for serious and legitimate purposes, as permitted by law.</p>
+    </section>
+
+    <section id="en-security">
+      <h2>Security</h2>
+      <p>We take reasonable security measures suited to the sensitivity of the information, including restricting access to those who need it, password-protected accounts, secure storage of clients' keys and access codes, and confidentiality commitments from our employees.</p>
+    </section>
+
+    <section id="en-rights">
+      <h2>Your rights</h2>
+      <p>Subject to the exceptions provided by law, you have the right to:</p>
+      <ul>
+        <li>access the personal information we hold about you;</li>
+        <li>have inaccurate, incomplete or ambiguous information corrected;</li>
+        <li>withdraw your consent;</li>
+        <li>request that your computerized information be provided to you, or to a person you designate, in a structured, commonly used technological format;</li>
+        <li>request that we stop disseminating information or de-index it, under the conditions set by law.</li>
+      </ul>
+      <p>To exercise these rights, write to the person in charge named above. We will respond in writing within 30 days of receiving your request. We may ask you to confirm your identity.</p>
+    </section>
+
+    <section id="en-incidents">
+      <h2>Confidentiality incidents</h2>
+      <p>If a confidentiality incident occurs, we act promptly to reduce the risks. If the incident presents a risk of serious injury, we notify the Commission d'accès à l'information and the affected persons. We keep a register of all incidents.</p>
+    </section>
+
+    <section id="en-complaints">
+      <h2>Complaints</h2>
+      <p>Complaints may be sent in writing to the person in charge named above. If you are not satisfied with our response, you may contact the Commission d'accès à l'information du Québec (<a href="https://www.cai.gouv.qc.ca" target="_blank" rel="noopener">cai.gouv.qc.ca</a>).</p>
+    </section>
+
+    <section id="en-changes">
+      <h2>Changes to this Policy</h2>
+      <p>We may update this Policy to reflect changes in our practices or the law. The current version is posted on our website with its update date. If we make a significant change, we will inform you by appropriate means.</p>
+    </section>
+  </article>
+  </main>
+</div>
+
+<button class="to-top" type="button" aria-label="Haut de page">↑</button>
+
+<script>
+(function () {
+  // Libellés de l'interface uniquement (le texte de la Politique n'est jamais modifié par JS)
+  var UI = {
+    fr: {
+      title: "Politique de confidentialité — Nettoyage Boréal",
+      toc: "Table des matières", top: "Haut de page"
+    },
+    en: {
+      title: "Privacy Policy — Nettoyage Boréal",
+      toc: "Contents", top: "Back to top"
+    }
+  };
+
+  var tocList = document.getElementById("toc-list");
+  var observer = null;
+
+  function detectLang() {
+    var p = new URLSearchParams(location.search).get("lang");
+    if (p === "fr" || p === "en") return p;
+    if (/^\/en(\/|$)/.test(location.pathname)) return "en";
+    if (/^\/fr(\/|$)/.test(location.pathname)) return "fr";
+    try { var s = localStorage.getItem("nb-policy-lang"); if (s === "fr" || s === "en") return s; } catch (e) {}
+    return (document.documentElement.getAttribute("lang") || "fr").slice(0, 2) === "en" ? "en" : "fr";
+  }
+
+  function buildToc(lang) {
+    tocList.innerHTML = "";
+    var article = document.querySelector('article[data-version="' + lang + '"]');
+    var links = [];
+    article.querySelectorAll("section").forEach(function (sec) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + sec.id;
+      a.textContent = sec.querySelector("h2").textContent;
+      li.appendChild(a); tocList.appendChild(li); links.push(a);
+    });
+    if (observer) observer.disconnect();
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            links.forEach(function (l) { l.classList.toggle("active", l.getAttribute("href") === "#" + en.target.id); });
+          }
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+      article.querySelectorAll("section").forEach(function (s) { observer.observe(s); });
+    }
+  }
+
+  function setLang(lang, push) {
+    document.documentElement.lang = lang;
+    document.title = UI[lang].title;
+    document.querySelectorAll("[data-version]").forEach(function (el) {
+      el.hidden = el.getAttribute("data-version") !== lang;
+    });
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var k = el.getAttribute("data-i18n"); if (UI[lang][k]) el.textContent = UI[lang][k];
+    });
+    document.querySelectorAll(".lang-switch button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
+    });
+    document.querySelector(".to-top").setAttribute("aria-label", UI[lang].top);
+    buildToc(lang);
+    try { localStorage.setItem("nb-policy-lang", lang); } catch (e) {}
+    if (push) {
+      var url = new URL(location.href);
+      if (/^\/(fr|en)(\/|$)/.test(url.pathname)) {
+        url.pathname = url.pathname.replace(/^\/(fr|en)/, "/" + lang);
+      } else {
+        url.searchParams.set("lang", lang);
+      }
+      url.hash = "";
+      try { history.replaceState(null, "", url); } catch (e) {}
+      window.scrollTo({ top: 0 });
+    }
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang"), true); });
+  });
+
+  var toTop = document.querySelector(".to-top");
+  window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.scrollY > 600); }, { passive: true });
+  toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  setLang(detectLang(), false);
+})();
+</script>
+</body>
+</html>
