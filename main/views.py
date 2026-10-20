@@ -284,3 +284,9 @@ def portal_change_password(request):
         return redirect('dashboard')
 
     return render(request, 'portal/change_password.html')
+
+
+#adding privacy policy on clients demand
+
+def privacy_policy(request):
+    return render(request, 'public/politique-confidentialite.html')
